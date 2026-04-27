@@ -3,343 +3,304 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Complexe Produits de Cheveux — Le luxe capillaire commence ici. Soins premium pour cheveux naturels et crémeux." />
+  <meta name="description" content="Complexe Produits de Cheveux — Le luxe capillaire commence ici." />
   <title>Complexe Produits de Cheveux | Luxe Capillaire</title>
 
   <style>
+
+    /* ============================================================
+       FONTS — Google Fonts via @import (léger)
+    ============================================================ */
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@200;300;400;500&display=swap');
+
+    /* ============================================================
+       CSS VARIABLES
+    ============================================================ */
     :root {
-      --violet-deep:    #0d0011;
-      --violet-mid:     #1a0030;
-      --violet-light:   #2d0050;
-      --violet-glow:    #6a0dad;
-      --violet-accent:  #9b30ff;
-      --gold:           #c9a84c;
-      --gold-light:     #f0d080;
-      --gold-pale:      #f7e8b0;
-      --white:          #ffffff;
-      --white-soft:     #f5f0ff;
-      --text-muted:     #b8a9d0;
-      --card-bg:        rgba(30, 0, 60, 0.7);
-      --glass:          rgba(255, 255, 255, 0.05);
-      --glass-border:   rgba(201, 168, 76, 0.3);
-      --transition:     0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      --font-serif:     'Georgia', 'Times New Roman', serif;
-      --font-sans:      'Helvetica Neue', Arial, sans-serif;
+      --v0:  #04000a;
+      --v1:  #0d0011;
+      --v2:  #1a0030;
+      --v3:  #2d0050;
+      --v4:  #6a0dad;
+      --v5:  #9b30ff;
+      --g1:  #7a5c1e;
+      --g2:  #c9a84c;
+      --g3:  #e8c96a;
+      --g4:  #f0d080;
+      --g5:  #f7e8b0;
+      --w:   #ffffff;
+      --ws:  #f5f0ff;
+      --wm:  #d4c8f0;
+      --tm:  #b8a9d0;
+      --ts:  #7a6a9a;
+      --card: rgba(20, 0, 40, 0.8);
+      --glass: rgba(255,255,255,0.03);
+      --gb:   rgba(201,168,76,0.15);
+      --tr: 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      --tr-fast: 0.25s ease;
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans:  'Montserrat', 'Helvetica Neue', sans-serif;
     }
 
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-      font-size: 16px;
-      -webkit-text-size-adjust: 100%;
-    }
-
+    /* ============================================================
+       RESET
+    ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
     body {
-      background-color: var(--violet-deep);
-      color: var(--white-soft);
-      font-family: var(--font-sans);
+      background: var(--v0);
+      color: var(--ws);
+      font-family: var(--sans);
+      font-weight: 300;
       overflow-x: hidden;
       line-height: 1.7;
+      cursor: none;
     }
-
-    img {
-      max-width: 100%;
-      display: block;
-    }
-
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
     ul { list-style: none; }
+    button { cursor: none; }
 
-    ::-webkit-scrollbar { width: 4px; }
-    ::-webkit-scrollbar-track { background: var(--violet-deep); }
-    ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 2px; }
+    ::-webkit-scrollbar { width: 3px; }
+    ::-webkit-scrollbar-track { background: var(--v0); }
+    ::-webkit-scrollbar-thumb { background: var(--g2); }
 
-    .gold-text {
-      color: var(--gold);
-      background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 50%, var(--gold) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+    /* ============================================================
+       CUSTOM CURSOR
+    ============================================================ */
+    .cursor-dot {
+      position: fixed;
+      width: 6px; height: 6px;
+      background: var(--g2);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 99999;
+      transform: translate(-50%, -50%);
+      transition: transform 0.1s ease;
     }
 
-    .section-label {
-      font-size: 0.65rem;
-      letter-spacing: 0.35em;
-      text-transform: uppercase;
-      color: var(--gold);
-      font-family: var(--font-sans);
-      font-weight: 400;
-      margin-bottom: 1rem;
+    .cursor-ring {
+      position: fixed;
+      width: 32px; height: 32px;
+      border: 1px solid rgba(201,168,76,0.5);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 99998;
+      transform: translate(-50%, -50%);
+      transition: all 0.15s ease;
     }
 
-    .gold-line {
-      display: block;
-      width: 50px;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--gold), transparent);
-      margin: 0 auto 2rem;
+    .cursor-ring.hovering {
+      width: 50px; height: 50px;
+      border-color: var(--g2);
+      background: rgba(201,168,76,0.05);
     }
 
-    .btn-luxury {
-      display: inline-block;
-      padding: 1rem 2.5rem;
-      border: 1px solid var(--gold);
-      color: var(--gold-light);
-      font-family: var(--font-serif);
-      font-size: 0.85rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      position: relative;
-      overflow: hidden;
-      cursor: pointer;
-      background: transparent;
-      transition: color var(--transition);
-      white-space: nowrap;
-    }
-
-    .btn-luxury::before {
-      content: '';
-      position: absolute;
+    /* ============================================================
+       LOADER
+    ============================================================ */
+    #loader {
+      position: fixed;
       inset: 0;
-      background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
-      transform: translateX(-101%);
-      transition: transform var(--transition);
-      z-index: 0;
-    }
-
-    .btn-luxury:hover::before { transform: translateX(0); }
-
-    .btn-luxury:hover {
-      color: var(--violet-deep);
-      border-color: var(--gold-light);
-    }
-
-    .btn-luxury span {
-      position: relative;
-      z-index: 1;
-    }
-
-    .btn-luxury-ghost {
-      display: inline-block;
-      padding: 0.75rem 2rem;
-      border: 1px solid rgba(201, 168, 76, 0.4);
-      color: var(--gold);
-      font-size: 0.75rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      cursor: pointer;
-      background: transparent;
-      transition: all var(--transition);
-    }
-
-    .btn-luxury-ghost:hover {
-      background: rgba(201, 168, 76, 0.1);
-      border-color: var(--gold);
-    }
-
-    .hologram-frame {
-      position: relative;
-      width: 100%;
-      border: 1px solid rgba(106, 13, 173, 0.6);
-      background: linear-gradient(
-        135deg,
-        rgba(106, 13, 173, 0.08) 0%,
-        rgba(201, 168, 76, 0.05) 50%,
-        rgba(106, 13, 173, 0.08) 100%
-      );
-      overflow: hidden;
+      background: var(--v0);
+      z-index: 99999;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
+      gap: 2.5rem;
+      transition: opacity 0.8s ease, visibility 0.8s ease;
     }
 
-    .hologram-frame::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(
-        45deg,
-        transparent 40%,
-        rgba(201, 168, 76, 0.08) 50%,
-        transparent 60%
-      );
-      animation: hologramSweep 4s ease-in-out infinite;
-      pointer-events: none;
-      z-index: 2;
+    #loader.out {
+      opacity: 0;
+      visibility: hidden;
     }
 
-    .hologram-frame::after {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, var(--gold-light), transparent);
-      animation: hologramScan 3s linear infinite;
-      pointer-events: none;
-      z-index: 2;
-    }
-
-    @keyframes hologramSweep {
-      0%   { opacity: 0; transform: translateX(-100%); }
-      50%  { opacity: 1; }
-      100% { opacity: 0; transform: translateX(100%); }
-    }
-
-    @keyframes hologramScan {
-      0%   { top: 0; opacity: 0.8; }
-      100% { top: 100%; opacity: 0; }
-    }
-
-    .hologram-inner {
+    .loader-brand {
       text-align: center;
-      padding: 0;
-      z-index: 1;
-      width: 100%;
-      height: 100%;
     }
 
-    .hologram-icon {
-      font-size: 2rem;
-      margin-bottom: 0.75rem;
-      opacity: 0.5;
-      color: var(--gold);
-    }
-
-    .hologram-label {
-      font-size: 0.6rem;
-      letter-spacing: 0.3em;
+    .loader-title {
+      font-family: var(--serif);
+      font-size: clamp(1rem, 4vw, 1.6rem);
+      font-weight: 300;
+      letter-spacing: 0.4em;
       text-transform: uppercase;
-      color: var(--gold);
-      opacity: 0.7;
+      color: var(--g2);
+      margin-bottom: 0.4rem;
     }
 
-    .hologram-corner {
+    .loader-sub {
+      font-size: 0.5rem;
+      letter-spacing: 0.6em;
+      text-transform: uppercase;
+      color: var(--ts);
+    }
+
+    .loader-progress {
+      width: 160px;
+      height: 1px;
+      background: rgba(201,168,76,0.15);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .loader-fill {
       position: absolute;
-      width: 16px;
-      height: 16px;
-      border-color: var(--gold);
-      border-style: solid;
-      opacity: 0.6;
-      z-index: 3;
+      top: 0; left: 0; height: 100%;
+      background: linear-gradient(90deg, transparent, var(--g2), var(--g4), var(--g2), transparent);
+      width: 0%;
+      transition: width 0.05s linear;
     }
-    .hologram-corner.tl { top: 8px; left: 8px; border-width: 1px 0 0 1px; }
-    .hologram-corner.tr { top: 8px; right: 8px; border-width: 1px 1px 0 0; }
-    .hologram-corner.bl { bottom: 8px; left: 8px; border-width: 0 0 1px 1px; }
-    .hologram-corner.br { bottom: 8px; right: 8px; border-width: 0 1px 1px 0; }
 
+    .loader-percent {
+      font-family: var(--serif);
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      color: var(--g2);
+      opacity: 0.6;
+    }
+
+    /* ============================================================
+       CANVAS — PARTICLES + LINES
+    ============================================================ */
+    #cosmos {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.5;
+    }
+
+    /* ============================================================
+       NAVIGATION
+    ============================================================ */
     .nav {
       position: fixed;
       top: 0; left: 0; right: 0;
       z-index: 1000;
-      padding: 1.25rem 1.5rem;
+      padding: 1.5rem 2rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      transition: all 0.5s ease;
+      transition: all 0.6s ease;
+    }
+
+    .nav::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 5%; right: 5%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(201,168,76,0), transparent);
+      transition: background 0.6s ease;
     }
 
     .nav.scrolled {
-      background: rgba(13, 0, 17, 0.92);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      padding: 0.85rem 1.5rem;
-      border-bottom: 1px solid rgba(201, 168, 76, 0.15);
+      padding: 1rem 2rem;
+      background: rgba(4, 0, 10, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+    }
+
+    .nav.scrolled::after {
+      background: linear-gradient(90deg, transparent, rgba(201,168,76,0.2), transparent);
     }
 
     .nav-logo {
-      font-family: var(--font-serif);
-      font-size: 0.75rem;
-      letter-spacing: 0.25em;
+      font-family: var(--serif);
+      font-weight: 400;
+      line-height: 1.2;
+      cursor: none;
+    }
+
+    .nav-logo-main {
+      font-size: 0.8rem;
+      letter-spacing: 0.3em;
       text-transform: uppercase;
-      color: var(--gold-light);
-      line-height: 1.3;
-    }
-
-    .nav-logo span {
+      color: var(--g3);
       display: block;
-      font-size: 0.55rem;
-      letter-spacing: 0.4em;
-      color: var(--text-muted);
-      margin-top: 2px;
     }
 
-    .nav-menu { display: none; }
+    .nav-logo-sub {
+      font-size: 0.45rem;
+      letter-spacing: 0.5em;
+      text-transform: uppercase;
+      color: var(--ts);
+      display: block;
+    }
 
-    .nav-actions {
-      display: flex;
-      gap: 1.25rem;
+    .nav-links {
+      display: none;
+      gap: 2.5rem;
       align-items: center;
     }
 
-    .nav-icon {
-      font-size: 1.1rem;
-      cursor: pointer;
-      color: var(--gold-light);
-      opacity: 0.8;
-      transition: opacity var(--transition);
+    .nav-links a {
+      font-size: 0.55rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--tm);
+      transition: color var(--tr-fast);
+      position: relative;
     }
 
-    .nav-icon:hover { opacity: 1; }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px; left: 0; right: 0;
+      height: 1px;
+      background: var(--g2);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform var(--tr);
+    }
 
-    .nav-cart-badge { position: relative; }
+    .nav-links a:hover { color: var(--g4); }
+    .nav-links a:hover::after { transform: scaleX(1); }
 
-    .cart-count {
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .nav-cart {
+      position: relative;
+      font-size: 0.55rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--g2);
+      border: 1px solid rgba(201,168,76,0.3);
+      padding: 0.4rem 0.9rem;
+      transition: all var(--tr);
+      cursor: none;
+      background: transparent;
+    }
+
+    .nav-cart:hover {
+      background: rgba(201,168,76,0.1);
+      border-color: var(--g2);
+    }
+
+    .nav-cart-num {
       position: absolute;
       top: -6px; right: -6px;
       width: 14px; height: 14px;
-      background: var(--gold);
-      color: var(--violet-deep);
+      background: var(--g2);
+      color: var(--v0);
       border-radius: 50%;
-      font-size: 0.5rem;
+      font-size: 0.45rem;
       display: flex;
       align-items: center;
       justify-content: center;
       font-weight: 700;
+      transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
     }
 
-    #particles-canvas {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      pointer-events: none;
-      z-index: 0;
-      opacity: 0.35;
-    }
-
-    .fade-in {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.8s ease, transform 0.8s ease;
-    }
-
-    .fade-in.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .fade-in-delay-1 { transition-delay: 0.15s; }
-    .fade-in-delay-2 { transition-delay: 0.30s; }
-    .fade-in-delay-3 { transition-delay: 0.45s; }
-    .fade-in-delay-4 { transition-delay: 0.60s; }
-
-    .stars {
-      color: var(--gold);
-      font-size: 0.85rem;
-      letter-spacing: 2px;
-    }
-
-    /* ====================================================
-       SECTION 1: HERO
-    ==================================================== */
+    /* ============================================================
+       SECTION 1 — HERO CINÉMATIQUE
+    ============================================================ */
     .hero {
       position: relative;
       min-height: 100svh;
@@ -347,495 +308,757 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      text-align: center;
-      padding: 7rem 1.5rem 4rem;
       overflow: hidden;
-      background: radial-gradient(ellipse 80% 70% at 50% 60%, #1e003a 0%, #0d0011 70%);
+      background: var(--v0);
     }
 
-    .hero-orb {
+    /* Fond dégradé animé */
+    .hero-bg {
       position: absolute;
-      border-radius: 50%;
-      filter: blur(60px);
+      inset: 0;
+      background:
+        radial-gradient(ellipse 100% 80% at 50% 100%, rgba(106,13,173,0.35) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 60% at 20% 20%, rgba(45,0,80,0.5) 0%, transparent 50%),
+        radial-gradient(ellipse 60% 60% at 80% 80%, rgba(26,0,48,0.5) 0%, transparent 50%);
+      animation: heroBgShift 12s ease-in-out infinite alternate;
+    }
+
+    @keyframes heroBgShift {
+      0%   { opacity: 0.7; transform: scale(1); }
+      100% { opacity: 1;   transform: scale(1.05); }
+    }
+
+    /* Lignes dorées diagonales */
+    .hero-lines {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
       pointer-events: none;
-      animation: orbFloat 8s ease-in-out infinite alternate;
     }
 
-    .hero-orb-1 {
-      width: 300px; height: 300px;
-      background: radial-gradient(circle, rgba(106,13,173,0.4), transparent 70%);
-      top: -80px; left: -80px;
-      animation-duration: 9s;
-    }
-
-    .hero-orb-2 {
-      width: 400px; height: 400px;
-      background: radial-gradient(circle, rgba(155,48,255,0.2), transparent 70%);
-      bottom: -100px; right: -100px;
-      animation-duration: 11s;
-      animation-delay: -3s;
-    }
-
-    .hero-orb-3 {
-      width: 200px; height: 200px;
-      background: radial-gradient(circle, rgba(201,168,76,0.15), transparent 70%);
-      top: 40%; left: 10%;
-      animation-duration: 7s;
-      animation-delay: -1.5s;
-    }
-
-    @keyframes orbFloat {
-      0%   { transform: translate(0, 0) scale(1); }
-      100% { transform: translate(20px, 30px) scale(1.08); }
-    }
-
-    .hero::before {
-      content: '';
+    .hero-line {
       position: absolute;
-      top: 0; left: 10%; right: 10%;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      width: 1px;
+      background: linear-gradient(180deg, transparent, rgba(201,168,76,0.15), transparent);
+      animation: lineFloat 8s ease-in-out infinite;
+    }
+
+    @keyframes lineFloat {
+      0%,100% { transform: translateY(-10px) scaleY(0.8); opacity: 0.3; }
+      50%      { transform: translateY(10px)  scaleY(1.2); opacity: 0.6; }
+    }
+
+    /* IMAGE MODÈLE — occupe tout le fond */
+    .hero-model-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+    }
+
+    .hero-model-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      opacity: 0.45;
+      filter: saturate(0.7) contrast(1.1);
+      transition: opacity 1s ease;
+    }
+
+    /* Overlay dégradé par-dessus la photo */
+    .hero-model-overlay {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg,
+          rgba(4,0,10,0.4) 0%,
+          rgba(4,0,10,0.1) 30%,
+          rgba(4,0,10,0.05) 50%,
+          rgba(4,0,10,0.5) 75%,
+          rgba(4,0,10,0.95) 100%
+        ),
+        linear-gradient(90deg,
+          rgba(4,0,10,0.6) 0%,
+          transparent 40%,
+          transparent 60%,
+          rgba(4,0,10,0.6) 100%
+        );
+      z-index: 3;
+    }
+
+    /* Lueur dorée sur la photo */
+    .hero-glow {
+      position: absolute;
+      width: 300px; height: 500px;
+      background: radial-gradient(ellipse, rgba(201,168,76,0.12), transparent 70%);
+      top: 10%; left: 50%;
+      transform: translateX(-50%);
+      z-index: 4;
+      animation: heroGlow 4s ease-in-out infinite alternate;
+      pointer-events: none;
+    }
+
+    @keyframes heroGlow {
+      0%   { opacity: 0.5; transform: translateX(-50%) scale(1); }
+      100% { opacity: 1;   transform: translateX(-50%) scale(1.15); }
+    }
+
+    /* Contenu texte hero */
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      padding: 7rem 1.5rem 5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100svh;
+      justify-content: flex-end;
     }
 
     .hero-eyebrow {
-      font-size: 0.6rem;
-      letter-spacing: 0.5em;
+      font-size: 0.5rem;
+      letter-spacing: 0.6em;
       text-transform: uppercase;
-      color: var(--gold);
+      color: var(--g2);
       margin-bottom: 1.5rem;
       opacity: 0;
-      animation: heroFadeUp 1s ease forwards 0.3s;
+      animation: fadeUp 1s ease forwards 0.5s;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
     }
 
-    .hero-headline-wrap {
-      position: relative;
-      z-index: 2;
-      max-width: 360px;
-      margin: 0 auto;
+    .hero-eyebrow::before,
+    .hero-eyebrow::after {
+      content: '';
+      display: block;
+      width: 30px; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--g2));
     }
+    .hero-eyebrow::after { transform: scaleX(-1); }
 
     .hero-h1 {
-      font-family: var(--font-serif);
-      font-size: clamp(2rem, 7vw, 3.5rem);
-      font-weight: 400;
-      line-height: 1.2;
-      color: var(--white);
+      font-family: var(--serif);
+      font-size: clamp(2.5rem, 10vw, 5.5rem);
+      font-weight: 300;
+      line-height: 1.05;
+      color: var(--w);
+      margin-bottom: 1rem;
       opacity: 0;
-      animation: heroFadeUp 1.1s ease forwards 0.6s;
-      margin-bottom: 0.5rem;
+      animation: fadeUp 1.2s ease forwards 0.8s;
+      max-width: 420px;
     }
 
-    .hero-h1 em {
+    .hero-h1 span.gold {
+      font-weight: 400;
       font-style: italic;
-      background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 60%, var(--gold) 100%);
+      background: linear-gradient(135deg, var(--g1) 0%, var(--g2) 30%, var(--g4) 60%, var(--g2) 100%);
+      background-size: 200% 100%;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+      animation: goldFlow 4s ease-in-out infinite;
     }
 
-    .hero-sub {
-      font-family: var(--font-serif);
-      font-size: clamp(1.1rem, 4vw, 1.5rem);
+    @keyframes goldFlow {
+      0%,100% { background-position: 0% 50%; }
+      50%      { background-position: 100% 50%; }
+    }
+
+    .hero-h2 {
+      font-family: var(--serif);
+      font-size: clamp(1rem, 3.5vw, 1.8rem);
       font-weight: 300;
       font-style: italic;
-      color: var(--text-muted);
-      opacity: 0;
-      animation: heroFadeUp 1.1s ease forwards 1s;
+      color: var(--wm);
       margin-bottom: 0.75rem;
+      opacity: 0;
+      animation: fadeUp 1.2s ease forwards 1.1s;
     }
 
-    .hero-tagline {
-      font-size: 0.7rem;
-      letter-spacing: 0.25em;
+    .hero-h3 {
+      font-size: 0.55rem;
+      letter-spacing: 0.45em;
       text-transform: uppercase;
-      color: var(--gold);
-      opacity: 0;
-      animation: heroFadeUp 1s ease forwards 1.4s;
+      color: var(--g2);
       margin-bottom: 2.5rem;
-    }
-
-    @keyframes heroFadeUp {
-      from { opacity: 0; transform: translateY(25px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    .hero-model-wrap {
-      position: relative;
-      width: 260px;
-      margin: 0 auto 2.5rem;
       opacity: 0;
-      animation: heroFadeUp 1.2s ease forwards 0.8s;
+      animation: fadeUp 1s ease forwards 1.4s;
     }
 
-    .hero-model-frame {
-      width: 100%;
-      aspect-ratio: 3/4;
-      border: 1px solid rgba(201, 168, 76, 0.25);
+    .hero-cta-group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      opacity: 0;
+      animation: fadeUp 1s ease forwards 1.7s;
+      margin-bottom: 3rem;
+    }
+
+    /* Bouton principal — or animé */
+    .btn-hero {
       position: relative;
+      padding: 1rem 3rem;
+      background: linear-gradient(135deg, var(--g1), var(--g2), var(--g4), var(--g2), var(--g1));
+      background-size: 300% 100%;
+      color: var(--v0);
+      font-family: var(--serif);
+      font-size: 0.75rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      font-weight: 600;
+      border: none;
+      cursor: none;
+      animation: btnGold 3s ease-in-out infinite;
+      transition: transform var(--tr), box-shadow var(--tr);
       overflow: hidden;
     }
 
-    /* Glow autour du modèle */
-    .hero-model-glow {
+    @keyframes btnGold {
+      0%,100% { background-position: 0% 50%; }
+      50%      { background-position: 100% 50%; }
+    }
+
+    .btn-hero::before {
+      content: '';
       position: absolute;
-      inset: -15px;
-      border-radius: 2px;
-      background: transparent;
-      box-shadow:
-        0 0 30px rgba(201,168,76,0.08),
-        0 0 60px rgba(106,13,173,0.15),
-        inset 0 0 30px rgba(106,13,173,0.08);
-      pointer-events: none;
-      animation: glowPulse 3s ease-in-out infinite;
-    }
-
-    @keyframes glowPulse {
-      0%,100% { box-shadow: 0 0 30px rgba(201,168,76,0.08), 0 0 60px rgba(106,13,173,0.15); }
-      50%      { box-shadow: 0 0 50px rgba(201,168,76,0.15), 0 0 90px rgba(106,13,173,0.25); }
-    }
-
-    .hero-btn-wrap {
+      inset: -2px;
+      background: linear-gradient(135deg, var(--g2), var(--g4), var(--g2));
+      z-index: -1;
       opacity: 0;
-      animation: heroFadeUp 1s ease forwards 1.7s;
+      transition: opacity var(--tr);
     }
 
-    .hero-scroll-hint {
+    .btn-hero:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 40px rgba(201,168,76,0.4), 0 0 80px rgba(201,168,76,0.15);
+    }
+
+    .btn-outline {
+      padding: 0.75rem 2rem;
+      border: 1px solid rgba(201,168,76,0.4);
+      color: var(--g3);
+      font-size: 0.55rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      background: transparent;
+      cursor: none;
+      transition: all var(--tr);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--g2);
+      background: rgba(201,168,76,0.07);
+      color: var(--g4);
+    }
+
+    /* Scroll indicator */
+    .hero-scroll {
       position: absolute;
       bottom: 2rem;
       left: 50%;
       transform: translateX(-50%);
+      z-index: 10;
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 0.5rem;
       opacity: 0;
-      animation: heroFadeUp 1s ease forwards 2.2s;
+      animation: fadeUp 1s ease forwards 2.2s;
     }
 
-    .scroll-hint-text {
-      font-size: 0.55rem;
-      letter-spacing: 0.35em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-    }
-
-    .scroll-hint-line {
-      width: 1px;
-      height: 40px;
-      background: linear-gradient(180deg, var(--gold), transparent);
-      animation: scrollLine 2s ease-in-out infinite;
-    }
-
-    @keyframes scrollLine {
-      0%   { transform: scaleY(0); transform-origin: top; }
-      50%  { transform: scaleY(1); transform-origin: top; }
-      51%  { transform-origin: bottom; }
-      100% { transform: scaleY(0); transform-origin: bottom; }
-    }
-
-    /* ====================================================
-       SECTION 2: IMMERSION
-    ==================================================== */
-    .immersion {
+    .scroll-mouse {
+      width: 20px; height: 32px;
+      border: 1px solid rgba(201,168,76,0.4);
+      border-radius: 10px;
       position: relative;
-      min-height: 90vh;
+    }
+
+    .scroll-wheel {
+      position: absolute;
+      top: 5px; left: 50%;
+      transform: translateX(-50%);
+      width: 2px; height: 6px;
+      background: var(--g2);
+      border-radius: 1px;
+      animation: scrollWheel 2s ease-in-out infinite;
+    }
+
+    @keyframes scrollWheel {
+      0%   { transform: translateX(-50%) translateY(0); opacity: 1; }
+      100% { transform: translateX(-50%) translateY(12px); opacity: 0; }
+    }
+
+    .scroll-text {
+      font-size: 0.45rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--ts);
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ============================================================
+       MARQUEE (bandeau défilant)
+    ============================================================ */
+    .marquee-wrap {
+      position: relative;
+      z-index: 5;
+      overflow: hidden;
+      border-top: 1px solid rgba(201,168,76,0.15);
+      border-bottom: 1px solid rgba(201,168,76,0.15);
+      background: rgba(4,0,10,0.9);
+      padding: 0.85rem 0;
+    }
+
+    .marquee-track {
+      display: flex;
+      gap: 0;
+      animation: marqueeScroll 25s linear infinite;
+      white-space: nowrap;
+    }
+
+    .marquee-item {
+      flex-shrink: 0;
+      font-size: 0.5rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--g2);
+      padding: 0 2.5rem;
       display: flex;
       align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      padding: 5rem 1.5rem;
-      background: linear-gradient(180deg, var(--violet-deep) 0%, #12001f 50%, var(--violet-deep) 100%);
+      gap: 1.5rem;
     }
 
-    .immersion-bg {
+    .marquee-item::after {
+      content: '✦';
+      color: var(--g3);
+      font-size: 0.4rem;
+    }
+
+    @keyframes marqueeScroll {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ============================================================
+       SECTION 2 — IMMERSION CINÉMATIQUE
+    ============================================================ */
+    .immersion {
+      position: relative;
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr;
+      overflow: hidden;
+      background: var(--v1);
+    }
+
+    .immersion-visual {
+      position: relative;
+      height: 60vh;
+      overflow: hidden;
+    }
+
+    .immersion-visual img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      filter: saturate(0.6) brightness(0.7);
+      transform: scale(1.08);
+      transition: transform 8s ease;
+    }
+
+    .immersion-visual.in-view img {
+      transform: scale(1);
+    }
+
+    .immersion-visual-overlay {
       position: absolute;
       inset: 0;
-      background:
-        radial-gradient(ellipse 60% 50% at 30% 50%, rgba(106,13,173,0.2) 0%, transparent 60%),
-        radial-gradient(ellipse 60% 50% at 70% 50%, rgba(201,168,76,0.07) 0%, transparent 60%);
-      will-change: transform;
+      background: linear-gradient(
+        180deg,
+        rgba(4,0,10,0.3) 0%,
+        rgba(13,0,17,0.2) 50%,
+        rgba(13,0,17,1) 100%
+      );
     }
 
-    .immersion-content {
+    /* Badge flottant sur l'image */
+    .immersion-badge {
+      position: absolute;
+      bottom: -1px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--v1);
+      border: 1px solid rgba(201,168,76,0.2);
+      border-bottom: none;
+      padding: 0.6rem 2rem;
+      font-size: 0.45rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--g2);
+      white-space: nowrap;
+      z-index: 5;
+    }
+
+    .immersion-text {
+      padding: 3rem 1.5rem 4rem;
       position: relative;
       z-index: 2;
       text-align: center;
-      max-width: 340px;
-      margin: 0 auto;
+      background: var(--v1);
     }
+
+    .immersion-label {
+      font-size: 0.5rem;
+      letter-spacing: 0.5em;
+      text-transform: uppercase;
+      color: var(--g2);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+    }
+
+    .immersion-label::before,
+    .immersion-label::after {
+      content: '';
+      display: block;
+      width: 25px; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--g2));
+    }
+    .immersion-label::after { transform: scaleX(-1); }
 
     .immersion-quote {
-      font-family: var(--font-serif);
-      font-size: clamp(1.6rem, 6vw, 2.8rem);
+      font-family: var(--serif);
+      font-size: clamp(1.8rem, 7vw, 3.5rem);
       font-weight: 300;
-      font-style: italic;
-      line-height: 1.35;
-      color: var(--white);
+      line-height: 1.2;
+      color: var(--w);
       margin-bottom: 1.5rem;
+      font-style: italic;
     }
 
-    .immersion-quote em {
+    .immersion-quote .accent {
       font-style: normal;
-      background: linear-gradient(135deg, var(--gold), var(--gold-light), var(--gold));
+      background: linear-gradient(135deg, var(--g2), var(--g4), var(--g2));
+      background-size: 200%;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+      animation: goldFlow 3s ease-in-out infinite;
     }
 
     .immersion-body {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      line-height: 1.8;
-      letter-spacing: 0.03em;
-      margin-bottom: 2rem;
+      font-size: 0.8rem;
+      color: var(--tm);
+      line-height: 1.9;
+      max-width: 320px;
+      margin: 0 auto 2rem;
       font-style: italic;
+      letter-spacing: 0.03em;
     }
 
-    .immersion-float {
-      position: absolute;
-      pointer-events: none;
-      will-change: transform;
-    }
-
-    .float-dot {
-      width: 4px; height: 4px;
-      border-radius: 50%;
-      background: var(--gold);
-      opacity: 0.4;
-      animation: floatDot 6s ease-in-out infinite;
-    }
-
-    @keyframes floatDot {
-      0%,100% { transform: translateY(0) rotate(0deg); opacity: 0.4; }
-      50%      { transform: translateY(-20px) rotate(180deg); opacity: 0.7; }
-    }
-
-    .float-line {
-      width: 1px;
-      height: 80px;
-      background: linear-gradient(180deg, transparent, var(--gold), transparent);
-      opacity: 0.2;
-      animation: floatLine 5s ease-in-out infinite alternate;
-    }
-
-    @keyframes floatLine {
-      0%   { transform: scaleY(0.5) translateY(-10px); opacity: 0.1; }
-      100% { transform: scaleY(1) translateY(10px); opacity: 0.35; }
-    }
-
-    .immersion-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      border: 1px solid rgba(201,168,76,0.3);
-      padding: 0.5rem 1.25rem;
-      margin-bottom: 2rem;
-    }
-
-    .immersion-badge-dot {
-      width: 5px; height: 5px;
-      border-radius: 50%;
-      background: var(--gold);
-      animation: pulse 2s ease-in-out infinite;
-    }
-
-    @keyframes pulse {
-      0%,100% { box-shadow: 0 0 0 0 rgba(201,168,76,0.5); }
-      50%      { box-shadow: 0 0 0 6px rgba(201,168,76,0); }
-    }
-
-    .immersion-badge-text {
-      font-size: 0.6rem;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: var(--gold);
-    }
-
+    /* Stats immersion */
     .immersion-stats {
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-      margin-top: 3rem;
-      padding-top: 2rem;
-      border-top: 1px solid rgba(201,168,76,0.12);
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      margin-top: 2.5rem;
+      border: 1px solid rgba(201,168,76,0.12);
     }
 
-    .stat-item { text-align: center; }
+    .i-stat {
+      padding: 1.5rem 0.5rem;
+      text-align: center;
+      position: relative;
+    }
 
-    .stat-number {
-      font-family: var(--font-serif);
-      font-size: 1.8rem;
-      font-weight: 400;
-      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    .i-stat::after {
+      content: '';
+      position: absolute;
+      top: 20%; right: 0; bottom: 20%;
+      width: 1px;
+      background: rgba(201,168,76,0.12);
+    }
+
+    .i-stat:last-child::after { display: none; }
+
+    .i-stat-num {
+      font-family: var(--serif);
+      font-size: 2rem;
+      font-weight: 300;
+      background: linear-gradient(135deg, var(--g2), var(--g4));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
       display: block;
+      line-height: 1;
+      margin-bottom: 0.4rem;
     }
 
-    .stat-label {
-      font-size: 0.55rem;
-      letter-spacing: 0.25em;
+    .i-stat-label {
+      font-size: 0.45rem;
+      letter-spacing: 0.3em;
       text-transform: uppercase;
-      color: var(--text-muted);
+      color: var(--ts);
     }
 
-    /* ====================================================
-       SECTION 3: STORYTELLING
-    ==================================================== */
-    .storytelling {
+    /* ============================================================
+       SECTION 3 — STORYTELLING IMMERSIF
+    ============================================================ */
+    .story {
       position: relative;
-      padding: 5rem 1.5rem;
-      background: linear-gradient(180deg, var(--violet-deep) 0%, var(--violet-mid) 100%);
+      background: var(--v0);
       overflow: hidden;
     }
 
-    .storytelling::before {
+    .story::before {
       content: '';
       position: absolute;
       top: 0; left: 0; right: 0;
       height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(201,168,76,0.3), transparent);
+      background: linear-gradient(90deg, transparent, var(--g2), transparent);
     }
 
-    .story-header {
-      text-align: center;
-      margin-bottom: 3rem;
-    }
-
-    .story-title {
-      font-family: var(--font-serif);
-      font-size: clamp(1.6rem, 5.5vw, 2.4rem);
-      font-weight: 400;
-      color: var(--white);
-      line-height: 1.3;
-      margin-bottom: 1rem;
-    }
-
-    .story-intro {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      max-width: 300px;
-      margin: 0 auto;
-      line-height: 1.8;
+    /* Grand titre décoratif */
+    .story-bg-word {
+      position: absolute;
+      font-family: var(--serif);
+      font-size: clamp(5rem, 25vw, 15rem);
+      font-weight: 600;
+      color: rgba(106,13,173,0.06);
+      letter-spacing: 0.05em;
+      pointer-events: none;
+      user-select: none;
+      top: 3%;
+      left: 50%;
+      transform: translateX(-50%);
+      white-space: nowrap;
     }
 
     .story-block {
       display: flex;
       flex-direction: column;
-      gap: 2rem;
-      margin-bottom: 3.5rem;
+      gap: 0;
     }
 
-    .story-text-block { flex: 1; }
+    /* IMAGE dans storytelling */
+    .story-img {
+      width: 100%;
+      height: 55vw;
+      min-height: 260px;
+      max-height: 420px;
+      position: relative;
+      overflow: hidden;
+    }
 
-    .story-block-label {
-      font-size: 0.6rem;
-      letter-spacing: 0.4em;
+    .story-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      filter: saturate(0.7) brightness(0.75);
+      transition: transform 6s ease, filter 0.5s ease;
+    }
+
+    .story-img:hover img,
+    .story-img.in-view img {
+      transform: scale(1.04);
+      filter: saturate(0.85) brightness(0.85);
+    }
+
+    /* Overlay holographique sur les images story */
+    .story-img-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        180deg,
+        rgba(13,0,17,0.2) 0%,
+        transparent 30%,
+        transparent 60%,
+        rgba(13,0,17,0.6) 100%
+      );
+      z-index: 1;
+    }
+
+    /* Coins hologramme */
+    .holo-corner {
+      position: absolute;
+      width: 18px; height: 18px;
+      border-color: rgba(201,168,76,0.5);
+      border-style: solid;
+      z-index: 2;
+      transition: all 0.4s ease;
+    }
+    .holo-corner.tl { top: 10px; left: 10px; border-width: 1px 0 0 1px; }
+    .holo-corner.tr { top: 10px; right: 10px; border-width: 1px 1px 0 0; }
+    .holo-corner.bl { bottom: 10px; left: 10px; border-width: 0 0 1px 1px; }
+    .holo-corner.br { bottom: 10px; right: 10px; border-width: 0 1px 1px 0; }
+
+    .story-img:hover .holo-corner {
+      border-color: var(--g2);
+      width: 24px; height: 24px;
+    }
+
+    /* Scan line animé */
+    .holo-scan {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(201,168,76,0.5), transparent);
+      animation: scanLine 4s linear infinite;
+      z-index: 3;
+      pointer-events: none;
+    }
+
+    @keyframes scanLine {
+      0%   { top: 0; opacity: 0.8; }
+      95%  { top: 100%; opacity: 0.3; }
+      100% { top: 100%; opacity: 0; }
+    }
+
+    .story-text {
+      padding: 2.5rem 1.5rem;
+      background: var(--v0);
+      position: relative;
+    }
+
+    .story-tag {
+      font-size: 0.45rem;
+      letter-spacing: 0.5em;
       text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 0.75rem;
-    }
-
-    .story-block-title {
-      font-family: var(--font-serif);
-      font-size: clamp(1.2rem, 4vw, 1.6rem);
-      font-weight: 400;
-      color: var(--white);
-      line-height: 1.3;
+      color: var(--g2);
       margin-bottom: 1rem;
     }
 
-    .story-block-text {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      line-height: 1.9;
+    .story-title {
+      font-family: var(--serif);
+      font-size: clamp(1.4rem, 5vw, 2.2rem);
+      font-weight: 300;
+      color: var(--w);
+      line-height: 1.25;
       margin-bottom: 1.25rem;
     }
 
-    .editable-text {
-      border-left: 2px solid rgba(201,168,76,0.3);
-      padding-left: 1rem;
+    .story-title em {
       font-style: italic;
-      opacity: 0.85;
+      color: var(--g3);
     }
 
-    .story-hologram {
-      width: 100%;
-      aspect-ratio: 4/5;
-      min-height: 200px;
+    .story-body {
+      font-size: 0.78rem;
+      color: var(--tm);
+      line-height: 1.9;
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.02em;
     }
 
-    .benefit-pillars {
+    /* Tags cheveux */
+    .type-tags {
       display: flex;
-      flex-direction: column;
-      gap: 1.25rem;
-      margin-top: 1.5rem;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1.5rem;
     }
 
-    .benefit-pill {
-      display: flex;
-      align-items: flex-start;
-      gap: 1rem;
-      padding: 1rem;
-      border: 1px solid rgba(201,168,76,0.12);
-      background: var(--glass);
-      transition: border-color var(--transition), background var(--transition);
+    .type-tag {
+      font-size: 0.5rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.8rem;
+      border: 1px solid rgba(201,168,76,0.25);
+      color: rgba(201,168,76,0.7);
+      transition: all var(--tr-fast);
     }
 
-    .benefit-pill:hover {
-      border-color: rgba(201,168,76,0.35);
+    .type-tag:hover {
+      border-color: var(--g2);
+      color: var(--g3);
       background: rgba(201,168,76,0.05);
     }
 
-    .benefit-pill-icon {
-      width: 36px; height: 36px;
-      border: 1px solid rgba(201,168,76,0.4);
+    /* Pills bénéfices */
+    .benefit-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+    }
+
+    .benefit-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.85rem;
+      padding: 0.85rem;
+      border: 1px solid rgba(201,168,76,0.08);
+      background: rgba(201,168,76,0.02);
+      transition: all var(--tr-fast);
+    }
+
+    .benefit-item:hover {
+      border-color: rgba(201,168,76,0.25);
+      background: rgba(201,168,76,0.05);
+      transform: translateX(4px);
+    }
+
+    .b-icon {
+      width: 32px; height: 32px;
+      border: 1px solid rgba(201,168,76,0.3);
       display: flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
-      font-size: 1rem;
+      font-size: 0.9rem;
     }
 
-    .benefit-pill-title {
-      font-size: 0.8rem;
-      font-weight: 600;
-      color: var(--gold-light);
-      margin-bottom: 0.25rem;
+    .b-title {
+      font-size: 0.7rem;
+      color: var(--g4);
+      font-weight: 500;
       letter-spacing: 0.05em;
+      margin-bottom: 0.2rem;
     }
 
-    .benefit-pill-text {
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      line-height: 1.6;
+    .b-text {
+      font-size: 0.65rem;
+      color: var(--tm);
+      line-height: 1.5;
     }
 
-    .hair-types {
+    /* Séparateur or */
+    .gold-divider {
       display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-top: 1rem;
+      align-items: center;
+      gap: 1rem;
+      padding: 2rem 1.5rem;
     }
 
-    .hair-tag {
+    .gold-divider-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(201,168,76,0.3), transparent);
+    }
+
+    .gold-divider-sym {
       font-size: 0.6rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      padding: 0.3rem 0.75rem;
-      border: 1px solid rgba(201,168,76,0.3);
-      color: var(--gold);
-      border-radius: 1px;
+      color: var(--g2);
+      letter-spacing: 0.3em;
     }
 
-    /* ====================================================
-       SECTION 4: PRODUCTS
-    ==================================================== */
+    /* ============================================================
+       SECTION 4 — PRODUCTS CINÉMATIQUES
+    ============================================================ */
     .products {
       position: relative;
-      padding: 5rem 1.5rem;
-      background: var(--violet-deep);
+      padding: 4rem 0;
+      background: linear-gradient(180deg, var(--v0) 0%, var(--v1) 50%, var(--v0) 100%);
       overflow: hidden;
     }
 
@@ -844,269 +1067,317 @@
       position: absolute;
       top: 0; left: 0; right: 0;
       height: 1px;
-      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      background: linear-gradient(90deg, transparent, var(--g2), transparent);
     }
 
-    .products-header {
+    .section-head {
       text-align: center;
-      margin-bottom: 3rem;
+      padding: 0 1.5rem 3rem;
     }
 
-    .products-title {
-      font-family: var(--font-serif);
-      font-size: clamp(1.6rem, 5.5vw, 2.4rem);
-      font-weight: 400;
-      color: var(--white);
+    .section-eyebrow {
+      font-size: 0.5rem;
+      letter-spacing: 0.5em;
+      text-transform: uppercase;
+      color: var(--g2);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+    }
+
+    .section-eyebrow::before,
+    .section-eyebrow::after {
+      content: '';
+      display: block;
+      width: 25px; height: 1px;
+      background: var(--g2);
+    }
+
+    .section-title {
+      font-family: var(--serif);
+      font-size: clamp(1.8rem, 6vw, 3rem);
+      font-weight: 300;
+      color: var(--w);
+      line-height: 1.2;
       margin-bottom: 0.75rem;
     }
 
-    .products-subtitle {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      letter-spacing: 0.05em;
+    .section-sub {
+      font-size: 0.65rem;
+      color: var(--ts);
+      letter-spacing: 0.1em;
     }
 
-    .product-filters {
+    /* Filtres */
+    .prod-filters {
       display: flex;
-      gap: 0.5rem;
+      gap: 0.4rem;
+      padding: 0 1.5rem;
       overflow-x: auto;
-      padding-bottom: 0.5rem;
-      margin-bottom: 2rem;
       scrollbar-width: none;
+      margin-bottom: 2rem;
     }
-    .product-filters::-webkit-scrollbar { display: none; }
+    .prod-filters::-webkit-scrollbar { display: none; }
 
-    .filter-tab {
-      white-space: nowrap;
-      font-size: 0.6rem;
-      letter-spacing: 0.2em;
+    .pf-btn {
+      flex-shrink: 0;
+      font-size: 0.5rem;
+      letter-spacing: 0.25em;
       text-transform: uppercase;
       padding: 0.4rem 1rem;
-      border: 1px solid rgba(201,168,76,0.2);
-      color: var(--text-muted);
-      cursor: pointer;
-      transition: all var(--transition);
+      border: 1px solid rgba(201,168,76,0.15);
+      color: var(--ts);
       background: transparent;
-      flex-shrink: 0;
+      cursor: none;
+      transition: all var(--tr-fast);
     }
 
-    .filter-tab.active,
-    .filter-tab:hover {
-      border-color: var(--gold);
-      color: var(--gold);
-      background: rgba(201,168,76,0.07);
+    .pf-btn.active,
+    .pf-btn:hover {
+      border-color: var(--g2);
+      color: var(--g2);
+      background: rgba(201,168,76,0.05);
     }
 
-    .products-grid {
+    /* Grille produits */
+    .prod-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 1rem;
+      gap: 0.75rem;
+      padding: 0 1rem;
     }
 
-    .product-card {
+    /* Card produit */
+    .prod-card {
       position: relative;
-      background: var(--card-bg);
-      border: 1px solid rgba(201,168,76,0.1);
+      background: var(--card);
+      border: 1px solid rgba(201,168,76,0.08);
       overflow: hidden;
-      transition: all var(--transition);
-      cursor: pointer;
+      transition: all var(--tr);
+      cursor: none;
     }
 
-    .product-card:hover {
-      border-color: rgba(201,168,76,0.4);
-      transform: translateY(-3px);
-      box-shadow:
-        0 12px 35px rgba(0,0,0,0.4),
-        0 0 20px rgba(106,13,173,0.2),
-        inset 0 0 30px rgba(201,168,76,0.03);
-    }
-
-    .product-badge {
+    .prod-card::before {
+      content: '';
       position: absolute;
-      top: 0.5rem; left: 0.5rem;
-      z-index: 3;
-      font-size: 0.45rem;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(201,168,76,0.03), transparent);
+      opacity: 0;
+      transition: opacity var(--tr);
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .prod-card:hover {
+      border-color: rgba(201,168,76,0.35);
+      transform: translateY(-4px);
+      box-shadow:
+        0 20px 50px rgba(0,0,0,0.5),
+        0 0 30px rgba(106,13,173,0.2),
+        0 0 1px rgba(201,168,76,0.3);
+    }
+
+    .prod-card:hover::before { opacity: 1; }
+
+    .prod-badge {
+      position: absolute;
+      top: 8px; left: 8px;
+      z-index: 5;
+      font-size: 0.4rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      padding: 0.2rem 0.5rem;
-      background: var(--gold);
-      color: var(--violet-deep);
+      padding: 0.2rem 0.6rem;
+      background: var(--g2);
+      color: var(--v0);
       font-weight: 700;
     }
 
-    .product-badge.limited {
-      background: linear-gradient(135deg, #8b0000, #cc0000);
-      color: var(--white);
+    .prod-badge.red {
+      background: linear-gradient(135deg, #8b0000, #cc2200);
+      color: var(--w);
     }
 
-    .product-img-wrap {
+    .prod-badge.purple {
+      background: linear-gradient(135deg, var(--v3), var(--v4));
+      color: var(--w);
+    }
+
+    /* Image produit */
+    .prod-img {
       width: 100%;
       aspect-ratio: 3/4;
       position: relative;
+      overflow: hidden;
     }
 
-    /* ── IMPORTANT: style pour que l'image remplisse le cadre ── */
-    .product-img-wrap img {
+    .prod-img img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      display: block;
+      object-position: center;
+      transition: transform 0.8s ease, filter 0.5s ease;
+      filter: brightness(0.85);
     }
 
-    .product-overlay {
+    .prod-card:hover .prod-img img {
+      transform: scale(1.06);
+      filter: brightness(0.95);
+    }
+
+    /* Overlay produit au hover */
+    .prod-img-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(180deg, transparent 40%, rgba(13,0,17,0.9) 100%);
+      background: linear-gradient(
+        180deg,
+        transparent 45%,
+        rgba(4,0,10,0.95) 100%
+      );
       opacity: 0;
-      transition: opacity var(--transition);
+      transition: opacity var(--tr);
       display: flex;
       align-items: flex-end;
       padding: 1rem;
+      z-index: 3;
+    }
+
+    .prod-card:hover .prod-img-overlay { opacity: 1; }
+
+    .prod-add-btn {
+      width: 100%;
+      padding: 0.5rem;
+      border: 1px solid var(--g2);
+      background: rgba(201,168,76,0.1);
+      color: var(--g3);
+      font-size: 0.5rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      cursor: none;
+      transition: all var(--tr-fast);
+      text-align: center;
+    }
+
+    .prod-add-btn:hover {
+      background: var(--g2);
+      color: var(--v0);
+    }
+
+    .prod-info {
+      padding: 0.85rem 0.75rem 0.6rem;
+      position: relative;
       z-index: 2;
     }
 
-    .product-card:hover .product-overlay { opacity: 1; }
-
-    .product-quick-btn {
-      width: 100%;
-      padding: 0.5rem;
-      border: 1px solid var(--gold);
-      background: transparent;
-      color: var(--gold-light);
-      font-size: 0.6rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      cursor: pointer;
-      text-align: center;
-      transition: all var(--transition);
-    }
-
-    .product-quick-btn:hover {
-      background: var(--gold);
-      color: var(--violet-deep);
-    }
-
-    .product-info { padding: 0.85rem 0.75rem; }
-
-    .product-name {
-      font-family: var(--font-serif);
+    .prod-name {
+      font-family: var(--serif);
       font-size: 0.85rem;
       font-weight: 400;
-      color: var(--white);
+      color: var(--w);
+      line-height: 1.25;
       margin-bottom: 0.3rem;
-      line-height: 1.3;
     }
 
-    .product-benefit {
-      font-size: 0.6rem;
-      color: var(--text-muted);
-      margin-bottom: 0.5rem;
+    .prod-desc {
+      font-size: 0.55rem;
+      color: var(--ts);
       line-height: 1.5;
+      margin-bottom: 0.5rem;
     }
 
-    .product-hair-types {
+    .prod-types {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.25rem;
-      margin-bottom: 0.6rem;
+      gap: 0.2rem;
+      margin-bottom: 0.5rem;
     }
 
-    .product-type-tag {
-      font-size: 0.45rem;
+    .prod-type {
+      font-size: 0.4rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;
       padding: 0.15rem 0.4rem;
-      border: 1px solid rgba(201,168,76,0.25);
-      color: rgba(201,168,76,0.7);
+      border: 1px solid rgba(201,168,76,0.2);
+      color: rgba(201,168,76,0.6);
     }
 
-    .product-effect {
-      font-size: 0.55rem;
-      color: var(--gold);
+    .prod-effect {
+      font-size: 0.5rem;
+      color: var(--g2);
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      display: flex;
-      align-items: center;
-      gap: 0.3rem;
     }
 
-    .product-effect::before {
-      content: '✦';
-      font-size: 0.4rem;
-    }
+    .prod-effect::before { content: '✦ '; font-size: 0.35rem; }
 
-    .product-footer {
+    .prod-footer {
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 0.6rem 0.75rem;
-      border-top: 1px solid rgba(201,168,76,0.08);
+      border-top: 1px solid rgba(201,168,76,0.06);
     }
 
-    .product-price {
-      font-family: var(--font-serif);
-      font-size: 0.95rem;
-      color: var(--gold-light);
+    .prod-price {
+      font-family: var(--serif);
+      font-size: 1rem;
+      color: var(--g4);
     }
 
-    .product-stock {
-      font-size: 0.5rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: #ff6b6b;
-    }
+    .prod-stock { font-size: 0.45rem; letter-spacing: 0.15em; text-transform: uppercase; color: #ff6b6b; }
+    .prod-stock.ok { color: rgba(80,200,100,0.8); }
 
-    .product-stock.in-stock { color: rgba(100, 200, 120, 0.8); }
-
-    .product-card.featured {
+    /* Card featured (pleine largeur) */
+    .prod-card.wide {
       grid-column: 1 / -1;
       display: grid;
       grid-template-columns: 1fr 1fr;
     }
 
-    .product-card.featured .product-img-wrap {
+    .prod-card.wide .prod-img {
       aspect-ratio: auto;
-      min-height: 200px;
+      min-height: 220px;
     }
 
-    .product-card.featured .product-info-wrap {
-      padding: 1.5rem 1rem;
+    .prod-card.wide .prod-body {
       display: flex;
       flex-direction: column;
       justify-content: center;
+      padding: 1.5rem 1rem;
     }
 
-    .featured-label {
-      font-size: 0.55rem;
-      letter-spacing: 0.35em;
+    .wide-tag {
+      font-size: 0.45rem;
+      letter-spacing: 0.4em;
       text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 0.75rem;
+      color: var(--g2);
+      margin-bottom: 0.6rem;
     }
 
-    .featured-name {
-      font-family: var(--font-serif);
-      font-size: 1rem;
-      font-weight: 400;
-      color: var(--white);
-      line-height: 1.3;
-      margin-bottom: 0.75rem;
+    .wide-name {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      font-weight: 300;
+      color: var(--w);
+      line-height: 1.25;
+      margin-bottom: 0.6rem;
     }
 
-    .featured-desc {
-      font-size: 0.72rem;
-      color: var(--text-muted);
+    .wide-desc {
+      font-size: 0.65rem;
+      color: var(--tm);
       line-height: 1.7;
       margin-bottom: 1rem;
     }
 
-    /* ====================================================
-       SECTION 5: TRANSFORMATION
-    ==================================================== */
+    /* ============================================================
+       SECTION 5 — AVANT / APRÈS IMMERSIF
+    ============================================================ */
     .transformation {
       position: relative;
       padding: 5rem 1.5rem;
-      background: linear-gradient(180deg, var(--violet-deep) 0%, var(--violet-mid) 60%, var(--violet-deep) 100%);
+      background: var(--v1);
       overflow: hidden;
       text-align: center;
     }
@@ -1116,173 +1387,196 @@
       position: absolute;
       top: 0; left: 0; right: 0;
       height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(201,168,76,0.3), transparent);
+      background: linear-gradient(90deg, transparent, var(--g2), transparent);
     }
 
-    .transformation-title {
-      font-family: var(--font-serif);
-      font-size: clamp(1.6rem, 5.5vw, 2.4rem);
-      font-weight: 400;
-      color: var(--white);
-      margin-bottom: 0.75rem;
-    }
-
-    .transformation-subtitle {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      margin-bottom: 3rem;
-    }
-
-    .ba-container {
+    /* Comparateur avant/après */
+    .ba-wrap {
+      max-width: 380px;
+      margin: 0 auto 2rem;
       position: relative;
-      max-width: 360px;
-      margin: 0 auto 1.5rem;
-      overflow: hidden;
       border: 1px solid rgba(201,168,76,0.2);
+      overflow: hidden;
+      box-shadow:
+        0 0 40px rgba(106,13,173,0.2),
+        0 0 80px rgba(0,0,0,0.4);
     }
 
-    .ba-images {
+    .ba-wrap::before,
+    .ba-wrap::after {
+      content: '';
+      position: absolute;
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    /* Lueur sur le bord du slider */
+    .ba-wrap::before {
+      inset: 0;
+      box-shadow: inset 0 0 30px rgba(106,13,173,0.15);
+    }
+
+    .ba-slider {
       position: relative;
       width: 100%;
       aspect-ratio: 3/4;
       user-select: none;
+      touch-action: none;
     }
 
-    .ba-before,
-    .ba-after {
+    .ba-side {
       position: absolute;
       inset: 0;
-    }
-
-    .ba-before {
-      z-index: 1;
       overflow: hidden;
     }
 
-    .ba-after {
-      z-index: 0;
-      clip-path: inset(0 50% 0 0);
-      transition: clip-path 0.01s;
-      overflow: hidden;
-    }
-
-    /* Images dans le slider avant/après */
-    .ba-before img,
-    .ba-after img {
+    .ba-side img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      object-position: center top;
       display: block;
     }
 
-    .ba-label {
-      position: absolute;
-      bottom: 0.5rem;
-      font-size: 0.6rem;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      z-index: 5;
-      background: rgba(13,0,17,0.6);
-      padding: 0.2rem 0.5rem;
+    .ba-before-side {
+      z-index: 1;
     }
 
-    .ba-before .ba-label { left: 0.5rem; }
-    .ba-after  .ba-label { right: 0.5rem; color: var(--gold-light); }
+    .ba-after-side {
+      z-index: 2;
+      clip-path: inset(0 50% 0 0);
+    }
 
-    .ba-divider {
+    /* Labels avant/après */
+    .ba-label {
+      position: absolute;
+      bottom: 12px;
+      z-index: 8;
+      font-size: 0.5rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.6rem;
+      background: rgba(4,0,10,0.7);
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(201,168,76,0.2);
+    }
+
+    .ba-label.left  { left: 10px;  color: var(--tm); }
+    .ba-label.right { right: 10px; color: var(--g3); border-color: rgba(201,168,76,0.4); }
+
+    /* Ligne de séparation */
+    .ba-line {
       position: absolute;
       top: 0; bottom: 0;
       left: 50%;
       width: 2px;
-      background: var(--gold);
-      z-index: 3;
-      cursor: ew-resize;
+      background: linear-gradient(180deg, transparent, var(--g2) 20%, var(--g4) 50%, var(--g2) 80%, transparent);
+      z-index: 5;
       transform: translateX(-50%);
+      box-shadow: 0 0 10px rgba(201,168,76,0.5);
     }
 
+    /* Poignée de drag */
     .ba-handle {
       position: absolute;
-      top: 50%; left: 50%;
+      top: 50%;
+      left: 50%;
       transform: translate(-50%, -50%);
-      width: 36px; height: 36px;
+      width: 40px; height: 40px;
       border-radius: 50%;
-      background: var(--gold);
+      background: linear-gradient(135deg, var(--g1), var(--g2), var(--g4));
       display: flex;
       align-items: center;
       justify-content: center;
-      color: var(--violet-deep);
+      z-index: 6;
+      cursor: ew-resize;
+      box-shadow: 0 0 20px rgba(201,168,76,0.6), 0 4px 15px rgba(0,0,0,0.5);
+      animation: handlePulse 2s ease-in-out infinite;
+    }
+
+    @keyframes handlePulse {
+      0%,100% { box-shadow: 0 0 20px rgba(201,168,76,0.6), 0 4px 15px rgba(0,0,0,0.5); }
+      50%      { box-shadow: 0 0 35px rgba(201,168,76,0.9), 0 4px 15px rgba(0,0,0,0.5); }
+    }
+
+    .ba-handle-icon {
+      color: var(--v0);
       font-size: 0.7rem;
       font-weight: 700;
-      cursor: ew-resize;
-      z-index: 4;
-      box-shadow: 0 0 15px rgba(201,168,76,0.5);
+      letter-spacing: -1px;
     }
 
-    .ba-captions {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 0.75rem;
-      padding: 0 0.25rem;
-    }
-
-    .ba-caption {
-      font-size: 0.55rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-    }
-
-    .ba-caption.after { color: var(--gold); }
-
-    .transform-steps {
+    /* Étapes rituel */
+    .ritual-steps {
+      max-width: 360px;
+      margin: 3rem auto 0;
+      text-align: left;
       display: flex;
       flex-direction: column;
-      gap: 1rem;
-      max-width: 360px;
-      margin: 2.5rem auto 0;
-      text-align: left;
+      gap: 0;
     }
 
-    .transform-step {
+    .ritual-step {
       display: flex;
       gap: 1rem;
-      align-items: flex-start;
+      align-items: stretch;
+      position: relative;
     }
 
-    .step-number {
-      width: 28px; height: 28px;
+    .ritual-step-left {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .ritual-num {
+      width: 30px; height: 30px;
       border: 1px solid rgba(201,168,76,0.4);
       display: flex;
       align-items: center;
       justify-content: center;
+      font-family: var(--serif);
+      font-size: 0.65rem;
+      color: var(--g2);
       flex-shrink: 0;
-      font-size: 0.6rem;
-      font-family: var(--font-serif);
-      color: var(--gold);
     }
 
-    .step-title {
+    .ritual-connector {
+      width: 1px;
+      flex: 1;
+      background: linear-gradient(180deg, rgba(201,168,76,0.3), rgba(201,168,76,0.05));
+      margin: 4px 0;
+      min-height: 20px;
+    }
+
+    .ritual-step:last-child .ritual-connector { display: none; }
+
+    .ritual-content {
+      padding: 0.2rem 0 1.5rem;
+    }
+
+    .ritual-title {
       font-size: 0.75rem;
-      font-weight: 600;
-      color: var(--white-soft);
+      font-weight: 500;
+      color: var(--ws);
       margin-bottom: 0.2rem;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.06em;
     }
 
-    .step-text {
-      font-size: 0.7rem;
-      color: var(--text-muted);
+    .ritual-desc {
+      font-size: 0.65rem;
+      color: var(--ts);
       line-height: 1.6;
     }
 
-    /* ====================================================
-       SECTION 6: REVIEWS
-    ==================================================== */
+    /* ============================================================
+       SECTION 6 — REVIEWS CINÉMATIQUES
+    ============================================================ */
     .reviews {
       position: relative;
-      padding: 5rem 1.5rem;
-      background: var(--violet-deep);
+      padding: 5rem 0;
+      background: var(--v0);
       overflow: hidden;
     }
 
@@ -1291,603 +1585,595 @@
       position: absolute;
       top: 0; left: 0; right: 0;
       height: 1px;
-      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      background: linear-gradient(90deg, transparent, var(--g2), transparent);
     }
 
-    .reviews-header {
-      text-align: center;
-      margin-bottom: 3rem;
-    }
-
-    .reviews-title {
-      font-family: var(--font-serif);
-      font-size: clamp(1.6rem, 5.5vw, 2.4rem);
-      font-weight: 400;
-      color: var(--white);
-      margin-bottom: 0.75rem;
-    }
-
-    .reviews-aggregate {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.75rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .aggregate-score {
-      font-family: var(--font-serif);
-      font-size: 2rem;
-      color: var(--gold-light);
-    }
-
-    .aggregate-meta { text-align: left; }
-
-    .aggregate-count {
-      font-size: 0.65rem;
-      color: var(--text-muted);
-      letter-spacing: 0.1em;
-    }
-
-    .reviews-track-wrap {
-      overflow: hidden;
-      position: relative;
-      margin: 0 -1.5rem;
+    /* Orbe violet décoratif */
+    .reviews-orb {
+      position: absolute;
+      width: 400px; height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(106,13,173,0.15), transparent 70%);
+      filter: blur(40px);
+      bottom: -100px; right: -100px;
+      pointer-events: none;
     }
 
     .reviews-track {
       display: flex;
       gap: 1rem;
-      padding: 0.5rem 1.5rem;
+      padding: 1rem 1.5rem;
       overflow-x: auto;
       scrollbar-width: none;
       scroll-snap-type: x mandatory;
       -webkit-overflow-scrolling: touch;
     }
-
     .reviews-track::-webkit-scrollbar { display: none; }
 
     .review-card {
       flex-shrink: 0;
-      width: 280px;
-      background: var(--card-bg);
-      border: 1px solid rgba(201,168,76,0.1);
-      padding: 1.5rem;
+      width: 290px;
+      background: var(--card);
+      border: 1px solid rgba(201,168,76,0.08);
+      padding: 1.75rem;
       scroll-snap-align: start;
-      transition: border-color var(--transition);
+      transition: border-color var(--tr);
+      position: relative;
+      overflow: hidden;
     }
 
-    .review-card:hover { border-color: rgba(201,168,76,0.3); }
+    .review-card::before {
+      content: '"';
+      position: absolute;
+      top: -10px; right: 15px;
+      font-family: var(--serif);
+      font-size: 6rem;
+      color: rgba(201,168,76,0.05);
+      line-height: 1;
+      pointer-events: none;
+    }
 
-    .review-header {
+    .review-card:hover {
+      border-color: rgba(201,168,76,0.25);
+    }
+
+    .rv-top {
       display: flex;
       align-items: center;
       gap: 0.75rem;
       margin-bottom: 1rem;
     }
 
-    .reviewer-avatar {
-      width: 38px; height: 38px;
+    .rv-avatar {
+      width: 40px; height: 40px;
       border-radius: 50%;
-      border: 1px solid rgba(201,168,76,0.3);
-      background: linear-gradient(135deg, rgba(106,13,173,0.5), rgba(201,168,76,0.2));
+      border: 1px solid rgba(201,168,76,0.25);
+      background: linear-gradient(135deg, rgba(106,13,173,0.5), rgba(201,168,76,0.15));
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.9rem;
+      font-size: 1rem;
       flex-shrink: 0;
     }
 
-    .reviewer-info { flex: 1; }
+    .rv-info { flex: 1; }
 
-    .reviewer-name {
+    .rv-name {
       font-size: 0.75rem;
-      font-weight: 600;
-      color: var(--white-soft);
+      font-weight: 500;
+      color: var(--ws);
       margin-bottom: 0.1rem;
     }
 
-    .reviewer-location {
-      font-size: 0.55rem;
-      color: var(--text-muted);
+    .rv-loc {
+      font-size: 0.5rem;
+      color: var(--ts);
       letter-spacing: 0.1em;
     }
 
-    .verified-badge {
-      font-size: 0.5rem;
-      color: var(--gold);
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      border: 1px solid rgba(201,168,76,0.3);
+    .rv-verified {
+      font-size: 0.45rem;
+      color: var(--g2);
+      border: 1px solid rgba(201,168,76,0.25);
       padding: 0.15rem 0.4rem;
+      letter-spacing: 0.1em;
       white-space: nowrap;
     }
 
-    .review-stars { margin-bottom: 0.75rem; }
-
-    .review-product {
-      font-size: 0.55rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--gold);
+    .rv-stars {
+      color: var(--g2);
+      font-size: 0.8rem;
+      letter-spacing: 2px;
       margin-bottom: 0.5rem;
     }
 
-    .review-text {
-      font-size: 0.78rem;
-      color: var(--text-muted);
-      line-height: 1.7;
+    .rv-product {
+      font-size: 0.5rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--g2);
+      margin-bottom: 0.75rem;
+    }
+
+    .rv-text {
+      font-size: 0.75rem;
+      color: var(--tm);
+      line-height: 1.75;
       font-style: italic;
     }
 
-    .review-date {
-      font-size: 0.5rem;
-      color: rgba(184,169,208,0.5);
+    .rv-date {
+      font-size: 0.45rem;
+      color: rgba(184,169,208,0.4);
       margin-top: 0.75rem;
       letter-spacing: 0.1em;
     }
 
-    .reviews-dots {
+    /* Dots */
+    .rv-dots {
       display: flex;
       justify-content: center;
       gap: 0.4rem;
       margin-top: 1.5rem;
+      padding: 0 1.5rem;
     }
 
-    .reviews-dot {
+    .rv-dot {
       width: 4px; height: 4px;
       border-radius: 50%;
-      background: rgba(201,168,76,0.25);
-      cursor: pointer;
-      transition: all var(--transition);
+      background: rgba(201,168,76,0.2);
       border: none;
+      cursor: none;
+      transition: all var(--tr);
     }
 
-    .reviews-dot.active {
-      background: var(--gold);
-      width: 16px;
+    .rv-dot.on {
+      background: var(--g2);
+      width: 18px;
       border-radius: 2px;
     }
 
-    .press-strip {
-      margin-top: 3rem;
-      padding-top: 2rem;
-      border-top: 1px solid rgba(201,168,76,0.1);
-      text-align: center;
-    }
-
-    .press-label {
-      font-size: 0.55rem;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      margin-bottom: 1rem;
-    }
-
-    .press-logos {
+    /* Score global */
+    .reviews-score {
       display: flex;
-      justify-content: center;
       align-items: center;
-      gap: 2rem;
-      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      padding: 2rem 1.5rem 0;
     }
 
-    .press-logo {
-      font-family: var(--font-serif);
-      font-size: 0.7rem;
-      letter-spacing: 0.2em;
-      color: rgba(201,168,76,0.3);
-      font-style: italic;
-      text-transform: uppercase;
-      transition: color var(--transition);
+    .score-big {
+      font-family: var(--serif);
+      font-size: 3rem;
+      font-weight: 300;
+      color: var(--g4);
+      line-height: 1;
     }
 
-    .press-logo:hover { color: rgba(201,168,76,0.7); }
+    .score-meta { text-align: left; }
 
-    /* ====================================================
-       SECTION 7: CTA
-    ==================================================== */
-    .cta-section {
+    .score-stars {
+      color: var(--g2);
+      font-size: 1rem;
+      letter-spacing: 3px;
+      display: block;
+      margin-bottom: 0.2rem;
+    }
+
+    .score-count {
+      font-size: 0.55rem;
+      color: var(--ts);
+      letter-spacing: 0.1em;
+    }
+
+    /* ============================================================
+       SECTION 7 — CTA FINAL
+    ============================================================ */
+    .cta {
       position: relative;
       padding: 6rem 1.5rem;
-      background: linear-gradient(
-        180deg,
-        var(--violet-deep) 0%,
-        var(--violet-mid) 40%,
-        var(--violet-light) 70%,
-        var(--violet-mid) 100%
-      );
+      background: var(--v0);
       overflow: hidden;
       text-align: center;
     }
 
-    .cta-section::before {
+    .cta::before {
       content: '';
       position: absolute;
       top: 0; left: 0; right: 0;
       height: 1px;
-      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      background: linear-gradient(90deg, transparent, var(--g2), transparent);
     }
 
-    .cta-bg-text {
+    /* Mot de fond géant */
+    .cta-word {
       position: absolute;
+      font-family: var(--serif);
+      font-size: clamp(5rem, 28vw, 18rem);
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      color: rgba(106,13,173,0.07);
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      font-family: var(--font-serif);
-      font-size: clamp(4rem, 20vw, 10rem);
-      font-weight: 700;
-      color: rgba(106,13,173,0.12);
-      letter-spacing: 0.05em;
       white-space: nowrap;
       pointer-events: none;
       user-select: none;
     }
 
+    /* Orbe CTA */
     .cta-orb {
       position: absolute;
-      width: 400px; height: 400px;
+      width: 500px; height: 500px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(106,13,173,0.3), transparent 70%);
-      filter: blur(40px);
+      background: radial-gradient(circle, rgba(106,13,173,0.2), transparent 70%);
+      filter: blur(60px);
       top: 50%; left: 50%;
       transform: translate(-50%, -50%);
+      animation: ctaPulse 5s ease-in-out infinite alternate;
       pointer-events: none;
-      animation: ctaOrb 5s ease-in-out infinite alternate;
     }
 
-    @keyframes ctaOrb {
-      0%   { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
-      100% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.8; }
+    @keyframes ctaPulse {
+      0%   { opacity: 0.5; transform: translate(-50%,-50%) scale(1); }
+      100% { opacity: 1;   transform: translate(-50%,-50%) scale(1.2); }
     }
 
     .cta-content {
       position: relative;
-      z-index: 2;
-      max-width: 340px;
+      z-index: 5;
+      max-width: 360px;
       margin: 0 auto;
     }
 
     .cta-eyebrow {
-      font-size: 0.6rem;
-      letter-spacing: 0.5em;
+      font-size: 0.5rem;
+      letter-spacing: 0.6em;
       text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 1.25rem;
+      color: var(--g2);
+      margin-bottom: 1.5rem;
     }
 
     .cta-title {
-      font-family: var(--font-serif);
-      font-size: clamp(1.8rem, 7vw, 3rem);
-      font-weight: 400;
-      color: var(--white);
-      line-height: 1.2;
-      margin-bottom: 1rem;
+      font-family: var(--serif);
+      font-size: clamp(2rem, 8vw, 3.5rem);
+      font-weight: 300;
+      line-height: 1.15;
+      color: var(--w);
+      margin-bottom: 1.25rem;
     }
 
     .cta-title em {
       font-style: italic;
-      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      background: linear-gradient(135deg, var(--g2), var(--g4), var(--g2));
+      background-size: 200%;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+      animation: goldFlow 3s ease-in-out infinite;
     }
 
     .cta-text {
-      font-size: 0.82rem;
-      color: var(--text-muted);
-      line-height: 1.8;
-      margin-bottom: 2.5rem;
+      font-size: 0.78rem;
+      color: var(--tm);
+      line-height: 1.85;
+      margin-bottom: 2rem;
     }
 
-    .cta-urgency {
+    /* Urgence */
+    .urgency-bar {
       display: inline-flex;
       align-items: center;
-      gap: 0.5rem;
+      gap: 0.6rem;
+      border: 1px solid rgba(200,50,50,0.3);
+      background: rgba(139,0,0,0.12);
+      padding: 0.5rem 1.25rem;
       margin-bottom: 2rem;
-      padding: 0.5rem 1rem;
-      background: rgba(139, 0, 0, 0.15);
-      border: 1px solid rgba(200, 50, 50, 0.3);
     }
 
-    .urgency-dot {
-      width: 5px; height: 5px;
+    .urgency-pulse {
+      width: 6px; height: 6px;
       border-radius: 50%;
       background: #ff4444;
-      animation: pulse 1.5s ease-in-out infinite;
+      animation: urgPulse 1.2s ease-in-out infinite;
+      flex-shrink: 0;
+    }
+
+    @keyframes urgPulse {
+      0%,100% { box-shadow: 0 0 0 0 rgba(255,68,68,0.6); }
+      50%      { box-shadow: 0 0 0 6px rgba(255,68,68,0); }
     }
 
     .urgency-text {
-      font-size: 0.6rem;
+      font-size: 0.55rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
       color: #ff8080;
     }
 
-    .cta-btn-wrap {
+    /* Boutons CTA */
+    .cta-btns {
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 1rem;
+      margin-bottom: 2rem;
     }
 
-    .cta-btn-primary {
-      display: inline-block;
-      padding: 1.1rem 3rem;
-      background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 50%, var(--gold) 100%);
-      background-size: 200% 100%;
-      color: var(--violet-deep);
-      font-family: var(--font-serif);
-      font-size: 0.85rem;
-      letter-spacing: 0.2em;
+    .cta-primary {
+      padding: 1.1rem 3.5rem;
+      background: linear-gradient(135deg, var(--g1), var(--g2), var(--g4), var(--g2), var(--g1));
+      background-size: 300% 100%;
+      color: var(--v0);
+      font-family: var(--serif);
+      font-size: 0.8rem;
+      letter-spacing: 0.25em;
       text-transform: uppercase;
-      font-weight: 700;
-      cursor: pointer;
+      font-weight: 600;
       border: none;
-      transition: all var(--transition);
-      animation: goldShimmer 3s ease-in-out infinite;
+      cursor: none;
+      animation: btnGold 3s ease-in-out infinite;
+      transition: transform var(--tr), box-shadow var(--tr);
+      display: inline-block;
     }
 
-    @keyframes goldShimmer {
-      0%,100% { background-position: 0% 50%; }
-      50%      { background-position: 100% 50%; }
-    }
-
-    .cta-btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 30px rgba(201,168,76,0.4), 0 0 60px rgba(201,168,76,0.2);
+    .cta-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 40px rgba(201,168,76,0.4);
     }
 
     .cta-note {
-      font-size: 0.6rem;
-      color: var(--text-muted);
+      font-size: 0.5rem;
+      color: var(--ts);
       letter-spacing: 0.1em;
     }
 
-    .cta-guarantees {
+    /* Garanties */
+    .guarantees {
       display: flex;
       justify-content: center;
       gap: 1.5rem;
+      flex-wrap: wrap;
       margin-top: 3rem;
       padding-top: 2rem;
-      border-top: 1px solid rgba(201,168,76,0.12);
-      flex-wrap: wrap;
+      border-top: 1px solid rgba(201,168,76,0.1);
     }
 
-    .guarantee-item {
+    .guarantee {
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 0.4rem;
     }
 
-    .guarantee-icon {
-      font-size: 1.1rem;
-      color: var(--gold);
+    .g-icon {
+      width: 36px; height: 36px;
+      border: 1px solid rgba(201,168,76,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
     }
 
-    .guarantee-text {
-      font-size: 0.55rem;
+    .g-text {
+      font-size: 0.45rem;
       letter-spacing: 0.15em;
       text-transform: uppercase;
-      color: var(--text-muted);
+      color: var(--ts);
       text-align: center;
     }
 
-    /* ====================================================
-       FOOTER
-    ==================================================== */
-    .footer {
-      background: #050008;
-      padding: 3rem 1.5rem 2rem;
-      border-top: 1px solid rgba(201,168,76,0.1);
+    /* ============================================================
+       TOAST
+    ============================================================ */
+    .toast {
+      position: fixed;
+      bottom: 1.5rem; right: 1.5rem;
+      background: rgba(13,0,17,0.95);
+      border: 1px solid rgba(201,168,76,0.35);
+      backdrop-filter: blur(20px);
+      padding: 1.1rem 1.3rem;
+      max-width: 270px;
+      z-index: 9998;
+      transform: translateX(120%);
+      transition: transform 0.5s cubic-bezier(0.34,1.56,0.64,1);
+      box-shadow: 0 10px 40px rgba(0,0,0,0.5), 0 0 20px rgba(106,13,173,0.2);
     }
 
-    .footer-logo {
-      font-family: var(--font-serif);
-      font-size: 0.75rem;
+    .toast.on { transform: translateX(0); }
+
+    .toast-top {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .toast-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--g2);
+      animation: urgPulse 1.5s ease-in-out infinite;
+      flex-shrink: 0;
+    }
+
+    .toast-title {
+      font-size: 0.65rem;
+      color: var(--g4);
+      font-weight: 500;
+      letter-spacing: 0.05em;
+    }
+
+    .toast-text {
+      font-size: 0.6rem;
+      color: var(--tm);
+      line-height: 1.5;
+    }
+
+    /* ============================================================
+       FOOTER
+    ============================================================ */
+    .footer {
+      background: var(--v0);
+      border-top: 1px solid rgba(201,168,76,0.1);
+      padding: 3rem 1.5rem 2rem;
+    }
+
+    .footer-logo-text {
+      font-family: var(--serif);
+      font-size: 0.8rem;
       letter-spacing: 0.3em;
       text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 0.5rem;
+      color: var(--g2);
+      margin-bottom: 0.3rem;
     }
 
     .footer-tagline {
-      font-size: 0.6rem;
-      color: var(--text-muted);
-      letter-spacing: 0.15em;
+      font-size: 0.5rem;
+      letter-spacing: 0.2em;
+      color: var(--ts);
       margin-bottom: 2rem;
     }
 
     .footer-links {
       display: flex;
       flex-wrap: wrap;
-      gap: 1rem;
+      gap: 0.75rem 1.5rem;
       margin-bottom: 2rem;
     }
 
     .footer-link {
-      font-size: 0.6rem;
-      letter-spacing: 0.15em;
+      font-size: 0.5rem;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: var(--text-muted);
-      transition: color var(--transition);
-      cursor: pointer;
+      color: var(--ts);
+      cursor: none;
+      transition: color var(--tr-fast);
     }
 
-    .footer-link:hover { color: var(--gold); }
+    .footer-link:hover { color: var(--g2); }
 
     .footer-bottom {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding-top: 1.5rem;
-      border-top: 1px solid rgba(255,255,255,0.05);
       flex-wrap: wrap;
-      gap: 0.5rem;
+      gap: 0.75rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255,255,255,0.04);
     }
 
     .footer-copy {
-      font-size: 0.55rem;
-      color: rgba(184,169,208,0.35);
+      font-size: 0.45rem;
+      color: rgba(184,169,208,0.3);
       letter-spacing: 0.1em;
     }
 
-    .footer-socials { display: flex; gap: 1rem; }
+    .footer-socials { display: flex; gap: 0.75rem; }
 
     .footer-social {
       width: 28px; height: 28px;
-      border: 1px solid rgba(201,168,76,0.2);
+      border: 1px solid rgba(201,168,76,0.15);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.7rem;
-      color: var(--text-muted);
-      cursor: pointer;
-      transition: all var(--transition);
+      font-size: 0.6rem;
+      color: var(--ts);
+      cursor: none;
+      transition: all var(--tr-fast);
       background: transparent;
     }
 
     .footer-social:hover {
-      border-color: var(--gold);
-      color: var(--gold);
+      border-color: var(--g2);
+      color: var(--g2);
     }
 
-    /* ====================================================
-       TOAST
-    ==================================================== */
-    .toast {
-      position: fixed;
-      bottom: 1.5rem;
-      right: 1.5rem;
-      background: var(--card-bg);
-      border: 1px solid rgba(201,168,76,0.3);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      padding: 1rem 1.25rem;
-      max-width: 260px;
-      z-index: 9999;
-      transform: translateX(120%);
-      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-
-    .toast.show { transform: translateX(0); }
-
-    .toast-title {
-      font-size: 0.7rem;
-      color: var(--gold-light);
-      font-weight: 600;
-      margin-bottom: 0.25rem;
-    }
-
-    .toast-text {
-      font-size: 0.65rem;
-      color: var(--text-muted);
-    }
-
-    /* ====================================================
-       LOADER
-    ==================================================== */
-    .loader {
-      position: fixed;
-      inset: 0;
-      background: var(--violet-deep);
-      z-index: 9999;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      gap: 1.5rem;
-      transition: opacity 0.6s ease, visibility 0.6s ease;
-    }
-
-    .loader.hidden {
+    /* ============================================================
+       FADE-IN GÉNÉRIQUE
+    ============================================================ */
+    .reveal {
       opacity: 0;
-      visibility: hidden;
+      transform: translateY(35px);
+      transition: opacity 0.9s ease, transform 0.9s ease;
     }
 
-    .loader-logo {
-      font-family: var(--font-serif);
-      font-size: 0.65rem;
-      letter-spacing: 0.4em;
-      text-transform: uppercase;
-      color: var(--gold);
+    .reveal.d1 { transition-delay: 0.1s; }
+    .reveal.d2 { transition-delay: 0.2s; }
+    .reveal.d3 { transition-delay: 0.3s; }
+    .reveal.d4 { transition-delay: 0.45s; }
+
+    .reveal.in {
+      opacity: 1;
+      transform: translateY(0);
     }
 
-    .loader-bar-wrap {
-      width: 120px;
-      height: 1px;
-      background: rgba(201,168,76,0.2);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .loader-bar {
-      position: absolute;
-      top: 0; left: 0;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, var(--gold), transparent);
-      animation: loaderBar 1.5s ease-in-out forwards;
-    }
-
-    @keyframes loaderBar {
-      0%   { width: 0%; }
-      100% { width: 100%; }
-    }
-
-    /* ====================================================
-       RESPONSIVE
-    ==================================================== */
+    /* ============================================================
+       RESPONSIVE — TABLETTE / DESKTOP
+    ============================================================ */
     @media (min-width: 768px) {
 
-      .nav-menu {
+      .nav-links { display: flex; }
+
+      .hero-content { padding: 8rem 2rem 6rem; }
+
+      .immersion {
+        grid-template-columns: 1fr 1fr;
+        min-height: auto;
+      }
+
+      .immersion-visual {
+        height: auto;
+        min-height: 80vh;
+      }
+
+      .immersion-text {
+        padding: 4rem 3rem;
         display: flex;
-        gap: 2rem;
-        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+        text-align: left;
       }
 
-      .nav-menu a {
-        font-size: 0.65rem;
-        letter-spacing: 0.2em;
-        text-transform: uppercase;
-        color: var(--text-muted);
-        transition: color var(--transition);
+      .immersion-label {
+        justify-content: flex-start;
       }
 
-      .nav-menu a:hover { color: var(--gold-light); }
+      .immersion-label::before { display: none; }
 
-      .hero-model-wrap { width: 300px; }
-      .hero-h1 { font-size: 3rem; }
+      .immersion-body { margin: 0 0 2rem; }
+      .immersion-badge { display: none; }
 
       .story-block {
-        flex-direction: row;
-        align-items: center;
-        gap: 3rem;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
       }
 
-      .story-block.reverse { flex-direction: row-reverse; }
-      .story-hologram { aspect-ratio: 3/4; }
+      .story-block.alt { direction: rtl; }
+      .story-block.alt > * { direction: ltr; }
 
-      .products-grid { grid-template-columns: repeat(3, 1fr); }
+      .story-img {
+        height: 100%;
+        max-height: none;
+      }
 
-      .product-card.featured {
+      .story-text { padding: 3rem 2.5rem; }
+
+      .prod-grid { grid-template-columns: repeat(3, 1fr); padding: 0 1.5rem; }
+
+      .prod-card.wide {
         grid-column: span 1;
         display: block;
       }
 
-      .product-card.featured .product-img-wrap { aspect-ratio: 3/4; }
-      .product-card.featured .product-info-wrap { padding: 0.85rem 0.75rem; }
-      .featured-name { font-size: 0.85rem; }
+      .prod-card.wide .prod-img { aspect-ratio: 3/4; }
 
-      .ba-container { max-width: 440px; }
-      .cta-btn-wrap { flex-direction: row; justify-content: center; }
+      .ba-wrap { max-width: 440px; }
+      .cta-btns { flex-direction: row; justify-content: center; }
     }
 
     @media (min-width: 1024px) {
-      .hero { padding: 8rem 2rem 6rem; }
-      .hero-model-wrap { width: 340px; }
-      .products-grid { grid-template-columns: repeat(4, 1fr); }
-      .immersion-content { max-width: 500px; }
+      .prod-grid { grid-template-columns: repeat(4, 1fr); }
     }
 
   </style>
@@ -1895,750 +2181,838 @@
 
 <body>
 
-  <!-- LOADER -->
-  <div class="loader" id="loader" aria-hidden="true">
-    <div class="loader-logo">Complexe Produits de Cheveux</div>
-    <div class="loader-bar-wrap">
-      <div class="loader-bar"></div>
+  <!-- ============================================================
+       CURSEUR PERSONNALISÉ
+  ============================================================ -->
+  <div class="cursor-dot"  id="cursorDot"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <!-- ============================================================
+       LOADING SCREEN
+  ============================================================ -->
+  <div id="loader">
+    <div class="loader-brand">
+      <div class="loader-title">Complexe</div>
+      <div class="loader-sub">Produits de Cheveux · Haïti</div>
     </div>
+    <div class="loader-progress">
+      <div class="loader-fill" id="loaderFill"></div>
+    </div>
+    <div class="loader-percent" id="loaderPct">0%</div>
   </div>
 
-  <!-- PARTICLES -->
-  <canvas id="particles-canvas" aria-hidden="true"></canvas>
+  <!-- ============================================================
+       CANVAS COSMOS
+  ============================================================ -->
+  <canvas id="cosmos"></canvas>
 
-  <!-- TOAST -->
-  <div class="toast" id="toast" role="alert" aria-live="polite">
-    <div class="toast-title">✦ Stock Limité</div>
+  <!-- ============================================================
+       TOAST
+  ============================================================ -->
+  <div class="toast" id="toast">
+    <div class="toast-top">
+      <div class="toast-dot"></div>
+      <div class="toast-title">✦ Stock Limité</div>
+    </div>
     <div class="toast-text">3 unités restantes — commandez avant épuisement.</div>
   </div>
 
-  <!-- NAVIGATION -->
-  <nav class="nav" id="nav" role="navigation" aria-label="Navigation principale">
+  <!-- ============================================================
+       NAVIGATION
+  ============================================================ -->
+  <nav class="nav" id="nav">
     <div class="nav-logo">
-      Complexe
-      <span>Produits de Cheveux</span>
+      <span class="nav-logo-main">Complexe</span>
+      <span class="nav-logo-sub">Produits de Cheveux</span>
     </div>
-    <ul class="nav-menu">
+    <ul class="nav-links">
       <li><a href="#produits">Collection</a></li>
-      <li><a href="#storytelling">Rituel</a></li>
+      <li><a href="#story">Rituel</a></li>
       <li><a href="#transformation">Résultats</a></li>
       <li><a href="#avis">Témoignages</a></li>
     </ul>
-    <div class="nav-actions">
-      <div class="nav-icon" title="Rechercher" aria-label="Rechercher">&#9906;</div>
-      <div class="nav-icon nav-cart-badge" title="Panier" aria-label="Panier">
-        &#9651;
-        <span class="cart-count" id="cartCount">2</span>
-      </div>
+    <div class="nav-right">
+      <button class="nav-cart" onclick="openCart()">
+        Panier
+        <span class="nav-cart-num" id="cartNum">2</span>
+      </button>
     </div>
   </nav>
 
 
   <!-- ============================================================
-       SECTION 1: HERO
+       SECTION 1 — HERO
+       Photo: images/model-hero.jpg
   ============================================================ -->
-  <section class="hero" id="accueil" aria-label="Héro - Entrée immersive">
+  <section class="hero" id="accueil">
 
-    <div class="hero-orb hero-orb-1" aria-hidden="true"></div>
-    <div class="hero-orb hero-orb-2" aria-hidden="true"></div>
-    <div class="hero-orb hero-orb-3" aria-hidden="true"></div>
+    <div class="hero-bg"></div>
 
-    <p class="hero-eyebrow">✦ Haïti · Luxe Capillaire · Édition Exclusive ✦</p>
-
-    <!-- ══════════════════════════════════════════
-         IMAGE MODÈLE HERO
-         Nom du fichier : model-hero.jpg
-         Uploader dans  : images/model-hero.jpg
-    ══════════════════════════════════════════ -->
-    <div class="hero-model-wrap" aria-hidden="true">
-      <div class="hero-model-frame">
-        <img
-          src="https://raw.githubusercontent.com/lavrizetwal/complexe/main/images/model-hero.jpg"
-          alt="Modèle cheveux naturels luxe"
-          style="width:100%; height:100%; object-fit:cover; object-position:top;"
-        />
-      </div>
-      <div class="hero-model-glow"></div>
+    <!-- Lignes verticales décoratives -->
+    <div class="hero-lines" aria-hidden="true">
+      <div class="hero-line" style="left:15%; height:40%; top:20%; animation-delay:0s;"></div>
+      <div class="hero-line" style="left:30%; height:60%; top:10%; animation-delay:1s;"></div>
+      <div class="hero-line" style="left:70%; height:50%; top:15%; animation-delay:2s;"></div>
+      <div class="hero-line" style="left:85%; height:35%; top:25%; animation-delay:0.5s;"></div>
     </div>
 
-    <div class="hero-headline-wrap">
+    <!-- IMAGE MODÈLE — plein fond -->
+    <div class="hero-model-bg">
+      <!--
+        ════════════════════════════════════
+        PHOTO : images/model-hero.jpg
+        ════════════════════════════════════
+      -->
+      <img
+        src="images/model-hero.jpg"
+        alt="Modèle — Complexe Produits de Cheveux"
+        id="heroImg"
+        onerror="this.style.display='none'"
+      />
+    </div>
+    <div class="hero-model-overlay"></div>
+    <div class="hero-glow"></div>
+
+    <!-- Texte Hero -->
+    <div class="hero-content">
+      <p class="hero-eyebrow">Haïti · Luxe Capillaire · Édition Exclusive</p>
+
       <h1 class="hero-h1">
-        Révélez la <em>puissance</em><br>de vos cheveux
+        Révélez la<br>
+        <span class="gold">puissance</span><br>
+        de vos cheveux
       </h1>
-      <p class="hero-sub">Le luxe capillaire commence ici.</p>
-      <p class="hero-tagline">✦ Plus qu'un style — une signature ✦</p>
+
+      <p class="hero-h2">Le luxe capillaire commence ici.</p>
+
+      <p class="hero-h3">✦ Plus qu'un style — une signature ✦</p>
+
+      <div class="hero-cta-group">
+        <a href="#produits" class="btn-hero">Explorer la collection</a>
+        <a href="#story" class="btn-outline">Notre histoire</a>
+      </div>
     </div>
 
-    <div class="hero-btn-wrap">
-      <a href="#produits" class="btn-luxury" aria-label="Explorer la collection">
-        <span>Explorer la collection</span>
-      </a>
+    <div class="hero-scroll" aria-hidden="true">
+      <div class="scroll-mouse">
+        <div class="scroll-wheel"></div>
+      </div>
+      <span class="scroll-text">Découvrir</span>
     </div>
 
-    <div class="hero-scroll-hint" aria-hidden="true">
-      <span class="scroll-hint-text">Découvrir</span>
-      <div class="scroll-hint-line"></div>
-    </div>
-
-  </section><!-- /SECTION 1 -->
+  </section><!-- /HERO -->
 
 
   <!-- ============================================================
-       SECTION 2: IMMERSION
+       MARQUEE DÉFILANT
   ============================================================ -->
-  <section class="immersion" id="immersion" aria-label="Immersion — Univers de la marque">
+  <div class="marquee-wrap" aria-hidden="true">
+    <div class="marquee-track">
+      <!-- Dupliquer pour boucle infinie -->
+      <span class="marquee-item">Luxe Capillaire</span>
+      <span class="marquee-item">Cheveux Naturels</span>
+      <span class="marquee-item">Formules Exclusives</span>
+      <span class="marquee-item">Haïti · Caraïbes</span>
+      <span class="marquee-item">Type 4A · 4B · 4C</span>
+      <span class="marquee-item">100% Naturel</span>
+      <span class="marquee-item">Édition Limitée</span>
+      <span class="marquee-item">Couronne Royale</span>
+      <span class="marquee-item">Luxe Capillaire</span>
+      <span class="marquee-item">Cheveux Naturels</span>
+      <span class="marquee-item">Formules Exclusives</span>
+      <span class="marquee-item">Haïti · Caraïbes</span>
+      <span class="marquee-item">Type 4A · 4B · 4C</span>
+      <span class="marquee-item">100% Naturel</span>
+      <span class="marquee-item">Édition Limitée</span>
+      <span class="marquee-item">Couronne Royale</span>
+    </div>
+  </div>
 
-    <div class="immersion-bg" id="parallaxBg" aria-hidden="true"></div>
 
-    <div class="immersion-float float-dot" style="top:15%; left:8%; animation-delay:0s;"></div>
-    <div class="immersion-float float-dot" style="top:70%; left:12%; animation-delay:1s;"></div>
-    <div class="immersion-float float-dot" style="top:30%; right:10%; animation-delay:2s;"></div>
-    <div class="immersion-float float-dot" style="top:80%; right:15%; animation-delay:0.5s;"></div>
-    <div class="immersion-float float-line" style="top:20%; left:5%;"></div>
-    <div class="immersion-float float-line" style="top:55%; right:6%; animation-delay:2.5s;"></div>
+  <!-- ============================================================
+       SECTION 2 — IMMERSION
+       Photo: images/story1-origines.jpg
+  ============================================================ -->
+  <section class="immersion" id="immersion">
 
-    <div class="immersion-content">
-      <div class="immersion-badge fade-in">
-        <div class="immersion-badge-dot"></div>
-        <span class="immersion-badge-text">Expérience Capillaire Exclusive</span>
-      </div>
+    <!-- Visuel gauche -->
+    <div class="immersion-visual" id="immersionVisual">
+      <!--
+        ════════════════════════════════════
+        PHOTO : images/story1-origines.jpg
+        ════════════════════════════════════
+      -->
+      <img
+        src="images/story1-origines.jpg"
+        alt="Origines — Complexe Produits de Cheveux"
+        onerror="this.style.display='none'"
+      />
+      <div class="immersion-visual-overlay"></div>
+      <div class="immersion-badge">✦ Expérience Exclusive ✦</div>
+    </div>
 
-      <blockquote class="immersion-quote fade-in fade-in-delay-1">
-        "Chaque cheveu raconte<br>une <em>histoire</em>.<br>
-        La vôtre mérite<br>d'être <em>extraordinaire</em>."
+    <!-- Texte droit -->
+    <div class="immersion-text">
+
+      <div class="immersion-label reveal">Notre Philosophie</div>
+
+      <blockquote class="immersion-quote reveal d1">
+        "Chaque cheveu<br>raconte une
+        <span class="accent">histoire</span>.<br>
+        La vôtre mérite<br>d'être
+        <span class="accent">extraordinaire</span>."
       </blockquote>
 
-      <p class="immersion-body fade-in fade-in-delay-2">
+      <p class="immersion-body reveal d2">
         Née de la richesse culturelle haïtienne et forgée par les standards
         de la beauté mondiale, notre formule est un hymne à la femme noire —
-        à sa couronne, à sa force, à son élégance naturelle.
+        à sa couronne, à sa force, à son élégance naturelle et singulière.
       </p>
 
-      <div class="fade-in fade-in-delay-3">
-        <a href="#storytelling" class="btn-luxury-ghost">Notre Histoire</a>
+      <div class="reveal d3">
+        <a href="#story" class="btn-outline">Découvrir notre histoire</a>
       </div>
 
-      <div class="immersion-stats fade-in fade-in-delay-4">
-        <div class="stat-item">
-          <span class="stat-number">98%</span>
-          <span class="stat-label">Satisfaction</span>
+      <div class="immersion-stats reveal d4">
+        <div class="i-stat">
+          <span class="i-stat-num" data-target="98" data-suffix="%">0%</span>
+          <span class="i-stat-label">Satisfaction</span>
         </div>
-        <div class="stat-item">
-          <span class="stat-number">5K+</span>
-          <span class="stat-label">Clientes</span>
+        <div class="i-stat">
+          <span class="i-stat-num" data-target="5000" data-suffix="+">0+</span>
+          <span class="i-stat-label">Clientes</span>
         </div>
-        <div class="stat-item">
-          <span class="stat-number">100%</span>
-          <span class="stat-label">Naturel</span>
+        <div class="i-stat">
+          <span class="i-stat-num" data-target="100" data-suffix="%">0%</span>
+          <span class="i-stat-label">Naturel</span>
         </div>
       </div>
+
     </div>
 
-  </section><!-- /SECTION 2 -->
+  </section><!-- /IMMERSION -->
 
 
   <!-- ============================================================
-       SECTION 3: STORYTELLING
+       SECTION 3 — STORYTELLING
+       Photos: images/story1-origines.jpg + images/story2-science.jpg
   ============================================================ -->
-  <section class="storytelling" id="storytelling" aria-label="Notre histoire">
+  <section class="story" id="story">
 
-    <div class="story-header fade-in">
-      <p class="section-label">Notre Philosophie</p>
-      <span class="gold-line" aria-hidden="true"></span>
-      <h2 class="story-title">
-        La science du soin,<br>l'art de la beauté
-      </h2>
-      <p class="story-intro">
-        Chaque formule est conçue pour célébrer la texture unique
-        des cheveux naturels et crémeux des femmes haïtiennes.
-      </p>
-    </div>
+    <div class="story-bg-word" aria-hidden="true">LUXE</div>
 
-    <!-- STORY BLOCK 1 -->
-    <div class="story-block fade-in">
+    <!-- BLOC 1 — Origines -->
+    <div class="story-block">
 
-      <!-- ══════════════════════════════════════════
-           IMAGE STORYTELLING 1
-           Nom du fichier : story1-origines.jpg
-           Uploader dans  : images/story1-origines.jpg
-      ══════════════════════════════════════════ -->
-      <div class="hologram-frame story-hologram" aria-label="Image origines de la marque">
-        <div class="hologram-corner tl"></div>
-        <div class="hologram-corner tr"></div>
-        <div class="hologram-corner bl"></div>
-        <div class="hologram-corner br"></div>
-        <div class="hologram-inner">
-          <img
-            src="https://raw.githubusercontent.com/lavrizetwal/complexe/main/images/story1-origines.jpg"
-            alt="Origines de la marque — ingrédients naturels"
-            style="width:100%; height:100%; object-fit:cover; display:block;"
-          />
-        </div>
+      <!--
+        ════════════════════════════════════
+        PHOTO : images/story1-origines.jpg
+        ════════════════════════════════════
+      -->
+      <div class="story-img" id="storyImg1">
+        <img
+          src="images/story1-origines.jpg"
+          alt="Ingrédients naturels — origines"
+          onerror="this.style.display='none'"
+        />
+        <div class="story-img-overlay"></div>
+        <div class="holo-corner tl"></div>
+        <div class="holo-corner tr"></div>
+        <div class="holo-corner bl"></div>
+        <div class="holo-corner br"></div>
+        <div class="holo-scan"></div>
       </div>
 
-      <div class="story-text-block">
-        <p class="story-block-label">✦ Origines · Authenticité</p>
-        <h3 class="story-block-title">Formulé pour votre couronne naturelle</h3>
-        <p class="story-block-text editable-text">
+      <div class="story-text">
+        <p class="story-tag reveal">✦ Origines · Authenticité</p>
+        <h2 class="story-title reveal d1">
+          Formulé pour votre<br>
+          <em>couronne naturelle</em>
+        </h2>
+        <p class="story-body reveal d2">
           Nos formules sont développées en partant d'une vérité fondamentale :
-          les cheveux 4A, 4B et 4C méritent des soins pensés spécifiquement pour eux.
-          Pas des adaptations. Pas des compromis. Une dévotion totale à leur structure unique.
+          les cheveux 4A, 4B et 4C méritent des soins pensés spécifiquement
+          pour eux. Pas des adaptations. Pas des compromis. Une dévotion totale
+          à leur structure unique et leur beauté singulière.
         </p>
-        <p class="story-block-text">
+        <p class="story-body reveal d2">
           Chaque ingrédient est sélectionné pour sa compatibilité avec
-          la porosité élevée, la fragilité naturelle et la beauté singulière
-          de vos boucles et vagues.
+          la porosité élevée, la fragilité naturelle et la magnificence
+          de vos boucles, vagues et spirales.
         </p>
-        <div class="hair-types" aria-label="Types de cheveux compatibles">
-          <span class="hair-tag">Type 3C</span>
-          <span class="hair-tag">Type 4A</span>
-          <span class="hair-tag">Type 4B</span>
-          <span class="hair-tag">Type 4C</span>
-          <span class="hair-tag">Crémeux</span>
-          <span class="hair-tag">Naturels</span>
+        <div class="type-tags reveal d3">
+          <span class="type-tag">Type 3C</span>
+          <span class="type-tag">Type 4A</span>
+          <span class="type-tag">Type 4B</span>
+          <span class="type-tag">Type 4C</span>
+          <span class="type-tag">Crémeux</span>
+          <span class="type-tag">Naturels</span>
         </div>
       </div>
 
     </div>
 
-    <!-- STORY BLOCK 2 -->
-    <div class="story-block reverse fade-in">
+    <div class="gold-divider">
+      <div class="gold-divider-line"></div>
+      <span class="gold-divider-sym">✦</span>
+      <div class="gold-divider-line"></div>
+    </div>
 
-      <div class="story-text-block">
-        <p class="story-block-label">✦ Science · Innovation</p>
-        <h3 class="story-block-title">La technologie au service de votre beauté</h3>
-        <p class="story-block-text editable-text">
+    <!-- BLOC 2 — Science -->
+    <div class="story-block alt">
+
+      <!--
+        ════════════════════════════════════
+        PHOTO : images/story2-science.jpg
+        ════════════════════════════════════
+      -->
+      <div class="story-img" id="storyImg2">
+        <img
+          src="images/story2-science.jpg"
+          alt="Science capillaire — innovation"
+          onerror="this.style.display='none'"
+        />
+        <div class="story-img-overlay"></div>
+        <div class="holo-corner tl"></div>
+        <div class="holo-corner tr"></div>
+        <div class="holo-corner bl"></div>
+        <div class="holo-corner br"></div>
+        <div class="holo-scan" style="animation-delay:2s;"></div>
+      </div>
+
+      <div class="story-text">
+        <p class="story-tag reveal">✦ Science · Innovation</p>
+        <h2 class="story-title reveal d1">
+          La technologie au service<br>
+          de votre <em>beauté</em>
+        </h2>
+        <p class="story-body reveal d2">
           Notre laboratoire combine des actifs botaniques issus des Caraïbes
-          avec des technologies capillaires de dernière génération.
-          Le résultat : une gamme qui nourrit en profondeur, définit les boucles
-          et crée un éclat visible dès la première application.
+          avec des technologies capillaires de dernière génération pour créer
+          des formules qui transforment réellement vos cheveux.
         </p>
-        <div class="benefit-pillars">
-          <div class="benefit-pill">
-            <div class="benefit-pill-icon">💧</div>
+        <div class="benefit-list reveal d3">
+          <div class="benefit-item">
+            <div class="b-icon">💧</div>
             <div>
-              <p class="benefit-pill-title">Hydratation Profonde</p>
-              <p class="benefit-pill-text">Pénètre jusqu'au cortex pour une hydratation qui dure 72h</p>
+              <p class="b-title">Hydratation Profonde</p>
+              <p class="b-text">Pénètre jusqu'au cortex · Hydratation active 72h</p>
             </div>
           </div>
-          <div class="benefit-pill">
-            <div class="benefit-pill-icon">✨</div>
+          <div class="benefit-item">
+            <div class="b-icon">✨</div>
             <div>
-              <p class="benefit-pill-title">Éclat & Définition</p>
-              <p class="benefit-pill-text">Révèle le brillant naturel et définit chaque boucle</p>
+              <p class="b-title">Éclat & Définition</p>
+              <p class="b-text">Révèle le brillant naturel · Définit chaque boucle</p>
             </div>
           </div>
-          <div class="benefit-pill">
-            <div class="benefit-pill-icon">🌿</div>
+          <div class="benefit-item">
+            <div class="b-icon">🌿</div>
             <div>
-              <p class="benefit-pill-title">Formules Naturelles</p>
-              <p class="benefit-pill-text">Sans sulfates, sans parabènes · 95% d'ingrédients naturels</p>
+              <p class="b-title">Formules Naturelles</p>
+              <p class="b-text">Sans sulfates · Sans parabènes · 95% naturel</p>
             </div>
           </div>
-        </div>
-      </div>
-
-      <!-- ══════════════════════════════════════════
-           IMAGE STORYTELLING 2
-           Nom du fichier : story2-science.jpg
-           Uploader dans  : images/story2-science.jpg
-      ══════════════════════════════════════════ -->
-      <div class="hologram-frame story-hologram" aria-label="Image science et innovation">
-        <div class="hologram-corner tl"></div>
-        <div class="hologram-corner tr"></div>
-        <div class="hologram-corner bl"></div>
-        <div class="hologram-corner br"></div>
-        <div class="hologram-inner">
-          <img
-            src="https://raw.githubusercontent.com/lavrizetwal/complexe/main/images/story2-science.jpg"
-            alt="Science et innovation capillaire"
-            style="width:100%; height:100%; object-fit:cover; display:block;"
-          />
         </div>
       </div>
 
     </div>
 
-  </section><!-- /SECTION 3 -->
+  </section><!-- /STORY -->
 
 
   <!-- ============================================================
-       SECTION 4: PRODUCTS
+       SECTION 4 — PRODUITS
+       Photos: images/prod1-elixir.jpg à prod5-huile.jpg
   ============================================================ -->
-  <section class="products" id="produits" aria-label="Collection de produits premium">
+  <section class="products" id="produits">
 
-    <div class="products-header fade-in">
-      <p class="section-label">Collection Exclusive</p>
-      <span class="gold-line" aria-hidden="true"></span>
-      <h2 class="products-title">Nos Produits Signatures</h2>
-      <p class="products-subtitle">Formulés pour l'excellence · Édition limitée</p>
+    <div class="section-head reveal">
+      <div class="section-eyebrow">Collection Exclusive</div>
+      <h2 class="section-title">Nos Produits<br>Signatures</h2>
+      <p class="section-sub">Formulés pour l'excellence · Édition Limitée · Haïti</p>
     </div>
 
-    <div class="product-filters fade-in" role="tablist" aria-label="Filtrer par catégorie">
-      <button class="filter-tab active" role="tab" aria-selected="true" onclick="filterProducts(this, 'all')">Tout</button>
-      <button class="filter-tab" role="tab" aria-selected="false" onclick="filterProducts(this, 'soin')">Soins</button>
-      <button class="filter-tab" role="tab" aria-selected="false" onclick="filterProducts(this, 'style')">Styling</button>
-      <button class="filter-tab" role="tab" aria-selected="false" onclick="filterProducts(this, 'traitement')">Traitements</button>
-      <button class="filter-tab" role="tab" aria-selected="false" onclick="filterProducts(this, 'parfum')">Parfums</button>
+    <!-- Filtres -->
+    <div class="prod-filters">
+      <button class="pf-btn active" onclick="filterProds(this,'all')">Tout</button>
+      <button class="pf-btn" onclick="filterProds(this,'soin')">Soins</button>
+      <button class="pf-btn" onclick="filterProds(this,'style')">Styling</button>
+      <button class="pf-btn" onclick="filterProds(this,'traitement')">Traitements</button>
     </div>
 
-    <div class="products-grid" id="productsGrid">
+    <!-- Grille -->
+    <div class="prod-grid" id="prodGrid">
 
-      <!-- ══════════════════════════════════════════
-           PRODUIT 1 — ÉLIXIR (Bestseller)
-           Nom du fichier : prod1-elixir.jpg
-           Uploader dans  : images/prod1-elixir.jpg
-      ══════════════════════════════════════════ -->
-      <article class="product-card featured fade-in" data-category="soin" aria-label="Élixir Précieux — Produit vedette">
-        <span class="product-badge">✦ Bestseller</span>
-        <div class="product-img-wrap">
+      <!-- ════════════════════════════════════
+           PRODUIT 1 — ÉLIXIR
+           Photo: images/prod1-elixir.jpg
+      ════════════════════════════════════ -->
+      <article class="prod-card wide reveal" data-cat="soin">
+        <span class="prod-badge">✦ Bestseller</span>
+        <div class="prod-img">
           <img
-            src="https://raw.githubusercontent.com/lavrizetwal/complexe/main/images/prod1-elixir.jpg"
+            src="images/prod1-elixir.jpg"
             alt="Élixir Précieux Signature"
+            onerror="this.style.opacity='0'"
           />
-          <div class="product-overlay">
-            <button class="product-quick-btn" onclick="addToCart('Élixir Précieux Signature')">
+          <div class="prod-img-overlay">
+            <button class="prod-add-btn" onclick="addCart('Élixir Précieux Signature')">
               Ajouter au Panier
             </button>
           </div>
         </div>
-        <div class="product-info-wrap">
-          <p class="featured-label">✦ Produit Signature</p>
-          <h3 class="featured-name">Élixir Précieux<br>Signature</h3>
-          <p class="featured-desc">
+        <div class="prod-body">
+          <p class="wide-tag">✦ Produit Signature</p>
+          <h3 class="wide-name">Élixir Précieux<br>Signature</h3>
+          <p class="wide-desc">
             Notre formule emblématique enrichie en beurre de karité
-            et huile de ricin noire. Restaure, nourrit et illumine.
+            et huile de ricin noire. Restaure, nourrit et illumine dès
+            la première application.
           </p>
-          <div class="hair-types">
-            <span class="hair-tag">4A</span>
-            <span class="hair-tag">4B</span>
-            <span class="hair-tag">Crémeux</span>
+          <div class="type-tags">
+            <span class="type-tag">4A</span>
+            <span class="type-tag">4B</span>
+            <span class="type-tag">Crémeux</span>
+          </div>
+          <div class="prod-footer" style="padding:0; border:none; margin-top:1rem;">
+            <span class="prod-price">4 800 HTG</span>
+            <span class="prod-stock red" style="color:#ff6b6b; font-size:0.45rem; letter-spacing:0.15em; text-transform:uppercase;">3 restants</span>
           </div>
         </div>
       </article>
 
-      <!-- ══════════════════════════════════════════
+      <!-- ════════════════════════════════════
            PRODUIT 2 — MASQUE
-           Nom du fichier : prod2-masque.jpg
-           Uploader dans  : images/prod2-masque.jpg
-      ══════════════════════════════════════════ -->
-      <article class="product-card fade-in fade-in-delay-1" data-category="soin" aria-label="Masque Couronne Royale">
-        <span class="product-badge limited">Stock Limité</span>
-        <div class="product-img-wrap">
+           Photo: images/prod2-masque.jpg
+      ════════════════════════════════════ -->
+      <article class="prod-card reveal d1" data-cat="soin">
+        <span class="prod-badge red">Stock Limité</span>
+        <div class="prod-img">
           <img
-            src="https://raw.githubusercontent.com/lavrizetwal/complexe/main/images/prod2-masque.jpg"
+            src="images/prod2-masque.jpg"
             alt="Masque Couronne Royale"
+            onerror="this.style.opacity='0'"
           />
-          <div class="product-overlay">
-            <button class="product-quick-btn" onclick="addToCart('Masque Couronne Royale')">
+          <div class="prod-img-overlay">
+            <button class="prod-add-btn" onclick="addCart('Masque Couronne Royale')">
               Ajouter
             </button>
           </div>
         </div>
-        <div class="product-info">
-          <h3 class="product-name">Masque Couronne<br>Royale</h3>
-          <p class="product-benefit">Nutrition intense 72h · Beurre de cacao & aloe vera</p>
-          <div class="product-hair-types">
-            <span class="product-type-tag">4B</span>
-            <span class="product-type-tag">4C</span>
+        <div class="prod-info">
+          <h3 class="prod-name">Masque Couronne<br>Royale</h3>
+          <p class="prod-desc">Nutrition intense 72h · Cacao & Aloe vera</p>
+          <div class="prod-types">
+            <span class="prod-type">4B</span>
+            <span class="prod-type">4C</span>
           </div>
-          <p class="product-effect">Boucles redéfinies</p>
+          <p class="prod-effect">Boucles redéfinies</p>
         </div>
-        <div class="product-footer">
-          <span class="product-price">3 500 HTG</span>
-          <span class="product-stock">2 restants</span>
+        <div class="prod-footer">
+          <span class="prod-price">3 500 HTG</span>
+          <span class="prod-stock">2 restants</span>
         </div>
       </article>
 
-      <!-- ══════════════════════════════════════════
+      <!-- ════════════════════════════════════
            PRODUIT 3 — CRÈME
-           Nom du fichier : prod3-creme.jpg
-           Uploader dans  : images/prod3-creme.jpg
-      ══════════════════════════════════════════ -->
-      <article class="product-card fade-in fade-in-delay-2" data-category="style" aria-label="Crème Définissante Luxe">
-        <div class="product-img-wrap">
+           Photo: images/prod3-creme.jpg
+      ════════════════════════════════════ -->
+      <article class="prod-card reveal d2" data-cat="style">
+        <div class="prod-img">
           <img
-            src="https://raw.githubusercontent.com/lavrizetwal/complexe/main/images/prod3-creme.jpg"
+            src="images/prod3-creme.jpg"
             alt="Crème Définissante Luxe"
+            onerror="this.style.opacity='0'"
           />
-          <div class="product-overlay">
-            <button class="product-quick-btn" onclick="addToCart('Crème Définissante Luxe')">
+          <div class="prod-img-overlay">
+            <button class="prod-add-btn" onclick="addCart('Crème Définissante Luxe')">
               Ajouter
             </button>
           </div>
         </div>
-        <div class="product-info">
-          <h3 class="product-name">Crème Définissante<br>Luxe</h3>
-          <p class="product-benefit">Définition & brillance · Sans résidu</p>
-          <div class="product-hair-types">
-            <span class="product-type-tag">3C</span>
-            <span class="product-type-tag">4A</span>
+        <div class="prod-info">
+          <h3 class="prod-name">Crème Définissante<br>Luxe</h3>
+          <p class="prod-desc">Définition & brillance · Sans résidu</p>
+          <div class="prod-types">
+            <span class="prod-type">3C</span>
+            <span class="prod-type">4A</span>
           </div>
-          <p class="product-effect">Brillance dorée</p>
+          <p class="prod-effect">Brillance dorée</p>
         </div>
-        <div class="product-footer">
-          <span class="product-price">2 800 HTG</span>
-          <span class="product-stock in-stock">En stock</span>
+        <div class="prod-footer">
+          <span class="prod-price">2 800 HTG</span>
+          <span class="prod-stock ok">En stock</span>
         </div>
       </article>
 
-      <!-- ══════════════════════════════════════════
+      <!-- ════════════════════════════════════
            PRODUIT 4 — SÉRUM
-           Nom du fichier : prod4-serum.jpg
-           Uploader dans  : images/prod4-serum.jpg
-      ══════════════════════════════════════════ -->
-      <article class="product-card fade-in fade-in-delay-3" data-category="traitement" aria-label="Sérum Réparateur Nuit">
-        <span class="product-badge">Nouveau</span>
-        <div class="product-img-wrap">
+           Photo: images/prod4-serum.jpg
+      ════════════════════════════════════ -->
+      <article class="prod-card reveal d3" data-cat="traitement">
+        <span class="prod-badge purple">Nouveau</span>
+        <div class="prod-img">
           <img
-            src="https://raw.githubusercontent.com/lavrizetwal/complexe/main/images/prod4-serum.jpg"
+            src="images/prod4-serum.jpg"
             alt="Sérum Réparateur Nuit"
+            onerror="this.style.opacity='0'"
           />
-          <div class="product-overlay">
-            <button class="product-quick-btn" onclick="addToCart('Sérum Réparateur Nuit')">
+          <div class="prod-img-overlay">
+            <button class="prod-add-btn" onclick="addCart('Sérum Réparateur Nuit')">
               Ajouter
             </button>
           </div>
         </div>
-        <div class="product-info">
-          <h3 class="product-name">Sérum Réparateur<br>Nuit</h3>
-          <p class="product-benefit">Reconstruction nocturne · Kératine végétale</p>
-          <div class="product-hair-types">
-            <span class="product-type-tag">Tous types</span>
+        <div class="prod-info">
+          <h3 class="prod-name">Sérum Réparateur<br>Nuit</h3>
+          <p class="prod-desc">Reconstruction nocturne · Kératine végétale</p>
+          <div class="prod-types">
+            <span class="prod-type">Tous types</span>
           </div>
-          <p class="product-effect">+80% résistance</p>
+          <p class="prod-effect">+80% résistance</p>
         </div>
-        <div class="product-footer">
-          <span class="product-price">4 200 HTG</span>
-          <span class="product-stock in-stock">En stock</span>
+        <div class="prod-footer">
+          <span class="prod-price">4 200 HTG</span>
+          <span class="prod-stock ok">En stock</span>
         </div>
       </article>
 
-      <!-- ══════════════════════════════════════════
+      <!-- ════════════════════════════════════
            PRODUIT 5 — HUILE
-           Nom du fichier : prod5-huile.jpg
-           Uploader dans  : images/prod5-huile.jpg
-      ══════════════════════════════════════════ -->
-      <article class="product-card fade-in fade-in-delay-4" data-category="soin" aria-label="Huile Précieuse 7 Plantes">
-        <div class="product-img-wrap">
+           Photo: images/prod5-huile.jpg
+      ════════════════════════════════════ -->
+      <article class="prod-card reveal d4" data-cat="soin">
+        <div class="prod-img">
           <img
-            src="https://raw.githubusercontent.com/lavrizetwal/complexe/main/images/prod5-huile.jpg"
+            src="images/prod5-huile.jpg"
             alt="Huile Précieuse 7 Plantes"
+            onerror="this.style.opacity='0'"
           />
-          <div class="product-overlay">
-            <button class="product-quick-btn" onclick="addToCart('Huile Précieuse 7 Plantes')">
+          <div class="prod-img-overlay">
+            <button class="prod-add-btn" onclick="addCart('Huile Précieuse 7 Plantes')">
               Ajouter
             </button>
           </div>
         </div>
-        <div class="product-info">
-          <h3 class="product-name">Huile Précieuse<br>7 Plantes</h3>
-          <p class="product-benefit">Mélange d'huiles rares · Éclat immédiat</p>
-          <div class="product-hair-types">
-            <span class="product-type-tag">4A</span>
-            <span class="product-type-tag">4C</span>
+        <div class="prod-info">
+          <h3 class="prod-name">Huile Précieuse<br>7 Plantes</h3>
+          <p class="prod-desc">Mélange d'huiles rares · Éclat immédiat</p>
+          <div class="prod-types">
+            <span class="prod-type">4A</span>
+            <span class="prod-type">4C</span>
           </div>
-          <p class="product-effect">Éclat miroir</p>
+          <p class="prod-effect">Éclat miroir</p>
         </div>
-        <div class="product-footer">
-          <span class="product-price">3 100 HTG</span>
-          <span class="product-stock">5 restants</span>
+        <div class="prod-footer">
+          <span class="prod-price">3 100 HTG</span>
+          <span class="prod-stock">5 restants</span>
         </div>
       </article>
 
-    </div>
+    </div><!-- /prod-grid -->
 
-  </section><!-- /SECTION 4 -->
+  </section><!-- /PRODUCTS -->
 
 
   <!-- ============================================================
-       SECTION 5: TRANSFORMATION — AVANT / APRÈS
+       SECTION 5 — TRANSFORMATION AVANT/APRÈS
+       Photos: images/avant.jpg + images/apres.jpg
   ============================================================ -->
-  <section class="transformation" id="transformation" aria-label="Transformations avant et après">
+  <section class="transformation" id="transformation">
 
-    <div class="fade-in">
-      <p class="section-label">Résultats Réels</p>
-      <span class="gold-line" aria-hidden="true"></span>
-      <h2 class="transformation-title">
+    <div class="reveal">
+      <div class="section-eyebrow">Résultats Réels</div>
+      <h2 class="section-title" style="margin-bottom:0.5rem;">
         Votre transformation<br>commence maintenant
       </h2>
-      <p class="transformation-subtitle">
+      <p class="section-sub" style="margin-bottom:3rem;">
         Des résultats visibles dès la première application
       </p>
     </div>
 
-    <div class="ba-container fade-in fade-in-delay-1" aria-label="Comparaison avant et après">
-      <div class="ba-images" id="baImages"
-           role="img"
-           aria-label="Glissez pour comparer avant et après"
-           tabindex="0">
+    <!-- Slider avant/après -->
+    <div class="ba-wrap reveal d1">
+      <div class="ba-slider" id="baSlider" tabindex="0" role="img" aria-label="Glissez pour comparer avant et après">
 
-        <!-- ══════════════════════════════════════════
-             IMAGE AVANT
-             Nom du fichier : avant.jpg
-             Uploader dans  : images/avant.jpg
-        ══════════════════════════════════════════ -->
-        <div class="ba-before" aria-hidden="true">
+        <!-- ════════════════════════════════════
+             PHOTO AVANT : images/avant.jpg
+        ════════════════════════════════════ -->
+        <div class="ba-side ba-before-side">
           <img
-            src="https://raw.githubusercontent.com/lavrizetwal/complexe/main/images/avant.jpg"
+            src="images/avant.jpg"
             alt="Cheveux avant traitement"
+            onerror="this.style.opacity='0'"
           />
-          <span class="ba-label">Avant</span>
         </div>
 
-        <!-- ══════════════════════════════════════════
-             IMAGE APRÈS
-             Nom du fichier : apres.jpg
-             Uploader dans  : images/apres.jpg
-        ══════════════════════════════════════════ -->
-        <div class="ba-after" id="baAfter" aria-hidden="true">
+        <!-- ════════════════════════════════════
+             PHOTO APRÈS : images/apres.jpg
+        ════════════════════════════════════ -->
+        <div class="ba-side ba-after-side" id="baAfter">
           <img
-            src="https://raw.githubusercontent.com/lavrizetwal/complexe/main/images/apres.jpg"
+            src="images/apres.jpg"
             alt="Cheveux après traitement"
+            onerror="this.style.opacity='0'"
           />
-          <span class="ba-label" style="color:var(--gold-light);">Après</span>
         </div>
 
-        <div class="ba-divider" id="baDivider" aria-hidden="true">
-          <div class="ba-handle">◀▶</div>
+        <!-- Labels -->
+        <span class="ba-label left">Avant</span>
+        <span class="ba-label right">Après ✦</span>
+
+        <!-- Séparateur -->
+        <div class="ba-line" id="baLine"></div>
+        <div class="ba-handle" id="baHandle">
+          <span class="ba-handle-icon">◀▶</span>
         </div>
 
-      </div>
-
-      <div class="ba-captions">
-        <span class="ba-caption">Avant traitement</span>
-        <span class="ba-caption after">Après 4 semaines ✦</span>
-      </div>
-    </div>
-
-    <div class="transform-steps fade-in fade-in-delay-2">
-      <div class="transform-step">
-        <div class="step-number">01</div>
-        <div>
-          <p class="step-title">Nettoyer</p>
-          <p class="step-text">Commencez par notre Shampoing Douceur pour préparer le cuir chevelu</p>
-        </div>
-      </div>
-      <div class="transform-step">
-        <div class="step-number">02</div>
-        <div>
-          <p class="step-title">Nourrir</p>
-          <p class="step-text">Appliquez le Masque Couronne Royale pendant 15 à 30 minutes</p>
-        </div>
-      </div>
-      <div class="transform-step">
-        <div class="step-number">03</div>
-        <div>
-          <p class="step-title">Sublimer</p>
-          <p class="step-text">Finalisez avec l'Élixir Précieux pour un éclat signature</p>
-        </div>
       </div>
     </div>
 
-  </section><!-- /SECTION 5 -->
+    <div class="ba-captions" style="max-width:380px; margin:0.75rem auto 0; display:flex; justify-content:space-between; padding:0 0.5rem;">
+      <span style="font-size:0.5rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--ts);">Avant traitement</span>
+      <span style="font-size:0.5rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--g2);">Après 4 semaines ✦</span>
+    </div>
+
+    <!-- Étapes du rituel -->
+    <div class="ritual-steps reveal d2">
+      <div class="ritual-step">
+        <div class="ritual-step-left">
+          <div class="ritual-num">01</div>
+          <div class="ritual-connector"></div>
+        </div>
+        <div class="ritual-content">
+          <p class="ritual-title">Nettoyer</p>
+          <p class="ritual-desc">Commencez par notre Shampoing Douceur pour préparer le cuir chevelu</p>
+        </div>
+      </div>
+      <div class="ritual-step">
+        <div class="ritual-step-left">
+          <div class="ritual-num">02</div>
+          <div class="ritual-connector"></div>
+        </div>
+        <div class="ritual-content">
+          <p class="ritual-title">Nourrir</p>
+          <p class="ritual-desc">Appliquez le Masque Couronne Royale pendant 15 à 30 minutes</p>
+        </div>
+      </div>
+      <div class="ritual-step">
+        <div class="ritual-step-left">
+          <div class="ritual-num">03</div>
+          <div class="ritual-connector"></div>
+        </div>
+        <div class="ritual-content">
+          <p class="ritual-title">Sublimer</p>
+          <p class="ritual-desc">Finalisez avec l'Élixir Précieux pour un éclat signature absolument luxueux</p>
+        </div>
+      </div>
+    </div>
+
+  </section><!-- /TRANSFORMATION -->
 
 
   <!-- ============================================================
-       SECTION 6: REVIEWS
+       SECTION 6 — REVIEWS
   ============================================================ -->
-  <section class="reviews" id="avis" aria-label="Avis et témoignages">
+  <section class="reviews" id="avis">
 
-    <div class="reviews-header fade-in">
-      <p class="section-label">Témoignages</p>
-      <span class="gold-line" aria-hidden="true"></span>
-      <h2 class="reviews-title">Elles ont dit oui<br>à leur couronne</h2>
-      <div class="reviews-aggregate">
-        <span class="aggregate-score">4.9</span>
-        <div class="aggregate-meta">
-          <div class="stars" aria-label="Note 4.9 sur 5">★★★★★</div>
-          <p class="aggregate-count">Basé sur 500+ avis vérifiés</p>
+    <div class="reviews-orb" aria-hidden="true"></div>
+
+    <div class="reveal" style="padding:0 1.5rem 2rem;">
+      <div class="section-eyebrow">Témoignages</div>
+      <h2 class="section-title">Elles ont dit oui<br>à leur couronne</h2>
+    </div>
+
+    <!-- Score global -->
+    <div class="reviews-score reveal d1">
+      <span class="score-big">4.9</span>
+      <div class="score-meta">
+        <span class="score-stars">★★★★★</span>
+        <span class="score-count">500+ avis vérifiés</span>
+      </div>
+    </div>
+
+    <!-- Carrousel -->
+    <div class="reviews-track" id="rvTrack">
+
+      <article class="review-card">
+        <div class="rv-top">
+          <div class="rv-avatar">👩🏾</div>
+          <div class="rv-info">
+            <p class="rv-name">Chloé M.</p>
+            <p class="rv-loc">Port-au-Prince, Haïti</p>
+          </div>
+          <span class="rv-verified">✓ Vérifié</span>
         </div>
-      </div>
+        <div class="rv-stars">★★★★★</div>
+        <p class="rv-product">✦ Élixir Précieux Signature</p>
+        <p class="rv-text">
+          "Je n'avais jamais vu mes cheveux aussi brillants.
+          Après 2 semaines, mes boucles sont définies,
+          hydratées et magnifiques. C'est du vrai luxe !"
+        </p>
+        <p class="rv-date">Décembre 2024</p>
+      </article>
+
+      <article class="review-card">
+        <div class="rv-top">
+          <div class="rv-avatar">👩🏿</div>
+          <div class="rv-info">
+            <p class="rv-name">Nadège B.</p>
+            <p class="rv-loc">Cap-Haïtien, Haïti</p>
+          </div>
+          <span class="rv-verified">✓ Vérifié</span>
+        </div>
+        <div class="rv-stars">★★★★★</div>
+        <p class="rv-product">✦ Masque Couronne Royale</p>
+        <p class="rv-text">
+          "Le Masque Couronne a transformé mes cheveux 4C.
+          Plus jamais de casse, mes cheveux poussent et
+          restent hydratés toute la semaine. Incroyable !"
+        </p>
+        <p class="rv-date">Novembre 2024</p>
+      </article>
+
+      <article class="review-card">
+        <div class="rv-top">
+          <div class="rv-avatar">👩🏾</div>
+          <div class="rv-info">
+            <p class="rv-name">Isabelle J.</p>
+            <p class="rv-loc">Pétion-Ville, Haïti</p>
+          </div>
+          <span class="rv-verified">✓ Vérifié</span>
+        </div>
+        <div class="rv-stars">★★★★★</div>
+        <p class="rv-product">✦ Huile Précieuse 7 Plantes</p>
+        <p class="rv-text">
+          "Cette huile sent divinement bon et mes cheveux
+          naturels n'ont jamais été aussi souples.
+          Le packaging est magnifique. Je commande en gros !"
+        </p>
+        <p class="rv-date">Octobre 2024</p>
+      </article>
+
+      <article class="review-card">
+        <div class="rv-top">
+          <div class="rv-avatar">👩🏿</div>
+          <div class="rv-info">
+            <p class="rv-name">Roseline F.</p>
+            <p class="rv-loc">Jacmel, Haïti</p>
+          </div>
+          <span class="rv-verified">✓ Vérifié</span>
+        </div>
+        <div class="rv-stars">★★★★★</div>
+        <p class="rv-product">✦ Sérum Réparateur Nuit</p>
+        <p class="rv-text">
+          "Je l'applique le soir et le matin mes cheveux
+          sont transformés. La casse a diminué de 80%.
+          Complexe est maintenant mon secret beauté !"
+        </p>
+        <p class="rv-date">Décembre 2024</p>
+      </article>
+
+      <article class="review-card">
+        <div class="rv-top">
+          <div class="rv-avatar">👩🏾</div>
+          <div class="rv-info">
+            <p class="rv-name">Marlène P.</p>
+            <p class="rv-loc">Gonaïves, Haïti</p>
+          </div>
+          <span class="rv-verified">✓ Vérifié</span>
+        </div>
+        <div class="rv-stars">★★★★★</div>
+        <p class="rv-product">✦ Crème Définissante Luxe</p>
+        <p class="rv-text">
+          "Mes boucles 3C sont parfaitement définies sans
+          effet carton. La crème est légère, sent bon
+          et tient toute la journée. Luxe accessible !"
+        </p>
+        <p class="rv-date">Janvier 2025</p>
+      </article>
+
+    </div><!-- /reviews-track -->
+
+    <!-- Dots -->
+    <div class="rv-dots" id="rvDots">
+      <button class="rv-dot on"  onclick="goReview(0)"></button>
+      <button class="rv-dot"     onclick="goReview(1)"></button>
+      <button class="rv-dot"     onclick="goReview(2)"></button>
+      <button class="rv-dot"     onclick="goReview(3)"></button>
+      <button class="rv-dot"     onclick="goReview(4)"></button>
     </div>
 
-    <div class="reviews-track-wrap" role="list" aria-label="Avis clients">
-      <div class="reviews-track" id="reviewsTrack">
-
-        <article class="review-card" role="listitem">
-          <div class="review-header">
-            <div class="reviewer-avatar" aria-hidden="true">👩🏾</div>
-            <div class="reviewer-info">
-              <p class="reviewer-name">Chloé M.</p>
-              <p class="reviewer-location">Port-au-Prince, Haïti</p>
-            </div>
-            <span class="verified-badge">✓ Vérifié</span>
-          </div>
-          <div class="review-stars"><div class="stars">★★★★★</div></div>
-          <p class="review-product">✦ Élixir Précieux Signature</p>
-          <p class="review-text">
-            "Je n'avais jamais vu mes cheveux aussi brillants.
-            Après 2 semaines, mes boucles sont définies,
-            hydratées et magnifiques. C'est du vrai luxe !"
-          </p>
-          <p class="review-date">Décembre 2024</p>
-        </article>
-
-        <article class="review-card" role="listitem">
-          <div class="review-header">
-            <div class="reviewer-avatar" aria-hidden="true">👩🏿</div>
-            <div class="reviewer-info">
-              <p class="reviewer-name">Nadège B.</p>
-              <p class="reviewer-location">Cap-Haïtien, Haïti</p>
-            </div>
-            <span class="verified-badge">✓ Vérifié</span>
-          </div>
-          <div class="review-stars"><div class="stars">★★★★★</div></div>
-          <p class="review-product">✦ Masque Couronne Royale</p>
-          <p class="review-text">
-            "Le Masque Couronne a transformé mes cheveux 4C.
-            Plus jamais de casse, mes cheveux poussent et
-            restent hydratés toute la semaine. Incroyable !"
-          </p>
-          <p class="review-date">Novembre 2024</p>
-        </article>
-
-        <article class="review-card" role="listitem">
-          <div class="review-header">
-            <div class="reviewer-avatar" aria-hidden="true">👩🏾</div>
-            <div class="reviewer-info">
-              <p class="reviewer-name">Isabelle J.</p>
-              <p class="reviewer-location">Pétion-Ville, Haïti</p>
-            </div>
-            <span class="verified-badge">✓ Vérifié</span>
-          </div>
-          <div class="review-stars"><div class="stars">★★★★★</div></div>
-          <p class="review-product">✦ Huile Précieuse 7 Plantes</p>
-          <p class="review-text">
-            "Cette huile sent divinement bon et mes cheveux
-            naturels n'ont jamais été aussi souples.
-            Le packaging est magnifique. Je commande en gros !"
-          </p>
-          <p class="review-date">Octobre 2024</p>
-        </article>
-
-        <article class="review-card" role="listitem">
-          <div class="review-header">
-            <div class="reviewer-avatar" aria-hidden="true">👩🏿</div>
-            <div class="reviewer-info">
-              <p class="reviewer-name">Roseline F.</p>
-              <p class="reviewer-location">Jacmel, Haïti</p>
-            </div>
-            <span class="verified-badge">✓ Vérifié</span>
-          </div>
-          <div class="review-stars"><div class="stars">★★★★★</div></div>
-          <p class="review-product">✦ Sérum Réparateur Nuit</p>
-          <p class="review-text">
-            "Je l'applique le soir et le matin mes cheveux
-            sont transformés. La casse a diminué de 80%.
-            Complexe est maintenant mon secret beauté !"
-          </p>
-          <p class="review-date">Décembre 2024</p>
-        </article>
-
-        <article class="review-card" role="listitem">
-          <div class="review-header">
-            <div class="reviewer-avatar" aria-hidden="true">👩🏾</div>
-            <div class="reviewer-info">
-              <p class="reviewer-name">Marlène P.</p>
-              <p class="reviewer-location">Gonaïves, Haïti</p>
-            </div>
-            <span class="verified-badge">✓ Vérifié</span>
-          </div>
-          <div class="review-stars"><div class="stars">★★★★★</div></div>
-          <p class="review-product">✦ Crème Définissante Luxe</p>
-          <p class="review-text">
-            "Mes boucles 3C sont parfaitement définies sans
-            effet carton. La crème est légère, sent bon
-            et tient toute la journée. Luxe accessible !"
-          </p>
-          <p class="review-date">Janvier 2025</p>
-        </article>
-
-      </div>
-    </div>
-
-    <div class="reviews-dots" role="tablist" aria-label="Navigation avis">
-      <button class="reviews-dot active" role="tab" aria-selected="true" onclick="scrollToReview(0)"></button>
-      <button class="reviews-dot" role="tab" onclick="scrollToReview(1)"></button>
-      <button class="reviews-dot" role="tab" onclick="scrollToReview(2)"></button>
-      <button class="reviews-dot" role="tab" onclick="scrollToReview(3)"></button>
-      <button class="reviews-dot" role="tab" onclick="scrollToReview(4)"></button>
-    </div>
-
-    <div class="press-strip fade-in">
-      <p class="press-label">Mentionné dans</p>
-      <div class="press-logos">
-        <span class="press-logo">Beauté Haiti</span>
-        <span class="press-logo">Caribbean Beauty</span>
-        <span class="press-logo">Vogue Caraïbes</span>
-        <span class="press-logo">Natural Hair Mag</span>
-      </div>
-    </div>
-
-  </section><!-- /SECTION 6 -->
+  </section><!-- /REVIEWS -->
 
 
   <!-- ============================================================
-       SECTION 7: CALL TO ACTION
+       SECTION 7 — CTA FINAL
   ============================================================ -->
-  <section class="cta-section" id="commande" aria-label="Commander">
+  <section class="cta" id="commande">
 
-    <div class="cta-bg-text" aria-hidden="true">LUXE</div>
+    <div class="cta-word" aria-hidden="true">COURONNE</div>
     <div class="cta-orb" aria-hidden="true"></div>
 
     <div class="cta-content">
-      <p class="cta-eyebrow fade-in">✦ Édition Exclusive · Haïti ✦</p>
-      <h2 class="cta-title fade-in fade-in-delay-1">
+
+      <p class="cta-eyebrow reveal">✦ Édition Exclusive · Haïti ✦</p>
+
+      <h2 class="cta-title reveal d1">
         Votre couronne<br>mérite le <em>meilleur</em>
       </h2>
-      <p class="cta-text fade-in fade-in-delay-2">
+
+      <p class="cta-text reveal d2">
         Rejoignez des milliers de femmes haïtiennes qui ont choisi
         de révéler la beauté naturelle de leurs cheveux.
         Accédez à notre collection exclusive — quantités limitées.
       </p>
-      <div class="cta-urgency fade-in fade-in-delay-3">
-        <div class="urgency-dot"></div>
+
+      <div class="urgency-bar reveal d3">
+        <div class="urgency-pulse"></div>
         <span class="urgency-text">Stock Limité — Commandez avant Épuisement</span>
       </div>
-      <div class="cta-btn-wrap fade-in fade-in-delay-4">
-        <a href="#produits" class="cta-btn-primary">
-          Accéder aux Produits
-        </a>
-        <a href="#storytelling" class="btn-luxury-ghost">
-          <span>Notre Histoire</span>
-        </a>
+
+      <div class="cta-btns reveal d4">
+        <a href="#produits" class="cta-primary">Accéder aux Produits</a>
+        <a href="#story" class="btn-outline">Notre Histoire</a>
       </div>
-      <p class="cta-note fade-in" style="margin-top:1rem;">
+
+      <p class="cta-note reveal">
         Livraison dans tout Haïti · Paiement sécurisé · Satisfaction garantie
       </p>
-      <div class="cta-guarantees fade-in">
-        <div class="guarantee-item">
-          <span class="guarantee-icon">🔒</span>
-          <span class="guarantee-text">Paiement<br>Sécurisé</span>
+
+      <div class="guarantees reveal">
+        <div class="guarantee">
+          <div class="g-icon">🔒</div>
+          <span class="g-text">Paiement<br>Sécurisé</span>
         </div>
-        <div class="guarantee-item">
-          <span class="guarantee-icon">📦</span>
-          <span class="guarantee-text">Livraison<br>Discrète</span>
+        <div class="guarantee">
+          <div class="g-icon">📦</div>
+          <span class="g-text">Livraison<br>Discrète</span>
         </div>
-        <div class="guarantee-item">
-          <span class="guarantee-icon">💎</span>
-          <span class="guarantee-text">100%<br>Authentique</span>
+        <div class="guarantee">
+          <div class="g-icon">💎</div>
+          <span class="g-text">100%<br>Authentique</span>
         </div>
-        <div class="guarantee-item">
-          <span class="guarantee-icon">🌿</span>
-          <span class="guarantee-text">Formules<br>Naturelles</span>
+        <div class="guarantee">
+          <div class="g-icon">🌿</div>
+          <span class="g-text">Formules<br>Naturelles</span>
         </div>
       </div>
+
     </div>
 
-  </section><!-- /SECTION 7 -->
+  </section><!-- /CTA -->
 
 
-  <!-- FOOTER -->
-  <footer class="footer" role="contentinfo">
-    <div class="footer-logo">Complexe Produits de Cheveux</div>
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer class="footer">
+    <div class="footer-logo-text">Complexe Produits de Cheveux</div>
     <p class="footer-tagline">Le luxe capillaire haïtien · Depuis 2024</p>
-    <nav class="footer-links" aria-label="Liens du pied de page">
+    <nav class="footer-links">
       <span class="footer-link">Collection</span>
       <span class="footer-link">Notre Histoire</span>
       <span class="footer-link">Rituel Beauté</span>
@@ -2649,11 +3023,11 @@
     </nav>
     <div class="footer-bottom">
       <p class="footer-copy">© 2024–2025 Complexe Produits de Cheveux · Tous droits réservés · Haïti</p>
-      <div class="footer-socials" aria-label="Réseaux sociaux">
-        <button class="footer-social" aria-label="Instagram">IG</button>
-        <button class="footer-social" aria-label="Facebook">FB</button>
-        <button class="footer-social" aria-label="TikTok">TK</button>
-        <button class="footer-social" aria-label="WhatsApp">WA</button>
+      <div class="footer-socials">
+        <button class="footer-social">IG</button>
+        <button class="footer-social">FB</button>
+        <button class="footer-social">TK</button>
+        <button class="footer-social">WA</button>
       </div>
     </div>
   </footer>
@@ -2664,197 +3038,276 @@
   ============================================================ -->
   <script>
 
-    /* LOADER */
-    window.addEventListener('load', () => {
-      setTimeout(() => {
-        const loader = document.getElementById('loader');
-        if (loader) {
-          loader.classList.add('hidden');
-          setTimeout(() => loader.remove(), 700);
+    /* ─── LOADER ─────────────────────────────────────────────── */
+    (function() {
+      const fill = document.getElementById('loaderFill');
+      const pct  = document.getElementById('loaderPct');
+      const loader = document.getElementById('loader');
+      let p = 0;
+      const iv = setInterval(() => {
+        p += Math.random() * 18 + 5;
+        if (p >= 100) {
+          p = 100;
+          clearInterval(iv);
+          setTimeout(() => {
+            loader.classList.add('out');
+            setTimeout(() => loader.remove(), 900);
+            setTimeout(showToast, 3000);
+          }, 400);
         }
-        setTimeout(showToast, 3500);
-      }, 1600);
+        fill.style.width = p + '%';
+        pct.textContent  = Math.floor(p) + '%';
+      }, 80);
+    })();
+
+
+    /* ─── CURSEUR PERSONNALISÉ ────────────────────────────────── */
+    const dot  = document.getElementById('cursorDot');
+    const ring = document.getElementById('cursorRing');
+    let mx = 0, my = 0, rx = 0, ry = 0;
+
+    document.addEventListener('mousemove', e => {
+      mx = e.clientX; my = e.clientY;
+      dot.style.left = mx + 'px';
+      dot.style.top  = my + 'px';
     });
 
-    /* NAV SCROLL */
-    const nav = document.getElementById('nav');
-    window.addEventListener('scroll', () => {
-      nav.classList.toggle('scrolled', window.scrollY > 60);
-    }, { passive: true });
+    (function animRing() {
+      rx += (mx - rx) * 0.12;
+      ry += (my - ry) * 0.12;
+      ring.style.left = rx + 'px';
+      ring.style.top  = ry + 'px';
+      requestAnimationFrame(animRing);
+    })();
 
-    /* PARTICLES */
-    (function initParticles() {
-      const canvas = document.getElementById('particles-canvas');
-      if (!canvas) return;
-      const ctx = canvas.getContext('2d');
-      let particles = [];
-      const COUNT = 40;
+    document.querySelectorAll('a, button, .prod-card, .review-card').forEach(el => {
+      el.addEventListener('mouseenter', () => ring.classList.add('hovering'));
+      el.addEventListener('mouseleave', () => ring.classList.remove('hovering'));
+    });
+
+
+    /* ─── CANVAS COSMOS (particules + lignes) ────────────────── */
+    (function initCosmos() {
+      const c   = document.getElementById('cosmos');
+      const ctx = c.getContext('2d');
+      let W, H, particles = [];
 
       function resize() {
-        canvas.width  = window.innerWidth;
-        canvas.height = window.innerHeight;
+        W = c.width  = window.innerWidth;
+        H = c.height = window.innerHeight;
       }
       resize();
       window.addEventListener('resize', resize, { passive: true });
 
-      function Particle() { this.reset(); }
-      Particle.prototype.reset = function() {
-        this.x       = Math.random() * canvas.width;
-        this.y       = Math.random() * canvas.height;
-        this.size    = Math.random() * 1.5 + 0.5;
-        this.speedX  = (Math.random() - 0.5) * 0.3;
-        this.speedY  = -Math.random() * 0.4 - 0.1;
-        this.opacity = Math.random() * 0.4 + 0.1;
-        this.color   = Math.random() > 0.5
-          ? `rgba(201,168,76,${this.opacity})`
-          : `rgba(155,48,255,${this.opacity * 0.5})`;
-        this.life    = 1;
-        this.decay   = Math.random() * 0.002 + 0.001;
-      };
-      Particle.prototype.update = function() {
-        this.x += this.speedX;
-        this.y += this.speedY;
-        this.life -= this.decay;
-        if (this.life <= 0 || this.y < -10) this.reset();
-      };
-      Particle.prototype.draw = function() {
-        ctx.save();
-        ctx.globalAlpha = this.life * this.opacity;
-        ctx.fillStyle   = this.color;
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.restore();
-      };
+      class Star {
+        constructor() { this.reset(); }
+        reset() {
+          this.x = Math.random() * W;
+          this.y = Math.random() * H;
+          this.r = Math.random() * 1.2 + 0.2;
+          this.vx = (Math.random() - 0.5) * 0.15;
+          this.vy = -Math.random() * 0.2 - 0.05;
+          this.a  = Math.random() * 0.5 + 0.1;
+          this.life = Math.random() * 0.5 + 0.5;
+          this.decay = Math.random() * 0.0015 + 0.0005;
+          this.gold  = Math.random() > 0.6;
+        }
+        update() {
+          this.x += this.vx; this.y += this.vy;
+          this.life -= this.decay;
+          if (this.life <= 0 || this.y < -5) this.reset();
+        }
+        draw() {
+          ctx.save();
+          ctx.globalAlpha = this.life * this.a;
+          ctx.fillStyle = this.gold
+            ? `rgba(201,168,76,${this.a})`
+            : `rgba(155,48,255,${this.a * 0.4})`;
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.restore();
+        }
+      }
 
-      for (let i = 0; i < COUNT; i++) {
-        const p = new Particle();
-        p.y = Math.random() * canvas.height;
-        particles.push(p);
+      for (let i = 0; i < 60; i++) {
+        const s = new Star();
+        s.y = Math.random() * H;
+        particles.push(s);
       }
 
       let animId;
-      function animate() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
+      function frame() {
+        ctx.clearRect(0, 0, W, H);
         particles.forEach(p => { p.update(); p.draw(); });
-        animId = requestAnimationFrame(animate);
+        animId = requestAnimationFrame(frame);
       }
-      animate();
+      frame();
 
       document.addEventListener('visibilitychange', () => {
         if (document.hidden) cancelAnimationFrame(animId);
-        else animate();
+        else frame();
       });
     })();
 
-    /* FADE-IN OBSERVER */
-    const fadeObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          fadeObserver.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
 
-    document.querySelectorAll('.fade-in').forEach(el => fadeObserver.observe(el));
-
-    /* PARALLAX */
-    const parallaxBg = document.getElementById('parallaxBg');
+    /* ─── NAVIGATION SCROLL ──────────────────────────────────── */
+    const nav = document.getElementById('nav');
     window.addEventListener('scroll', () => {
-      if (!parallaxBg) return;
-      const rect     = parallaxBg.parentElement.getBoundingClientRect();
-      const viewH    = window.innerHeight;
-      const progress = 1 - (rect.top + rect.height) / (viewH + rect.height);
-      parallaxBg.style.transform = `translateY(${(progress - 0.5) * 60}px)`;
+      nav.classList.toggle('scrolled', window.scrollY > 80);
     }, { passive: true });
 
-    /* BEFORE / AFTER SLIDER */
-    (function initBASlider() {
-      const baImages  = document.getElementById('baImages');
-      const baAfter   = document.getElementById('baAfter');
-      const baDivider = document.getElementById('baDivider');
-      if (!baImages || !baAfter || !baDivider) return;
 
-      let isDragging = false;
-      let autoPos = 50, autoDir = -1, autoAnim;
+    /* ─── REVEAL (INTERSECTION OBSERVER) ─────────────────────── */
+    const revObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('in');
+          revObs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
-      function setPosition(pct) {
-        pct = Math.max(5, Math.min(95, pct));
-        baDivider.style.left   = pct + '%';
-        baAfter.style.clipPath = `inset(0 ${100 - pct}% 0 0)`;
+    document.querySelectorAll('.reveal').forEach(el => revObs.observe(el));
+
+
+    /* ─── IMMERSION IMAGE ZOOM ───────────────────────────────── */
+    const immVis = document.getElementById('immersionVisual');
+    if (immVis) {
+      const imgObs = new IntersectionObserver(([e]) => {
+        if (e.isIntersecting) {
+          immVis.classList.add('in-view');
+          imgObs.disconnect();
+        }
+      }, { threshold: 0.2 });
+      imgObs.observe(immVis);
+    }
+
+
+    /* ─── STORY IMAGES ZOOM ──────────────────────────────────── */
+    ['storyImg1','storyImg2'].forEach(id => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      const io = new IntersectionObserver(([e]) => {
+        if (e.isIntersecting) { el.classList.add('in-view'); io.disconnect(); }
+      }, { threshold: 0.2 });
+      io.observe(el);
+    });
+
+
+    /* ─── COUNTER ANIMATION ──────────────────────────────────── */
+    (function() {
+      const nums = document.querySelectorAll('.i-stat-num');
+      let done = false;
+
+      function animate() {
+        if (done) return;
+        done = true;
+        nums.forEach(el => {
+          const target = parseInt(el.dataset.target);
+          const suffix = el.dataset.suffix || '';
+          const dur    = 2000;
+          const start  = performance.now();
+          function tick(now) {
+            const t = Math.min((now - start) / dur, 1);
+            const v = Math.floor((1 - Math.pow(1-t, 3)) * target);
+            el.textContent = (target >= 1000 ? '5K' : v) + suffix;
+            if (t < 1) requestAnimationFrame(tick);
+          }
+          requestAnimationFrame(tick);
+        });
       }
 
-      function autoAnimate() {
-        autoPos += autoDir * 0.4;
-        if (autoPos <= 15) autoDir = 1;
-        if (autoPos >= 85) autoDir = -1;
-        setPosition(autoPos);
-        autoAnim = requestAnimationFrame(autoAnimate);
-      }
-      autoAnim = requestAnimationFrame(autoAnimate);
+      const sec = document.getElementById('immersion');
+      if (!sec) return;
+      const io = new IntersectionObserver(([e]) => {
+        if (e.isIntersecting) { animate(); io.disconnect(); }
+      }, { threshold: 0.3 });
+      io.observe(sec);
+    })();
 
-      function getPercent(clientX) {
-        const rect = baImages.getBoundingClientRect();
-        return ((clientX - rect.left) / rect.width) * 100;
+
+    /* ─── BEFORE / AFTER SLIDER ──────────────────────────────── */
+    (function() {
+      const slider = document.getElementById('baSlider');
+      const after  = document.getElementById('baAfter');
+      const line   = document.getElementById('baLine');
+      const handle = document.getElementById('baHandle');
+      if (!slider) return;
+
+      let dragging = false, pos = 50, dir = -1, autoAnim;
+
+      function set(p) {
+        p = Math.max(3, Math.min(97, p));
+        pos = p;
+        line.style.left   = p + '%';
+        handle.style.left = p + '%';
+        after.style.clipPath = `inset(0 ${100-p}% 0 0)`;
       }
 
-      function startDrag(e) {
-        isDragging = true;
+      /* Auto animation douce */
+      function auto() {
+        pos += dir * 0.3;
+        if (pos <= 12) dir = 1;
+        if (pos >= 88) dir = -1;
+        set(pos);
+        autoAnim = requestAnimationFrame(auto);
+      }
+      autoAnim = requestAnimationFrame(auto);
+
+      function pct(cx) {
+        const r = slider.getBoundingClientRect();
+        return ((cx - r.left) / r.width) * 100;
+      }
+
+      function start(e) {
+        dragging = true;
         cancelAnimationFrame(autoAnim);
         document.body.style.userSelect = 'none';
         e.preventDefault();
       }
-      function doDrag(e) {
-        if (!isDragging) return;
-        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-        setPosition(getPercent(clientX));
+      function move(e) {
+        if (!dragging) return;
+        set(pct(e.touches ? e.touches[0].clientX : e.clientX));
       }
-      function stopDrag() {
-        if (!isDragging) return;
-        isDragging = false;
+      function end() {
+        if (!dragging) return;
+        dragging = false;
         document.body.style.userSelect = '';
       }
 
-      baDivider.addEventListener('mousedown', startDrag);
-      baImages.addEventListener('mousedown',  startDrag);
-      window.addEventListener('mousemove', doDrag);
-      window.addEventListener('mouseup',   stopDrag);
+      slider.addEventListener('mousedown',  start);
+      handle.addEventListener('mousedown',  start);
+      window.addEventListener('mousemove',  move);
+      window.addEventListener('mouseup',    end);
+      slider.addEventListener('touchstart', start, { passive: false });
+      handle.addEventListener('touchstart', start, { passive: false });
+      window.addEventListener('touchmove',  move, { passive: true });
+      window.addEventListener('touchend',   end);
 
-      baDivider.addEventListener('touchstart', startDrag, { passive: false });
-      baImages.addEventListener('touchstart',  startDrag, { passive: false });
-      window.addEventListener('touchmove', doDrag, { passive: true });
-      window.addEventListener('touchend',  stopDrag);
-
-      baImages.addEventListener('keydown', (e) => {
+      slider.addEventListener('keydown', e => {
         cancelAnimationFrame(autoAnim);
-        if (e.key === 'ArrowLeft') { autoPos = Math.max(5,  autoPos - 5); setPosition(autoPos); }
-        if (e.key === 'ArrowRight'){ autoPos = Math.min(95, autoPos + 5); setPosition(autoPos); }
+        if (e.key === 'ArrowLeft')  set(pos - 5);
+        if (e.key === 'ArrowRight') set(pos + 5);
       });
 
-      setPosition(50);
+      set(50);
     })();
 
-    /* PRODUCT FILTERS */
-    function filterProducts(btn, category) {
-      document.querySelectorAll('.filter-tab').forEach(t => {
-        t.classList.remove('active');
-        t.setAttribute('aria-selected', 'false');
-      });
-      btn.classList.add('active');
-      btn.setAttribute('aria-selected', 'true');
 
-      document.querySelectorAll('.product-card').forEach(card => {
-        const cat = card.getAttribute('data-category');
-        if (category === 'all' || cat === category) {
+    /* ─── PRODUCT FILTERS ─────────────────────────────────────── */
+    function filterProds(btn, cat) {
+      document.querySelectorAll('.pf-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('.prod-card').forEach(card => {
+        const show = cat === 'all' || card.dataset.cat === cat;
+        if (show) {
           card.style.display = '';
-          card.style.opacity = '0';
-          card.style.transform = 'translateY(10px)';
-          setTimeout(() => {
+          requestAnimationFrame(() => {
             card.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
             card.style.opacity    = '1';
             card.style.transform  = 'translateY(0)';
-          }, 50);
+          });
         } else {
           card.style.opacity   = '0';
           card.style.transform = 'translateY(10px)';
@@ -2863,109 +3316,85 @@
       });
     }
 
-    /* ADD TO CART */
-    let cartTotal = 2;
-    function addToCart(productName) {
-      cartTotal++;
-      const countEl = document.getElementById('cartCount');
-      if (countEl) {
-        countEl.textContent = cartTotal;
-        countEl.style.transform = 'scale(1.5)';
-        setTimeout(() => { countEl.style.transform = 'scale(1)'; }, 300);
+
+    /* ─── ADD TO CART ─────────────────────────────────────────── */
+    let cart = 2;
+    function addCart(name) {
+      cart++;
+      const n = document.getElementById('cartNum');
+      if (n) {
+        n.textContent = cart;
+        n.style.transform = 'scale(1.8)';
+        setTimeout(() => { n.style.transform = 'scale(1)'; }, 400);
       }
-      const toast = document.getElementById('toast');
-      if (toast) {
-        toast.querySelector('.toast-title').textContent = '✦ Ajouté au panier';
-        toast.querySelector('.toast-text').textContent  = `${productName} — Commandez avant rupture de stock.`;
-        toast.classList.add('show');
-        setTimeout(() => toast.classList.remove('show'), 4000);
+      const t = document.getElementById('toast');
+      if (t) {
+        t.querySelector('.toast-title').textContent = '✦ Ajouté au panier';
+        t.querySelector('.toast-text').textContent  = name + ' — Commandez avant rupture de stock.';
+        t.classList.add('on');
+        setTimeout(() => t.classList.remove('on'), 4000);
       }
     }
 
-    /* TOAST */
+    function openCart() {
+      const t = document.getElementById('toast');
+      if (t) {
+        t.querySelector('.toast-title').textContent = '🛍 Votre Panier';
+        t.querySelector('.toast-text').textContent  = cart + ' article(s) · Finalisez votre commande.';
+        t.classList.add('on');
+        setTimeout(() => t.classList.remove('on'), 4000);
+      }
+    }
+
+
+    /* ─── TOAST ──────────────────────────────────────────────── */
     function showToast() {
-      const toast = document.getElementById('toast');
-      if (!toast) return;
-      toast.querySelector('.toast-title').textContent = '✦ Stock Limité';
-      toast.querySelector('.toast-text').textContent  = '3 unités restantes — commandez avant épuisement.';
-      toast.classList.add('show');
-      setTimeout(() => toast.classList.remove('show'), 5000);
+      const t = document.getElementById('toast');
+      if (!t) return;
+      t.querySelector('.toast-title').textContent = '✦ Stock Limité';
+      t.querySelector('.toast-text').textContent  = '3 unités restantes — commandez avant épuisement.';
+      t.classList.add('on');
+      setTimeout(() => t.classList.remove('on'), 5000);
     }
 
-    /* REVIEWS DOTS */
-    function scrollToReview(index) {
-      const track = document.getElementById('reviewsTrack');
+
+    /* ─── REVIEWS DOTS ───────────────────────────────────────── */
+    function goReview(i) {
+      const track = document.getElementById('rvTrack');
       if (!track) return;
       const cards = track.querySelectorAll('.review-card');
-      if (!cards[index]) return;
-      track.scrollTo({ left: index * (cards[0].offsetWidth + 16), behavior: 'smooth' });
-      document.querySelectorAll('.reviews-dot').forEach((dot, i) => {
-        dot.classList.toggle('active', i === index);
-        dot.setAttribute('aria-selected', i === index ? 'true' : 'false');
+      if (!cards[i]) return;
+      track.scrollTo({ left: i * (cards[0].offsetWidth + 16), behavior: 'smooth' });
+      document.querySelectorAll('.rv-dot').forEach((d, j) => {
+        d.classList.toggle('on', j === i);
       });
     }
 
     (function() {
-      const track = document.getElementById('reviewsTrack');
+      const track = document.getElementById('rvTrack');
       if (!track) return;
       let timer;
       track.addEventListener('scroll', () => {
         clearTimeout(timer);
         timer = setTimeout(() => {
           const cards = track.querySelectorAll('.review-card');
-          const cardW = cards[0] ? cards[0].offsetWidth + 16 : 296;
-          const idx   = Math.round(track.scrollLeft / cardW);
-          document.querySelectorAll('.reviews-dot').forEach((dot, i) => {
-            dot.classList.toggle('active', i === idx);
+          const w     = cards[0] ? cards[0].offsetWidth + 16 : 306;
+          const idx   = Math.round(track.scrollLeft / w);
+          document.querySelectorAll('.rv-dot').forEach((d, j) => {
+            d.classList.toggle('on', j === idx);
           });
         }, 80);
       }, { passive: true });
     })();
 
-    /* SMOOTH SCROLL */
-    document.querySelectorAll('a[href^="#"]').forEach(link => {
-      link.addEventListener('click', (e) => {
-        const target = document.querySelector(link.getAttribute('href'));
-        if (target) {
-          e.preventDefault();
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
+
+    /* ─── SMOOTH SCROLL ──────────────────────────────────────── */
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const t = document.querySelector(a.getAttribute('href'));
+        if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth' }); }
       });
     });
-
-    /* COUNTER ANIMATION */
-    (function initCounters() {
-      const stats    = document.querySelectorAll('.stat-number');
-      const targets  = [98, 5000, 100];
-      const suffixes = ['%', '+', '%'];
-      let animated   = false;
-
-      function animateCounters() {
-        if (animated) return;
-        animated = true;
-        stats.forEach((el, i) => {
-          const target   = targets[i];
-          const suffix   = suffixes[i];
-          const duration = 1800;
-          const start    = performance.now();
-          function tick(now) {
-            const progress = Math.min((now - start) / duration, 1);
-            const eased    = 1 - Math.pow(1 - progress, 3);
-            const current  = Math.floor(eased * target);
-            el.textContent = (i === 1 && current >= 1000 ? '5K' : current) + suffix;
-            if (progress < 1) requestAnimationFrame(tick);
-          }
-          requestAnimationFrame(tick);
-        });
-      }
-
-      const immersion = document.getElementById('immersion');
-      if (!immersion) return;
-      const obs = new IntersectionObserver((entries) => {
-        if (entries[0].isIntersecting) { animateCounters(); obs.disconnect(); }
-      }, { threshold: 0.3 });
-      obs.observe(immersion);
-    })();
 
   </script>
 
