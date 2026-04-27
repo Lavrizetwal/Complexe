@@ -6,11 +6,7 @@
   <meta name="description" content="Complexe Produits de Cheveux — Le luxe capillaire commence ici. Soins premium pour cheveux naturels et crémeux." />
   <title>Complexe Produits de Cheveux | Luxe Capillaire</title>
 
-  <!-- ============================================================
-       GLOBAL STYLES
-  ============================================================ -->
   <style>
-    /* ─── CSS CUSTOM PROPERTIES ─────────────────────────────────── */
     :root {
       --violet-deep:    #0d0011;
       --violet-mid:     #1a0030;
@@ -31,7 +27,6 @@
       --font-sans:      'Helvetica Neue', Arial, sans-serif;
     }
 
-    /* ─── RESET & BASE ───────────────────────────────────────────── */
     *, *::before, *::after {
       box-sizing: border-box;
       margin: 0;
@@ -64,12 +59,10 @@
 
     ul { list-style: none; }
 
-    /* ─── SCROLLBAR ───────────────────────────────────────────────── */
     ::-webkit-scrollbar { width: 4px; }
     ::-webkit-scrollbar-track { background: var(--violet-deep); }
     ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 2px; }
 
-    /* ─── UTILITY CLASSES ─────────────────────────────────────────── */
     .gold-text {
       color: var(--gold);
       background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 50%, var(--gold) 100%);
@@ -96,7 +89,6 @@
       margin: 0 auto 2rem;
     }
 
-    /* ─── LUXURY BUTTON ──────────────────────────────────────────── */
     .btn-luxury {
       display: inline-block;
       padding: 1rem 2.5rem;
@@ -154,7 +146,6 @@
       border-color: var(--gold);
     }
 
-    /* ─── HOLOGRAM FRAME ─────────────────────────────────────────── */
     .hologram-frame {
       position: relative;
       width: 100%;
@@ -183,6 +174,7 @@
       );
       animation: hologramSweep 4s ease-in-out infinite;
       pointer-events: none;
+      z-index: 2;
     }
 
     .hologram-frame::after {
@@ -193,6 +185,7 @@
       background: linear-gradient(90deg, transparent, var(--gold-light), transparent);
       animation: hologramScan 3s linear infinite;
       pointer-events: none;
+      z-index: 2;
     }
 
     @keyframes hologramSweep {
@@ -208,8 +201,10 @@
 
     .hologram-inner {
       text-align: center;
-      padding: 2rem 1rem;
+      padding: 0;
       z-index: 1;
+      width: 100%;
+      height: 100%;
     }
 
     .hologram-icon {
@@ -227,7 +222,6 @@
       opacity: 0.7;
     }
 
-    /* Corner accents on hologram */
     .hologram-corner {
       position: absolute;
       width: 16px;
@@ -235,13 +229,13 @@
       border-color: var(--gold);
       border-style: solid;
       opacity: 0.6;
+      z-index: 3;
     }
     .hologram-corner.tl { top: 8px; left: 8px; border-width: 1px 0 0 1px; }
     .hologram-corner.tr { top: 8px; right: 8px; border-width: 1px 1px 0 0; }
     .hologram-corner.bl { bottom: 8px; left: 8px; border-width: 0 0 1px 1px; }
     .hologram-corner.br { bottom: 8px; right: 8px; border-width: 0 1px 1px 0; }
 
-    /* ─── NAVIGATION ────────────────────────────────────────────── */
     .nav {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -278,9 +272,7 @@
       margin-top: 2px;
     }
 
-    .nav-menu {
-      display: none;
-    }
+    .nav-menu { display: none; }
 
     .nav-actions {
       display: flex;
@@ -298,9 +290,7 @@
 
     .nav-icon:hover { opacity: 1; }
 
-    .nav-cart-badge {
-      position: relative;
-    }
+    .nav-cart-badge { position: relative; }
 
     .cart-count {
       position: absolute;
@@ -316,7 +306,6 @@
       font-weight: 700;
     }
 
-    /* ─── PARTICLES CANVAS ───────────────────────────────────────── */
     #particles-canvas {
       position: fixed;
       top: 0; left: 0;
@@ -326,7 +315,6 @@
       opacity: 0.35;
     }
 
-    /* ─── FADE-IN ANIMATION ──────────────────────────────────────── */
     .fade-in {
       opacity: 0;
       transform: translateY(30px);
@@ -343,13 +331,11 @@
     .fade-in-delay-3 { transition-delay: 0.45s; }
     .fade-in-delay-4 { transition-delay: 0.60s; }
 
-    /* ─── STAR RATING ─────────────────────────────────────────────── */
     .stars {
       color: var(--gold);
       font-size: 0.85rem;
       letter-spacing: 2px;
     }
-
 
     /* ====================================================
        SECTION 1: HERO
@@ -364,14 +350,9 @@
       text-align: center;
       padding: 7rem 1.5rem 4rem;
       overflow: hidden;
-      background: radial-gradient(
-        ellipse 80% 70% at 50% 60%,
-        #1e003a 0%,
-        #0d0011 70%
-      );
+      background: radial-gradient(ellipse 80% 70% at 50% 60%, #1e003a 0%, #0d0011 70%);
     }
 
-    /* Animated background orbs */
     .hero-orb {
       position: absolute;
       border-radius: 50%;
@@ -408,7 +389,6 @@
       100% { transform: translate(20px, 30px) scale(1.08); }
     }
 
-    /* Gold top border */
     .hero::before {
       content: '';
       position: absolute;
@@ -479,7 +459,6 @@
       to   { opacity: 1; transform: translateY(0); }
     }
 
-    /* Hero image placeholder */
     .hero-model-wrap {
       position: relative;
       width: 260px;
@@ -492,51 +471,11 @@
       width: 100%;
       aspect-ratio: 3/4;
       border: 1px solid rgba(201, 168, 76, 0.25);
-      background: linear-gradient(
-        180deg,
-        rgba(106, 13, 173, 0.25) 0%,
-        rgba(30, 0, 60, 0.5) 100%
-      );
       position: relative;
       overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
     }
 
-    /* Animated hair strands */
-    .hair-strand {
-      position: absolute;
-      top: 0;
-      width: 2px;
-      background: linear-gradient(
-        180deg,
-        rgba(201,168,76,0.0) 0%,
-        rgba(201,168,76,0.3) 30%,
-        rgba(155,48,255,0.2) 70%,
-        rgba(201,168,76,0.0) 100%
-      );
-      border-radius: 2px;
-      animation: hairWave 4s ease-in-out infinite;
-      transform-origin: top center;
-    }
-
-    @keyframes hairWave {
-      0%,100% { transform: rotate(0deg) scaleY(1); }
-      25%      { transform: rotate(1.5deg) scaleY(1.02); }
-      75%      { transform: rotate(-1.5deg) scaleY(0.98); }
-    }
-
-    .model-placeholder-text {
-      font-size: 0.55rem;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: rgba(201, 168, 76, 0.5);
-      text-align: center;
-      z-index: 2;
-    }
-
-    /* Gold glow ring around model */
+    /* Glow autour du modèle */
     .hero-model-glow {
       position: absolute;
       inset: -15px;
@@ -594,9 +533,8 @@
       100% { transform: scaleY(0); transform-origin: bottom; }
     }
 
-
     /* ====================================================
-       SECTION 2: IMMERSION / PARALLAX
+       SECTION 2: IMMERSION
     ==================================================== */
     .immersion {
       position: relative;
@@ -653,7 +591,6 @@
       font-style: italic;
     }
 
-    /* Floating elements */
     .immersion-float {
       position: absolute;
       pointer-events: none;
@@ -714,7 +651,6 @@
       color: var(--gold);
     }
 
-    /* Stats row */
     .immersion-stats {
       display: flex;
       justify-content: center;
@@ -724,9 +660,7 @@
       border-top: 1px solid rgba(201,168,76,0.12);
     }
 
-    .stat-item {
-      text-align: center;
-    }
+    .stat-item { text-align: center; }
 
     .stat-number {
       font-family: var(--font-serif);
@@ -746,9 +680,8 @@
       color: var(--text-muted);
     }
 
-
     /* ====================================================
-       SECTION 3: STORYTELLING + EDUCATION
+       SECTION 3: STORYTELLING
     ==================================================== */
     .storytelling {
       position: relative;
@@ -787,7 +720,6 @@
       line-height: 1.8;
     }
 
-    /* Story blocks */
     .story-block {
       display: flex;
       flex-direction: column;
@@ -795,9 +727,7 @@
       margin-bottom: 3.5rem;
     }
 
-    .story-text-block {
-      flex: 1;
-    }
+    .story-text-block { flex: 1; }
 
     .story-block-label {
       font-size: 0.6rem;
@@ -823,7 +753,6 @@
       margin-bottom: 1.25rem;
     }
 
-    /* [EDIT] — editable placeholder text */
     .editable-text {
       border-left: 2px solid rgba(201,168,76,0.3);
       padding-left: 1rem;
@@ -837,7 +766,6 @@
       min-height: 200px;
     }
 
-    /* Science / benefit pillars */
     .benefit-pillars {
       display: flex;
       flex-direction: column;
@@ -884,7 +812,6 @@
       line-height: 1.6;
     }
 
-    /* Hair type tags */
     .hair-types {
       display: flex;
       flex-wrap: wrap;
@@ -902,9 +829,8 @@
       border-radius: 1px;
     }
 
-
     /* ====================================================
-       SECTION 4: PREMIUM PRODUCTS PREVIEW
+       SECTION 4: PRODUCTS
     ==================================================== */
     .products {
       position: relative;
@@ -940,7 +866,6 @@
       letter-spacing: 0.05em;
     }
 
-    /* Filter tabs */
     .product-filters {
       display: flex;
       gap: 0.5rem;
@@ -972,7 +897,6 @@
       background: rgba(201,168,76,0.07);
     }
 
-    /* Product grid */
     .products-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -997,7 +921,6 @@
         inset 0 0 30px rgba(201,168,76,0.03);
     }
 
-    /* Exclusive badge */
     .product-badge {
       position: absolute;
       top: 0.5rem; left: 0.5rem;
@@ -1022,52 +945,27 @@
       position: relative;
     }
 
-    .product-img-placeholder {
+    /* ── IMPORTANT: style pour que l'image remplisse le cadre ── */
+    .product-img-wrap img {
       width: 100%;
       height: 100%;
-      background: linear-gradient(
-        180deg,
-        rgba(106,13,173,0.3) 0%,
-        rgba(30,0,60,0.6) 100%
-      );
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      gap: 0.5rem;
+      object-fit: cover;
+      display: block;
     }
 
-    .product-img-icon {
-      font-size: 2rem;
-      opacity: 0.35;
-    }
-
-    .product-img-text {
-      font-size: 0.5rem;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: rgba(201,168,76,0.4);
-    }
-
-    /* Hover overlay */
     .product-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(
-        180deg,
-        transparent 40%,
-        rgba(13,0,17,0.9) 100%
-      );
+      background: linear-gradient(180deg, transparent 40%, rgba(13,0,17,0.9) 100%);
       opacity: 0;
       transition: opacity var(--transition);
       display: flex;
       align-items: flex-end;
       padding: 1rem;
+      z-index: 2;
     }
 
-    .product-card:hover .product-overlay {
-      opacity: 1;
-    }
+    .product-card:hover .product-overlay { opacity: 1; }
 
     .product-quick-btn {
       width: 100%;
@@ -1088,9 +986,7 @@
       color: var(--violet-deep);
     }
 
-    .product-info {
-      padding: 0.85rem 0.75rem;
-    }
+    .product-info { padding: 0.85rem 0.75rem; }
 
     .product-name {
       font-family: var(--font-serif);
@@ -1160,11 +1056,8 @@
       color: #ff6b6b;
     }
 
-    .product-stock.in-stock {
-      color: rgba(100, 200, 120, 0.8);
-    }
+    .product-stock.in-stock { color: rgba(100, 200, 120, 0.8); }
 
-    /* Featured card (full width) */
     .product-card.featured {
       grid-column: 1 / -1;
       display: grid;
@@ -1207,9 +1100,8 @@
       margin-bottom: 1rem;
     }
 
-
     /* ====================================================
-       SECTION 5: TRANSFORMATION — BEFORE / AFTER
+       SECTION 5: TRANSFORMATION
     ==================================================== */
     .transformation {
       position: relative;
@@ -1241,7 +1133,6 @@
       margin-bottom: 3rem;
     }
 
-    /* Comparison slider */
     .ba-container {
       position: relative;
       max-width: 360px;
@@ -1261,36 +1152,43 @@
     .ba-after {
       position: absolute;
       inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      gap: 0.5rem;
     }
 
     .ba-before {
-      background: linear-gradient(135deg, rgba(40,20,60,0.9) 0%, rgba(20,0,35,0.95) 100%);
       z-index: 1;
+      overflow: hidden;
     }
 
     .ba-after {
-      background: linear-gradient(135deg, rgba(106,13,173,0.4) 0%, rgba(201,168,76,0.15) 100%);
       z-index: 0;
       clip-path: inset(0 50% 0 0);
       transition: clip-path 0.01s;
+      overflow: hidden;
+    }
+
+    /* Images dans le slider avant/après */
+    .ba-before img,
+    .ba-after img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
 
     .ba-label {
+      position: absolute;
+      bottom: 0.5rem;
       font-size: 0.6rem;
       letter-spacing: 0.3em;
       text-transform: uppercase;
       color: var(--text-muted);
+      z-index: 5;
+      background: rgba(13,0,17,0.6);
+      padding: 0.2rem 0.5rem;
     }
 
-    .ba-icon {
-      font-size: 2.5rem;
-      opacity: 0.25;
-    }
+    .ba-before .ba-label { left: 0.5rem; }
+    .ba-after  .ba-label { right: 0.5rem; color: var(--gold-light); }
 
     .ba-divider {
       position: absolute;
@@ -1301,7 +1199,6 @@
       z-index: 3;
       cursor: ew-resize;
       transform: translateX(-50%);
-      transition: left 0.01s;
     }
 
     .ba-handle {
@@ -1336,11 +1233,8 @@
       color: var(--text-muted);
     }
 
-    .ba-caption.after {
-      color: var(--gold);
-    }
+    .ba-caption.after { color: var(--gold); }
 
-    /* Transformation steps */
     .transform-steps {
       display: flex;
       flex-direction: column;
@@ -1382,9 +1276,8 @@
       line-height: 1.6;
     }
 
-
     /* ====================================================
-       SECTION 6: SOCIAL PROOF / REVIEWS
+       SECTION 6: REVIEWS
     ==================================================== */
     .reviews {
       position: relative;
@@ -1428,9 +1321,7 @@
       color: var(--gold-light);
     }
 
-    .aggregate-meta {
-      text-align: left;
-    }
+    .aggregate-meta { text-align: left; }
 
     .aggregate-count {
       font-size: 0.65rem;
@@ -1438,7 +1329,6 @@
       letter-spacing: 0.1em;
     }
 
-    /* Reviews carousel */
     .reviews-track-wrap {
       overflow: hidden;
       position: relative;
@@ -1467,9 +1357,7 @@
       transition: border-color var(--transition);
     }
 
-    .review-card:hover {
-      border-color: rgba(201,168,76,0.3);
-    }
+    .review-card:hover { border-color: rgba(201,168,76,0.3); }
 
     .review-header {
       display: flex;
@@ -1515,9 +1403,7 @@
       white-space: nowrap;
     }
 
-    .review-stars {
-      margin-bottom: 0.75rem;
-    }
+    .review-stars { margin-bottom: 0.75rem; }
 
     .review-product {
       font-size: 0.55rem;
@@ -1541,7 +1427,6 @@
       letter-spacing: 0.1em;
     }
 
-    /* Dots */
     .reviews-dots {
       display: flex;
       justify-content: center;
@@ -1555,6 +1440,7 @@
       background: rgba(201,168,76,0.25);
       cursor: pointer;
       transition: all var(--transition);
+      border: none;
     }
 
     .reviews-dot.active {
@@ -1563,7 +1449,6 @@
       border-radius: 2px;
     }
 
-    /* Press logos */
     .press-strip {
       margin-top: 3rem;
       padding-top: 2rem;
@@ -1597,13 +1482,10 @@
       transition: color var(--transition);
     }
 
-    .press-logo:hover {
-      color: rgba(201,168,76,0.7);
-    }
-
+    .press-logo:hover { color: rgba(201,168,76,0.7); }
 
     /* ====================================================
-       SECTION 7: CALL TO ACTION
+       SECTION 7: CTA
     ==================================================== */
     .cta-section {
       position: relative;
@@ -1627,7 +1509,6 @@
       background: linear-gradient(90deg, transparent, var(--gold), transparent);
     }
 
-    /* Large background text */
     .cta-bg-text {
       position: absolute;
       top: 50%;
@@ -1763,7 +1644,6 @@
       letter-spacing: 0.1em;
     }
 
-    /* Guarantees */
     .cta-guarantees {
       display: flex;
       justify-content: center;
@@ -1793,7 +1673,6 @@
       color: var(--text-muted);
       text-align: center;
     }
-
 
     /* ====================================================
        FOOTER
@@ -1854,10 +1733,7 @@
       letter-spacing: 0.1em;
     }
 
-    .footer-socials {
-      display: flex;
-      gap: 1rem;
-    }
+    .footer-socials { display: flex; gap: 1rem; }
 
     .footer-social {
       width: 28px; height: 28px;
@@ -1869,6 +1745,7 @@
       color: var(--text-muted);
       cursor: pointer;
       transition: all var(--transition);
+      background: transparent;
     }
 
     .footer-social:hover {
@@ -1876,9 +1753,8 @@
       color: var(--gold);
     }
 
-
     /* ====================================================
-       TOAST NOTIFICATION
+       TOAST
     ==================================================== */
     .toast {
       position: fixed;
@@ -1909,9 +1785,8 @@
       color: var(--text-muted);
     }
 
-
     /* ====================================================
-       LOADING SCREEN
+       LOADER
     ==================================================== */
     .loader {
       position: fixed;
@@ -1956,13 +1831,12 @@
     }
 
     @keyframes loaderBar {
-      0%   { width: 0%; left: 0; }
-      100% { width: 100%; left: 0; }
+      0%   { width: 0%; }
+      100% { width: 100%; }
     }
 
-
     /* ====================================================
-       RESPONSIVE — DESKTOP UPGRADES
+       RESPONSIVE
     ==================================================== */
     @media (min-width: 768px) {
 
@@ -1983,7 +1857,6 @@
       .nav-menu a:hover { color: var(--gold-light); }
 
       .hero-model-wrap { width: 300px; }
-
       .hero-h1 { font-size: 3rem; }
 
       .story-block {
@@ -1993,46 +1866,28 @@
       }
 
       .story-block.reverse { flex-direction: row-reverse; }
-
       .story-hologram { aspect-ratio: 3/4; }
 
-      .products-grid {
-        grid-template-columns: repeat(3, 1fr);
-      }
+      .products-grid { grid-template-columns: repeat(3, 1fr); }
 
       .product-card.featured {
         grid-column: span 1;
         display: block;
       }
 
-      .product-card.featured .product-img-wrap {
-        aspect-ratio: 3/4;
-      }
-
-      .product-card.featured .product-info-wrap {
-        padding: 0.85rem 0.75rem;
-      }
-
+      .product-card.featured .product-img-wrap { aspect-ratio: 3/4; }
+      .product-card.featured .product-info-wrap { padding: 0.85rem 0.75rem; }
       .featured-name { font-size: 0.85rem; }
 
       .ba-container { max-width: 440px; }
-
       .cta-btn-wrap { flex-direction: row; justify-content: center; }
-
     }
 
     @media (min-width: 1024px) {
-
       .hero { padding: 8rem 2rem 6rem; }
-
       .hero-model-wrap { width: 340px; }
-
-      .products-grid {
-        grid-template-columns: repeat(4, 1fr);
-      }
-
+      .products-grid { grid-template-columns: repeat(4, 1fr); }
       .immersion-content { max-width: 500px; }
-
     }
 
   </style>
@@ -2040,9 +1895,7 @@
 
 <body>
 
-  <!-- ============================================================
-       LOADING SCREEN
-  ============================================================ -->
+  <!-- LOADER -->
   <div class="loader" id="loader" aria-hidden="true">
     <div class="loader-logo">Complexe Produits de Cheveux</div>
     <div class="loader-bar-wrap">
@@ -2050,42 +1903,29 @@
     </div>
   </div>
 
-
-  <!-- ============================================================
-       PARTICLES CANVAS (ambient background particles)
-  ============================================================ -->
+  <!-- PARTICLES -->
   <canvas id="particles-canvas" aria-hidden="true"></canvas>
 
-
-  <!-- ============================================================
-       TOAST NOTIFICATION
-  ============================================================ -->
+  <!-- TOAST -->
   <div class="toast" id="toast" role="alert" aria-live="polite">
     <div class="toast-title">✦ Stock Limité</div>
     <div class="toast-text">3 unités restantes — commandez avant épuisement.</div>
   </div>
 
-
-  <!-- ============================================================
-       NAVIGATION
-  ============================================================ -->
+  <!-- NAVIGATION -->
   <nav class="nav" id="nav" role="navigation" aria-label="Navigation principale">
     <div class="nav-logo">
       Complexe
       <span>Produits de Cheveux</span>
     </div>
-
     <ul class="nav-menu">
       <li><a href="#produits">Collection</a></li>
-      <li><a href="#rituel">Rituel</a></li>
+      <li><a href="#storytelling">Rituel</a></li>
       <li><a href="#transformation">Résultats</a></li>
       <li><a href="#avis">Témoignages</a></li>
     </ul>
-
     <div class="nav-actions">
-      <!-- Search icon -->
       <div class="nav-icon" title="Rechercher" aria-label="Rechercher">&#9906;</div>
-      <!-- Cart icon -->
       <div class="nav-icon nav-cart-badge" title="Panier" aria-label="Panier">
         &#9651;
         <span class="cart-count" id="cartCount">2</span>
@@ -2095,86 +1935,61 @@
 
 
   <!-- ============================================================
-       SECTION 1: HERO — IMMERSIVE ENTRY
+       SECTION 1: HERO
   ============================================================ -->
   <section class="hero" id="accueil" aria-label="Héro - Entrée immersive">
 
-    <!-- Animated background orbs -->
     <div class="hero-orb hero-orb-1" aria-hidden="true"></div>
     <div class="hero-orb hero-orb-2" aria-hidden="true"></div>
     <div class="hero-orb hero-orb-3" aria-hidden="true"></div>
 
-    <!-- Eyebrow label -->
     <p class="hero-eyebrow">✦ Haïti · Luxe Capillaire · Édition Exclusive ✦</p>
 
-    <!-- Hero model image placeholder -->
+    <!-- ══════════════════════════════════════════
+         IMAGE MODÈLE HERO
+         Nom du fichier : model-hero.jpg
+         Uploader dans  : images/model-hero.jpg
+    ══════════════════════════════════════════ -->
     <div class="hero-model-wrap" aria-hidden="true">
       <div class="hero-model-frame">
-        <!--
-          ╔══════════════════════════════╗
-          ║   REMPLACER PAR IMAGE MODÈLE ║
-          ║   Format recommandé: 3:4     ║
-          ║   Ex: <img src="model.jpg"/> ║
-          ╚══════════════════════════════╝
-        -->
-
-        <!-- Animated hair strands (decorative) -->
-        <div class="hair-strand" style="left:20%; height:70%; animation-delay:0s; opacity:0.6;"></div>
-        <div class="hair-strand" style="left:30%; height:85%; animation-delay:0.3s; opacity:0.4;"></div>
-        <div class="hair-strand" style="left:42%; height:90%; animation-delay:0.6s; opacity:0.7;"></div>
-        <div class="hair-strand" style="left:54%; height:80%; animation-delay:0.9s; opacity:0.5;"></div>
-        <div class="hair-strand" style="left:65%; height:75%; animation-delay:1.2s; opacity:0.6;"></div>
-        <div class="hair-strand" style="left:75%; height:88%; animation-delay:0.4s; opacity:0.4;"></div>
-
-        <div class="model-placeholder-text">
-          [ IMAGE MODÈLE ICI ]<br>
-          <span style="display:block; margin-top:0.5rem; font-size:0.45rem; opacity:0.5;">Format 3:4 · JPG/WebP</span>
-        </div>
+        <img
+          src="https://raw.githubusercontent.com/lavrizetwal/complexe/main/images/model-hero.jpg"
+          alt="Modèle cheveux naturels luxe"
+          style="width:100%; height:100%; object-fit:cover; object-position:top;"
+        />
       </div>
       <div class="hero-model-glow"></div>
     </div>
 
-    <!-- Headline text block — Progressive appearance -->
     <div class="hero-headline-wrap">
-
-      <!-- Headline 1 — Primary impact -->
       <h1 class="hero-h1">
         Révélez la <em>puissance</em><br>de vos cheveux
       </h1>
-
-      <!-- Headline 2 — Secondary luxury statement -->
       <p class="hero-sub">Le luxe capillaire commence ici.</p>
-
-      <!-- Headline 3 — Brand signature -->
       <p class="hero-tagline">✦ Plus qu'un style — une signature ✦</p>
-
     </div>
 
-    <!-- CTA Button -->
     <div class="hero-btn-wrap">
-      <a href="#produits" class="btn-luxury" aria-label="Explorer la collection de produits capillaires">
+      <a href="#produits" class="btn-luxury" aria-label="Explorer la collection">
         <span>Explorer la collection</span>
       </a>
     </div>
 
-    <!-- Scroll hint -->
     <div class="hero-scroll-hint" aria-hidden="true">
       <span class="scroll-hint-text">Découvrir</span>
       <div class="scroll-hint-line"></div>
     </div>
 
-  </section><!-- /SECTION 1: HERO -->
+  </section><!-- /SECTION 1 -->
 
 
   <!-- ============================================================
-       SECTION 2: IMMERSION / EMOTION (Parallax + Storytelling)
+       SECTION 2: IMMERSION
   ============================================================ -->
   <section class="immersion" id="immersion" aria-label="Immersion — Univers de la marque">
 
-    <!-- Parallax background layer -->
     <div class="immersion-bg" id="parallaxBg" aria-hidden="true"></div>
 
-    <!-- Floating decorative elements -->
     <div class="immersion-float float-dot" style="top:15%; left:8%; animation-delay:0s;"></div>
     <div class="immersion-float float-dot" style="top:70%; left:12%; animation-delay:1s;"></div>
     <div class="immersion-float float-dot" style="top:30%; right:10%; animation-delay:2s;"></div>
@@ -2183,33 +1998,26 @@
     <div class="immersion-float float-line" style="top:55%; right:6%; animation-delay:2.5s;"></div>
 
     <div class="immersion-content">
-
-      <!-- Live indicator -->
       <div class="immersion-badge fade-in">
         <div class="immersion-badge-dot"></div>
         <span class="immersion-badge-text">Expérience Capillaire Exclusive</span>
       </div>
 
-      <!-- Main poetic quote -->
       <blockquote class="immersion-quote fade-in fade-in-delay-1">
         "Chaque cheveu raconte<br>une <em>histoire</em>.<br>
         La vôtre mérite<br>d'être <em>extraordinaire</em>."
       </blockquote>
 
-      <!-- Supporting poetic text — EDITABLE -->
       <p class="immersion-body fade-in fade-in-delay-2">
-        <!--[ÉDITER] Texte poétique de marque — À personnaliser selon l'identité souhaitée-->
         Née de la richesse culturelle haïtienne et forgée par les standards
         de la beauté mondiale, notre formule est un hymne à la femme noire —
         à sa couronne, à sa force, à son élégance naturelle.
       </p>
 
-      <!-- CTA -->
       <div class="fade-in fade-in-delay-3">
         <a href="#storytelling" class="btn-luxury-ghost">Notre Histoire</a>
       </div>
 
-      <!-- Key stats -->
       <div class="immersion-stats fade-in fade-in-delay-4">
         <div class="stat-item">
           <span class="stat-number">98%</span>
@@ -2224,18 +2032,16 @@
           <span class="stat-label">Naturel</span>
         </div>
       </div>
-
     </div>
 
-  </section><!-- /SECTION 2: IMMERSION -->
+  </section><!-- /SECTION 2 -->
 
 
   <!-- ============================================================
-       SECTION 3: STORYTELLING + EDUCATION
+       SECTION 3: STORYTELLING
   ============================================================ -->
-  <section class="storytelling" id="storytelling" aria-label="Notre histoire et éducation capillaire">
+  <section class="storytelling" id="storytelling" aria-label="Notre histoire">
 
-    <!-- Section header -->
     <div class="story-header fade-in">
       <p class="section-label">Notre Philosophie</p>
       <span class="gold-line" aria-hidden="true"></span>
@@ -2243,55 +2049,46 @@
         La science du soin,<br>l'art de la beauté
       </h2>
       <p class="story-intro">
-        <!--[ÉDITER] Sous-titre de section — À personnaliser-->
         Chaque formule est conçue pour célébrer la texture unique
         des cheveux naturels et crémeux des femmes haïtiennes.
       </p>
     </div>
 
-    <!-- ─── STORY BLOCK 1: ORIGINS ──────────────────────────────── -->
+    <!-- STORY BLOCK 1 -->
     <div class="story-block fade-in">
 
-      <!-- Hologram image placeholder — BLOCK 1 -->
-      <div class="hologram-frame story-hologram" aria-label="Emplacement image — Origines de la marque">
+      <!-- ══════════════════════════════════════════
+           IMAGE STORYTELLING 1
+           Nom du fichier : story1-origines.jpg
+           Uploader dans  : images/story1-origines.jpg
+      ══════════════════════════════════════════ -->
+      <div class="hologram-frame story-hologram" aria-label="Image origines de la marque">
         <div class="hologram-corner tl"></div>
         <div class="hologram-corner tr"></div>
         <div class="hologram-corner bl"></div>
         <div class="hologram-corner br"></div>
         <div class="hologram-inner">
-          <div class="hologram-icon">◈</div>
-          <!--
-            ╔═════════════════════════════════════╗
-            ║   [ HOLOGRAM IMAGE ICI — BLOC 1 ]   ║
-            ║   Image: Ingrédients / Origines     ║
-            ║   Remplacer par: <img src="..."/>   ║
-            ╚═════════════════════════════════════╝
-          -->
-          <p class="hologram-label">Image · Origines</p>
+          <img
+            src="https://raw.githubusercontent.com/lavrizetwal/complexe/main/images/story1-origines.jpg"
+            alt="Origines de la marque — ingrédients naturels"
+            style="width:100%; height:100%; object-fit:cover; display:block;"
+          />
         </div>
       </div>
 
-      <!-- Text block 1 -->
       <div class="story-text-block">
         <p class="story-block-label">✦ Origines · Authenticité</p>
-        <h3 class="story-block-title">
-          <!--[ÉDITER] Titre du bloc storytelling 1-->
-          Formulé pour votre couronne naturelle
-        </h3>
+        <h3 class="story-block-title">Formulé pour votre couronne naturelle</h3>
         <p class="story-block-text editable-text">
-          <!--[ÉDITER] Texte principal bloc 1 — Contenu à personnaliser-->
           Nos formules sont développées en partant d'une vérité fondamentale :
           les cheveux 4A, 4B et 4C méritent des soins pensés spécifiquement pour eux.
           Pas des adaptations. Pas des compromis. Une dévotion totale à leur structure unique.
         </p>
         <p class="story-block-text">
-          <!--[ÉDITER] Texte secondaire bloc 1-->
-          Chaque ingredient est sélectionné pour sa compatibilité avec
+          Chaque ingrédient est sélectionné pour sa compatibilité avec
           la porosité élevée, la fragilité naturelle et la beauté singulière
           de vos boucles et vagues.
         </p>
-
-        <!-- Hair type compatibility tags -->
         <div class="hair-types" aria-label="Types de cheveux compatibles">
           <span class="hair-tag">Type 3C</span>
           <span class="hair-tag">Type 4A</span>
@@ -2304,89 +2101,72 @@
 
     </div>
 
-    <!-- ─── STORY BLOCK 2: SCIENCE ──────────────────────────────── -->
+    <!-- STORY BLOCK 2 -->
     <div class="story-block reverse fade-in">
 
-      <!-- Text block 2 -->
       <div class="story-text-block">
         <p class="story-block-label">✦ Science · Innovation</p>
-        <h3 class="story-block-title">
-          <!--[ÉDITER] Titre du bloc storytelling 2-->
-          La technologie au service de votre beauté
-        </h3>
+        <h3 class="story-block-title">La technologie au service de votre beauté</h3>
         <p class="story-block-text editable-text">
-          <!--[ÉDITER] Texte principal bloc 2 — Contenu à personnaliser-->
           Notre laboratoire combine des actifs botaniques issus des Caraïbes
           avec des technologies capillaires de dernière génération.
           Le résultat : une gamme qui nourrit en profondeur, définit les boucles
           et crée un éclat visible dès la première application.
         </p>
-
-        <!-- Benefit pillars -->
         <div class="benefit-pillars">
           <div class="benefit-pill">
             <div class="benefit-pill-icon">💧</div>
             <div>
               <p class="benefit-pill-title">Hydratation Profonde</p>
-              <p class="benefit-pill-text">
-                <!--[ÉDITER] Description bénéfice 1-->
-                Pénètre jusqu'au cortex pour une hydratation qui dure 72h
-              </p>
+              <p class="benefit-pill-text">Pénètre jusqu'au cortex pour une hydratation qui dure 72h</p>
             </div>
           </div>
           <div class="benefit-pill">
             <div class="benefit-pill-icon">✨</div>
             <div>
               <p class="benefit-pill-title">Éclat & Définition</p>
-              <p class="benefit-pill-text">
-                <!--[ÉDITER] Description bénéfice 2-->
-                Révèle le brillant naturel et définit chaque boucle
-              </p>
+              <p class="benefit-pill-text">Révèle le brillant naturel et définit chaque boucle</p>
             </div>
           </div>
           <div class="benefit-pill">
             <div class="benefit-pill-icon">🌿</div>
             <div>
               <p class="benefit-pill-title">Formules Naturelles</p>
-              <p class="benefit-pill-text">
-                <!--[ÉDITER] Description bénéfice 3-->
-                Sans sulfates, sans parabènes · 95% d'ingrédients naturels
-              </p>
+              <p class="benefit-pill-text">Sans sulfates, sans parabènes · 95% d'ingrédients naturels</p>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Hologram image placeholder — BLOCK 2 -->
-      <div class="hologram-frame story-hologram" aria-label="Emplacement image — Science et innovation">
+      <!-- ══════════════════════════════════════════
+           IMAGE STORYTELLING 2
+           Nom du fichier : story2-science.jpg
+           Uploader dans  : images/story2-science.jpg
+      ══════════════════════════════════════════ -->
+      <div class="hologram-frame story-hologram" aria-label="Image science et innovation">
         <div class="hologram-corner tl"></div>
         <div class="hologram-corner tr"></div>
         <div class="hologram-corner bl"></div>
         <div class="hologram-corner br"></div>
         <div class="hologram-inner">
-          <div class="hologram-icon">◈</div>
-          <!--
-            ╔═════════════════════════════════════╗
-            ║   [ HOLOGRAM IMAGE ICI — BLOC 2 ]   ║
-            ║   Image: Laboratoire / Science      ║
-            ║   Remplacer par: <img src="..."/>   ║
-            ╚═════════════════════════════════════╝
-          -->
-          <p class="hologram-label">Image · Science</p>
+          <img
+            src="https://raw.githubusercontent.com/lavrizetwal/complexe/main/images/story2-science.jpg"
+            alt="Science et innovation capillaire"
+            style="width:100%; height:100%; object-fit:cover; display:block;"
+          />
         </div>
       </div>
 
     </div>
 
-  </section><!-- /SECTION 3: STORYTELLING -->
+  </section><!-- /SECTION 3 -->
 
 
   <!-- ============================================================
-       SECTION 4: PREMIUM PRODUCTS PREVIEW
+       SECTION 4: PRODUCTS
   ============================================================ -->
   <section class="products" id="produits" aria-label="Collection de produits premium">
 
-    <!-- Section header -->
     <div class="products-header fade-in">
       <p class="section-label">Collection Exclusive</p>
       <span class="gold-line" aria-hidden="true"></span>
@@ -2394,7 +2174,6 @@
       <p class="products-subtitle">Formulés pour l'excellence · Édition limitée</p>
     </div>
 
-    <!-- Filter tabs -->
     <div class="product-filters fade-in" role="tablist" aria-label="Filtrer par catégorie">
       <button class="filter-tab active" role="tab" aria-selected="true" onclick="filterProducts(this, 'all')">Tout</button>
       <button class="filter-tab" role="tab" aria-selected="false" onclick="filterProducts(this, 'soin')">Soins</button>
@@ -2403,37 +2182,29 @@
       <button class="filter-tab" role="tab" aria-selected="false" onclick="filterProducts(this, 'parfum')">Parfums</button>
     </div>
 
-    <!-- Products grid -->
     <div class="products-grid" id="productsGrid">
 
-      <!-- ── PRODUCT 1: FEATURED ELIXIR ────────────────────────── -->
+      <!-- ══════════════════════════════════════════
+           PRODUIT 1 — ÉLIXIR (Bestseller)
+           Nom du fichier : prod1-elixir.jpg
+           Uploader dans  : images/prod1-elixir.jpg
+      ══════════════════════════════════════════ -->
       <article class="product-card featured fade-in" data-category="soin" aria-label="Élixir Précieux — Produit vedette">
         <span class="product-badge">✦ Bestseller</span>
-
         <div class="product-img-wrap">
-          <div class="product-img-placeholder">
-            <!--
-              ╔══════════════════════════════════════╗
-              ║  [ IMAGE PRODUIT 1 — ÉLIXIR ]        ║
-              ║  Remplacer par: <img src="prod1.jpg">║
-              ║  Format recommandé: 3:4              ║
-              ╚══════════════════════════════════════╝
-            -->
-            <div class="product-img-icon">🌹</div>
-            <p class="product-img-text">Image Produit</p>
-          </div>
+          <img
+            src="https://raw.githubusercontent.com/lavrizetwal/complexe/main/images/prod1-elixir.jpg"
+            alt="Élixir Précieux Signature"
+          />
           <div class="product-overlay">
-            <button class="product-quick-btn" onclick="addToCart('Élixir Précieux Signature')" aria-label="Ajouter au panier">
+            <button class="product-quick-btn" onclick="addToCart('Élixir Précieux Signature')">
               Ajouter au Panier
             </button>
           </div>
         </div>
-
         <div class="product-info-wrap">
           <p class="featured-label">✦ Produit Signature</p>
-          <!--[ÉDITER] Nom produit 1-->
           <h3 class="featured-name">Élixir Précieux<br>Signature</h3>
-          <!--[ÉDITER] Description courte produit 1-->
           <p class="featured-desc">
             Notre formule emblématique enrichie en beurre de karité
             et huile de ricin noire. Restaure, nourrit et illumine.
@@ -2446,182 +2217,145 @@
         </div>
       </article>
 
-      <!-- ── PRODUCT 2 ───────────────────────────────────────────── -->
-      <article class="product-card fade-in fade-in-delay-1" data-category="soin" aria-label="Masque Couronne">
+      <!-- ══════════════════════════════════════════
+           PRODUIT 2 — MASQUE
+           Nom du fichier : prod2-masque.jpg
+           Uploader dans  : images/prod2-masque.jpg
+      ══════════════════════════════════════════ -->
+      <article class="product-card fade-in fade-in-delay-1" data-category="soin" aria-label="Masque Couronne Royale">
         <span class="product-badge limited">Stock Limité</span>
-
         <div class="product-img-wrap">
-          <div class="product-img-placeholder">
-            <!--
-              ╔══════════════════════════════════════╗
-              ║  [ IMAGE PRODUIT 2 — MASQUE ]        ║
-              ║  Remplacer par: <img src="prod2.jpg">║
-              ╚══════════════════════════════════════╝
-            -->
-            <div class="product-img-icon">✨</div>
-            <p class="product-img-text">Image Produit</p>
-          </div>
+          <img
+            src="https://raw.githubusercontent.com/lavrizetwal/complexe/main/images/prod2-masque.jpg"
+            alt="Masque Couronne Royale"
+          />
           <div class="product-overlay">
-            <button class="product-quick-btn" onclick="addToCart('Masque Couronne Royale')" aria-label="Ajouter au panier">
+            <button class="product-quick-btn" onclick="addToCart('Masque Couronne Royale')">
               Ajouter
             </button>
           </div>
         </div>
-
         <div class="product-info">
-          <!--[ÉDITER] Nom produit 2-->
           <h3 class="product-name">Masque Couronne<br>Royale</h3>
-          <!--[ÉDITER] Bénéfice produit 2-->
           <p class="product-benefit">Nutrition intense 72h · Beurre de cacao & aloe vera</p>
           <div class="product-hair-types">
             <span class="product-type-tag">4B</span>
             <span class="product-type-tag">4C</span>
           </div>
-          <!--[ÉDITER] Effet de transformation produit 2-->
           <p class="product-effect">Boucles redéfinies</p>
         </div>
-
         <div class="product-footer">
-          <!--[ÉDITER] Prix produit 2-->
           <span class="product-price">3 500 HTG</span>
           <span class="product-stock">2 restants</span>
         </div>
       </article>
 
-      <!-- ── PRODUCT 3 ───────────────────────────────────────────── -->
-      <article class="product-card fade-in fade-in-delay-2" data-category="style" aria-label="Crème Définissante">
-
+      <!-- ══════════════════════════════════════════
+           PRODUIT 3 — CRÈME
+           Nom du fichier : prod3-creme.jpg
+           Uploader dans  : images/prod3-creme.jpg
+      ══════════════════════════════════════════ -->
+      <article class="product-card fade-in fade-in-delay-2" data-category="style" aria-label="Crème Définissante Luxe">
         <div class="product-img-wrap">
-          <div class="product-img-placeholder">
-            <!--
-              ╔══════════════════════════════════════╗
-              ║  [ IMAGE PRODUIT 3 — CRÈME ]         ║
-              ║  Remplacer par: <img src="prod3.jpg">║
-              ╚══════════════════════════════════════╝
-            -->
-            <div class="product-img-icon">💫</div>
-            <p class="product-img-text">Image Produit</p>
-          </div>
+          <img
+            src="https://raw.githubusercontent.com/lavrizetwal/complexe/main/images/prod3-creme.jpg"
+            alt="Crème Définissante Luxe"
+          />
           <div class="product-overlay">
-            <button class="product-quick-btn" onclick="addToCart('Crème Définissante Luxe')" aria-label="Ajouter au panier">
+            <button class="product-quick-btn" onclick="addToCart('Crème Définissante Luxe')">
               Ajouter
             </button>
           </div>
         </div>
-
         <div class="product-info">
-          <!--[ÉDITER] Nom produit 3-->
           <h3 class="product-name">Crème Définissante<br>Luxe</h3>
-          <!--[ÉDITER] Bénéfice produit 3-->
           <p class="product-benefit">Définition & brillance · Sans résidu</p>
           <div class="product-hair-types">
             <span class="product-type-tag">3C</span>
             <span class="product-type-tag">4A</span>
           </div>
-          <!--[ÉDITER] Effet produit 3-->
           <p class="product-effect">Brillance dorée</p>
         </div>
-
         <div class="product-footer">
-          <!--[ÉDITER] Prix produit 3-->
           <span class="product-price">2 800 HTG</span>
           <span class="product-stock in-stock">En stock</span>
         </div>
       </article>
 
-      <!-- ── PRODUCT 4 ───────────────────────────────────────────── -->
-      <article class="product-card fade-in fade-in-delay-3" data-category="traitement" aria-label="Sérum Réparateur">
+      <!-- ══════════════════════════════════════════
+           PRODUIT 4 — SÉRUM
+           Nom du fichier : prod4-serum.jpg
+           Uploader dans  : images/prod4-serum.jpg
+      ══════════════════════════════════════════ -->
+      <article class="product-card fade-in fade-in-delay-3" data-category="traitement" aria-label="Sérum Réparateur Nuit">
         <span class="product-badge">Nouveau</span>
-
         <div class="product-img-wrap">
-          <div class="product-img-placeholder">
-            <!--
-              ╔══════════════════════════════════════╗
-              ║  [ IMAGE PRODUIT 4 — SÉRUM ]         ║
-              ║  Remplacer par: <img src="prod4.jpg">║
-              ╚══════════════════════════════════════╝
-            -->
-            <div class="product-img-icon">🔬</div>
-            <p class="product-img-text">Image Produit</p>
-          </div>
+          <img
+            src="https://raw.githubusercontent.com/lavrizetwal/complexe/main/images/prod4-serum.jpg"
+            alt="Sérum Réparateur Nuit"
+          />
           <div class="product-overlay">
-            <button class="product-quick-btn" onclick="addToCart('Sérum Réparateur Nuit')" aria-label="Ajouter au panier">
+            <button class="product-quick-btn" onclick="addToCart('Sérum Réparateur Nuit')">
               Ajouter
             </button>
           </div>
         </div>
-
         <div class="product-info">
-          <!--[ÉDITER] Nom produit 4-->
           <h3 class="product-name">Sérum Réparateur<br>Nuit</h3>
-          <!--[ÉDITER] Bénéfice produit 4-->
           <p class="product-benefit">Reconstruction nocturne · Kératine végétale</p>
           <div class="product-hair-types">
             <span class="product-type-tag">Tous types</span>
           </div>
-          <!--[ÉDITER] Effet produit 4-->
           <p class="product-effect">+80% résistance</p>
         </div>
-
         <div class="product-footer">
-          <!--[ÉDITER] Prix produit 4-->
           <span class="product-price">4 200 HTG</span>
           <span class="product-stock in-stock">En stock</span>
         </div>
       </article>
 
-      <!-- ── PRODUCT 5 ───────────────────────────────────────────── -->
-      <article class="product-card fade-in fade-in-delay-4" data-category="soin" aria-label="Huile Précieuse">
-
+      <!-- ══════════════════════════════════════════
+           PRODUIT 5 — HUILE
+           Nom du fichier : prod5-huile.jpg
+           Uploader dans  : images/prod5-huile.jpg
+      ══════════════════════════════════════════ -->
+      <article class="product-card fade-in fade-in-delay-4" data-category="soin" aria-label="Huile Précieuse 7 Plantes">
         <div class="product-img-wrap">
-          <div class="product-img-placeholder">
-            <!--
-              ╔══════════════════════════════════════╗
-              ║  [ IMAGE PRODUIT 5 — HUILE ]         ║
-              ║  Remplacer par: <img src="prod5.jpg">║
-              ╚══════════════════════════════════════╝
-            -->
-            <div class="product-img-icon">🌺</div>
-            <p class="product-img-text">Image Produit</p>
-          </div>
+          <img
+            src="https://raw.githubusercontent.com/lavrizetwal/complexe/main/images/prod5-huile.jpg"
+            alt="Huile Précieuse 7 Plantes"
+          />
           <div class="product-overlay">
-            <button class="product-quick-btn" onclick="addToCart('Huile Précieuse 7 Plantes')" aria-label="Ajouter au panier">
+            <button class="product-quick-btn" onclick="addToCart('Huile Précieuse 7 Plantes')">
               Ajouter
             </button>
           </div>
         </div>
-
         <div class="product-info">
-          <!--[ÉDITER] Nom produit 5-->
           <h3 class="product-name">Huile Précieuse<br>7 Plantes</h3>
-          <!--[ÉDITER] Bénéfice produit 5-->
           <p class="product-benefit">Mélange d'huiles rares · Éclat immédiat</p>
           <div class="product-hair-types">
             <span class="product-type-tag">4A</span>
             <span class="product-type-tag">4C</span>
           </div>
-          <!--[ÉDITER] Effet produit 5-->
           <p class="product-effect">Éclat miroir</p>
         </div>
-
         <div class="product-footer">
-          <!--[ÉDITER] Prix produit 5-->
           <span class="product-price">3 100 HTG</span>
           <span class="product-stock">5 restants</span>
         </div>
       </article>
 
-    </div><!-- /products-grid -->
+    </div>
 
-  </section><!-- /SECTION 4: PRODUCTS -->
+  </section><!-- /SECTION 4 -->
 
 
   <!-- ============================================================
-       SECTION 5: TRANSFORMATION — BEFORE / AFTER
+       SECTION 5: TRANSFORMATION — AVANT / APRÈS
   ============================================================ -->
   <section class="transformation" id="transformation" aria-label="Transformations avant et après">
 
-    <!-- Section header -->
     <div class="fade-in">
       <p class="section-label">Résultats Réels</p>
       <span class="gold-line" aria-hidden="true"></span>
@@ -2629,64 +2363,58 @@
         Votre transformation<br>commence maintenant
       </h2>
       <p class="transformation-subtitle">
-        <!--[ÉDITER] Sous-titre section transformation-->
         Des résultats visibles dès la première application
       </p>
     </div>
 
-    <!-- Before / After slider -->
     <div class="ba-container fade-in fade-in-delay-1" aria-label="Comparaison avant et après">
       <div class="ba-images" id="baImages"
            role="img"
-           aria-label="Glissez pour comparer avant et après le traitement"
+           aria-label="Glissez pour comparer avant et après"
            tabindex="0">
 
-        <!-- BEFORE image (bottom layer) -->
+        <!-- ══════════════════════════════════════════
+             IMAGE AVANT
+             Nom du fichier : avant.jpg
+             Uploader dans  : images/avant.jpg
+        ══════════════════════════════════════════ -->
         <div class="ba-before" aria-hidden="true">
-          <!--
-            ╔════════════════════════════════════════╗
-            ║  [ IMAGE AVANT — AVANT TRAITEMENT ]    ║
-            ║  Remplacer par: <img src="avant.jpg"/> ║
-            ║  Dimensions: 360×480px minimum         ║
-            ╚════════════════════════════════════════╝
-          -->
-          <div class="ba-icon">◈</div>
-          <p class="ba-label">Avant</p>
+          <img
+            src="https://raw.githubusercontent.com/lavrizetwal/complexe/main/images/avant.jpg"
+            alt="Cheveux avant traitement"
+          />
+          <span class="ba-label">Avant</span>
         </div>
 
-        <!-- AFTER image (top layer, clipped) -->
+        <!-- ══════════════════════════════════════════
+             IMAGE APRÈS
+             Nom du fichier : apres.jpg
+             Uploader dans  : images/apres.jpg
+        ══════════════════════════════════════════ -->
         <div class="ba-after" id="baAfter" aria-hidden="true">
-          <!--
-            ╔════════════════════════════════════════╗
-            ║  [ IMAGE APRÈS — APRÈS TRAITEMENT ]    ║
-            ║  Remplacer par: <img src="apres.jpg"/> ║
-            ║  Dimensions: 360×480px minimum         ║
-            ╚════════════════════════════════════════╝
-          -->
-          <div class="ba-icon" style="color:var(--gold);">✦</div>
-          <p class="ba-label" style="color:var(--gold-light);">Après</p>
+          <img
+            src="https://raw.githubusercontent.com/lavrizetwal/complexe/main/images/apres.jpg"
+            alt="Cheveux après traitement"
+          />
+          <span class="ba-label" style="color:var(--gold-light);">Après</span>
         </div>
 
-        <!-- Draggable divider -->
         <div class="ba-divider" id="baDivider" aria-hidden="true">
           <div class="ba-handle">◀▶</div>
         </div>
 
       </div>
 
-      <!-- Captions -->
       <div class="ba-captions">
         <span class="ba-caption">Avant traitement</span>
         <span class="ba-caption after">Après 4 semaines ✦</span>
       </div>
     </div>
 
-    <!-- Transformation steps -->
     <div class="transform-steps fade-in fade-in-delay-2">
       <div class="transform-step">
         <div class="step-number">01</div>
         <div>
-          <!--[ÉDITER] Étape 1 de transformation-->
           <p class="step-title">Nettoyer</p>
           <p class="step-text">Commencez par notre Shampoing Douceur pour préparer le cuir chevelu</p>
         </div>
@@ -2694,7 +2422,6 @@
       <div class="transform-step">
         <div class="step-number">02</div>
         <div>
-          <!--[ÉDITER] Étape 2 de transformation-->
           <p class="step-title">Nourrir</p>
           <p class="step-text">Appliquez le Masque Couronne Royale pendant 15 à 30 minutes</p>
         </div>
@@ -2702,28 +2429,24 @@
       <div class="transform-step">
         <div class="step-number">03</div>
         <div>
-          <!--[ÉDITER] Étape 3 de transformation-->
           <p class="step-title">Sublimer</p>
           <p class="step-text">Finalisez avec l'Élixir Précieux pour un éclat signature</p>
         </div>
       </div>
     </div>
 
-  </section><!-- /SECTION 5: TRANSFORMATION -->
+  </section><!-- /SECTION 5 -->
 
 
   <!-- ============================================================
-       SECTION 6: SOCIAL PROOF — REVIEWS
+       SECTION 6: REVIEWS
   ============================================================ -->
-  <section class="reviews" id="avis" aria-label="Avis et témoignages de clientes">
+  <section class="reviews" id="avis" aria-label="Avis et témoignages">
 
-    <!-- Section header -->
     <div class="reviews-header fade-in">
       <p class="section-label">Témoignages</p>
       <span class="gold-line" aria-hidden="true"></span>
       <h2 class="reviews-title">Elles ont dit oui<br>à leur couronne</h2>
-
-      <!-- Aggregate rating -->
       <div class="reviews-aggregate">
         <span class="aggregate-score">4.9</span>
         <div class="aggregate-meta">
@@ -2733,157 +2456,118 @@
       </div>
     </div>
 
-    <!-- Reviews carousel -->
     <div class="reviews-track-wrap" role="list" aria-label="Avis clients">
       <div class="reviews-track" id="reviewsTrack">
 
-        <!-- ── REVIEW 1 ─────────────────────────────────────────── -->
         <article class="review-card" role="listitem">
           <div class="review-header">
             <div class="reviewer-avatar" aria-hidden="true">👩🏾</div>
             <div class="reviewer-info">
-              <!--[ÉDITER] Nom cliente 1-->
               <p class="reviewer-name">Chloé M.</p>
-              <!--[ÉDITER] Localisation cliente 1-->
               <p class="reviewer-location">Port-au-Prince, Haïti</p>
             </div>
             <span class="verified-badge">✓ Vérifié</span>
           </div>
-          <div class="review-stars">
-            <div class="stars" aria-label="5 étoiles">★★★★★</div>
-          </div>
-          <!--[ÉDITER] Produit utilisé par cliente 1-->
+          <div class="review-stars"><div class="stars">★★★★★</div></div>
           <p class="review-product">✦ Élixir Précieux Signature</p>
-          <!--[ÉDITER] Texte de l'avis cliente 1-->
           <p class="review-text">
-            "Je n'avais jamais vu mes cheveux aussi brillants. 
-            Après 2 semaines, mes boucles sont définies, 
+            "Je n'avais jamais vu mes cheveux aussi brillants.
+            Après 2 semaines, mes boucles sont définies,
             hydratées et magnifiques. C'est du vrai luxe !"
           </p>
           <p class="review-date">Décembre 2024</p>
         </article>
 
-        <!-- ── REVIEW 2 ─────────────────────────────────────────── -->
         <article class="review-card" role="listitem">
           <div class="review-header">
             <div class="reviewer-avatar" aria-hidden="true">👩🏿</div>
             <div class="reviewer-info">
-              <!--[ÉDITER] Nom cliente 2-->
               <p class="reviewer-name">Nadège B.</p>
-              <!--[ÉDITER] Localisation cliente 2-->
               <p class="reviewer-location">Cap-Haïtien, Haïti</p>
             </div>
             <span class="verified-badge">✓ Vérifié</span>
           </div>
-          <div class="review-stars">
-            <div class="stars" aria-label="5 étoiles">★★★★★</div>
-          </div>
-          <!--[ÉDITER] Produit utilisé par cliente 2-->
+          <div class="review-stars"><div class="stars">★★★★★</div></div>
           <p class="review-product">✦ Masque Couronne Royale</p>
-          <!--[ÉDITER] Texte de l'avis cliente 2-->
           <p class="review-text">
-            "Le Masque Couronne a transformé mes cheveux 4C. 
-            Plus jamais de casse, mes cheveux poussent et 
+            "Le Masque Couronne a transformé mes cheveux 4C.
+            Plus jamais de casse, mes cheveux poussent et
             restent hydratés toute la semaine. Incroyable !"
           </p>
           <p class="review-date">Novembre 2024</p>
         </article>
 
-        <!-- ── REVIEW 3 ─────────────────────────────────────────── -->
         <article class="review-card" role="listitem">
           <div class="review-header">
             <div class="reviewer-avatar" aria-hidden="true">👩🏾</div>
             <div class="reviewer-info">
-              <!--[ÉDITER] Nom cliente 3-->
               <p class="reviewer-name">Isabelle J.</p>
-              <!--[ÉDITER] Localisation cliente 3-->
               <p class="reviewer-location">Pétion-Ville, Haïti</p>
             </div>
             <span class="verified-badge">✓ Vérifié</span>
           </div>
-          <div class="review-stars">
-            <div class="stars" aria-label="5 étoiles">★★★★★</div>
-          </div>
-          <!--[ÉDITER] Produit utilisé par cliente 3-->
+          <div class="review-stars"><div class="stars">★★★★★</div></div>
           <p class="review-product">✦ Huile Précieuse 7 Plantes</p>
-          <!--[ÉDITER] Texte de l'avis cliente 3-->
           <p class="review-text">
-            "Cette huile sent divinement bon et mes cheveux 
-            naturels n'ont jamais été aussi souples. 
+            "Cette huile sent divinement bon et mes cheveux
+            naturels n'ont jamais été aussi souples.
             Le packaging est magnifique. Je commande en gros !"
           </p>
           <p class="review-date">Octobre 2024</p>
         </article>
 
-        <!-- ── REVIEW 4 ─────────────────────────────────────────── -->
         <article class="review-card" role="listitem">
           <div class="review-header">
             <div class="reviewer-avatar" aria-hidden="true">👩🏿</div>
             <div class="reviewer-info">
-              <!--[ÉDITER] Nom cliente 4-->
               <p class="reviewer-name">Roseline F.</p>
-              <!--[ÉDITER] Localisation cliente 4-->
               <p class="reviewer-location">Jacmel, Haïti</p>
             </div>
             <span class="verified-badge">✓ Vérifié</span>
           </div>
-          <div class="review-stars">
-            <div class="stars" aria-label="4 étoiles">★★★★★</div>
-          </div>
-          <!--[ÉDITER] Produit utilisé par cliente 4-->
+          <div class="review-stars"><div class="stars">★★★★★</div></div>
           <p class="review-product">✦ Sérum Réparateur Nuit</p>
-          <!--[ÉDITER] Texte de l'avis cliente 4-->
           <p class="review-text">
-            "Je l'applique le soir et le matin mes cheveux 
-            sont transformés. La casse a diminué de 80%. 
+            "Je l'applique le soir et le matin mes cheveux
+            sont transformés. La casse a diminué de 80%.
             Complexe est maintenant mon secret beauté !"
           </p>
           <p class="review-date">Décembre 2024</p>
         </article>
 
-        <!-- ── REVIEW 5 ─────────────────────────────────────────── -->
         <article class="review-card" role="listitem">
           <div class="review-header">
             <div class="reviewer-avatar" aria-hidden="true">👩🏾</div>
             <div class="reviewer-info">
-              <!--[ÉDITER] Nom cliente 5-->
               <p class="reviewer-name">Marlène P.</p>
-              <!--[ÉDITER] Localisation cliente 5-->
               <p class="reviewer-location">Gonaïves, Haïti</p>
             </div>
             <span class="verified-badge">✓ Vérifié</span>
           </div>
-          <div class="review-stars">
-            <div class="stars" aria-label="5 étoiles">★★★★★</div>
-          </div>
-          <!--[ÉDITER] Produit utilisé par cliente 5-->
+          <div class="review-stars"><div class="stars">★★★★★</div></div>
           <p class="review-product">✦ Crème Définissante Luxe</p>
-          <!--[ÉDITER] Texte de l'avis cliente 5-->
           <p class="review-text">
-            "Mes boucles 3C sont parfaitement définies sans 
-            effet carton. La crème est légère, sent bon 
+            "Mes boucles 3C sont parfaitement définies sans
+            effet carton. La crème est légère, sent bon
             et tient toute la journée. Luxe accessible !"
           </p>
           <p class="review-date">Janvier 2025</p>
         </article>
 
-      </div><!-- /reviews-track -->
+      </div>
     </div>
 
-    <!-- Dots navigation -->
     <div class="reviews-dots" role="tablist" aria-label="Navigation avis">
-      <button class="reviews-dot active" role="tab" aria-selected="true" onclick="scrollToReview(0)" aria-label="Avis 1"></button>
-      <button class="reviews-dot" role="tab" onclick="scrollToReview(1)" aria-label="Avis 2"></button>
-      <button class="reviews-dot" role="tab" onclick="scrollToReview(2)" aria-label="Avis 3"></button>
-      <button class="reviews-dot" role="tab" onclick="scrollToReview(3)" aria-label="Avis 4"></button>
-      <button class="reviews-dot" role="tab" onclick="scrollToReview(4)" aria-label="Avis 5"></button>
+      <button class="reviews-dot active" role="tab" aria-selected="true" onclick="scrollToReview(0)"></button>
+      <button class="reviews-dot" role="tab" onclick="scrollToReview(1)"></button>
+      <button class="reviews-dot" role="tab" onclick="scrollToReview(2)"></button>
+      <button class="reviews-dot" role="tab" onclick="scrollToReview(3)"></button>
+      <button class="reviews-dot" role="tab" onclick="scrollToReview(4)"></button>
     </div>
 
-    <!-- Press strip -->
     <div class="press-strip fade-in">
       <p class="press-label">Mentionné dans</p>
       <div class="press-logos">
-        <!--[ÉDITER] Logos de presse — Remplacer par vraies mentions-->
         <span class="press-logo">Beauté Haiti</span>
         <span class="press-logo">Caribbean Beauty</span>
         <span class="press-logo">Vogue Caraïbes</span>
@@ -2891,59 +2575,42 @@
       </div>
     </div>
 
-  </section><!-- /SECTION 6: REVIEWS -->
+  </section><!-- /SECTION 6 -->
 
 
   <!-- ============================================================
        SECTION 7: CALL TO ACTION
   ============================================================ -->
-  <section class="cta-section" id="commande" aria-label="Appel à l'action — Commander">
+  <section class="cta-section" id="commande" aria-label="Commander">
 
-    <!-- Large background text (decorative) -->
     <div class="cta-bg-text" aria-hidden="true">LUXE</div>
-
-    <!-- Background orb -->
     <div class="cta-orb" aria-hidden="true"></div>
 
     <div class="cta-content">
-
-      <!-- Eyebrow -->
       <p class="cta-eyebrow fade-in">✦ Édition Exclusive · Haïti ✦</p>
-
-      <!-- Main CTA headline -->
       <h2 class="cta-title fade-in fade-in-delay-1">
         Votre couronne<br>mérite le <em>meilleur</em>
       </h2>
-
-      <!-- Supporting text — EDITABLE -->
       <p class="cta-text fade-in fade-in-delay-2">
-        <!--[ÉDITER] Texte de l'appel à l'action — À personnaliser-->
         Rejoignez des milliers de femmes haïtiennes qui ont choisi
         de révéler la beauté naturelle de leurs cheveux.
         Accédez à notre collection exclusive — quantités limitées.
       </p>
-
-      <!-- Urgency indicator -->
       <div class="cta-urgency fade-in fade-in-delay-3">
         <div class="urgency-dot"></div>
         <span class="urgency-text">Stock Limité — Commandez avant Épuisement</span>
       </div>
-
-      <!-- CTA buttons -->
       <div class="cta-btn-wrap fade-in fade-in-delay-4">
-        <a href="#produits" class="cta-btn-primary" aria-label="Accéder aux produits — Commander maintenant">
+        <a href="#produits" class="cta-btn-primary">
           Accéder aux Produits
         </a>
-        <a href="#storytelling" class="btn-luxury-ghost" aria-label="En savoir plus sur notre histoire">
+        <a href="#storytelling" class="btn-luxury-ghost">
           <span>Notre Histoire</span>
         </a>
       </div>
-
-      <p class="cta-note fade-in" style="margin-top: 1rem;">
+      <p class="cta-note fade-in" style="margin-top:1rem;">
         Livraison dans tout Haïti · Paiement sécurisé · Satisfaction garantie
       </p>
-
-      <!-- Guarantee icons -->
       <div class="cta-guarantees fade-in">
         <div class="guarantee-item">
           <span class="guarantee-icon">🔒</span>
@@ -2962,20 +2629,15 @@
           <span class="guarantee-text">Formules<br>Naturelles</span>
         </div>
       </div>
-
     </div>
 
-  </section><!-- /SECTION 7: CTA -->
+  </section><!-- /SECTION 7 -->
 
 
-  <!-- ============================================================
-       FOOTER
-  ============================================================ -->
+  <!-- FOOTER -->
   <footer class="footer" role="contentinfo">
-
     <div class="footer-logo">Complexe Produits de Cheveux</div>
     <p class="footer-tagline">Le luxe capillaire haïtien · Depuis 2024</p>
-
     <nav class="footer-links" aria-label="Liens du pied de page">
       <span class="footer-link">Collection</span>
       <span class="footer-link">Notre Histoire</span>
@@ -2983,13 +2645,10 @@
       <span class="footer-link">Témoignages</span>
       <span class="footer-link">Contact</span>
       <span class="footer-link">Livraison</span>
-      <span class="footer-link">Politique de confidentialité</span>
+      <span class="footer-link">Confidentialité</span>
     </nav>
-
     <div class="footer-bottom">
-      <p class="footer-copy">
-        © 2024–2025 Complexe Produits de Cheveux · Tous droits réservés · Haïti
-      </p>
+      <p class="footer-copy">© 2024–2025 Complexe Produits de Cheveux · Tous droits réservés · Haïti</p>
       <div class="footer-socials" aria-label="Réseaux sociaux">
         <button class="footer-social" aria-label="Instagram">IG</button>
         <button class="footer-social" aria-label="Facebook">FB</button>
@@ -2997,56 +2656,39 @@
         <button class="footer-social" aria-label="WhatsApp">WA</button>
       </div>
     </div>
-
   </footer>
 
 
   <!-- ============================================================
-       JAVASCRIPT — ALL FUNCTIONALITY
+       JAVASCRIPT
   ============================================================ -->
   <script>
 
-    /* ─────────────────────────────────────────────────────────────
-       LOADING SCREEN
-    ───────────────────────────────────────────────────────────── */
+    /* LOADER */
     window.addEventListener('load', () => {
       setTimeout(() => {
         const loader = document.getElementById('loader');
         if (loader) {
           loader.classList.add('hidden');
-          // Remove from DOM after transition
           setTimeout(() => loader.remove(), 700);
         }
-        // Show toast notification after load
         setTimeout(showToast, 3500);
       }, 1600);
     });
 
-
-    /* ─────────────────────────────────────────────────────────────
-       NAVIGATION — SCROLL STATE
-    ───────────────────────────────────────────────────────────── */
+    /* NAV SCROLL */
     const nav = document.getElementById('nav');
-
     window.addEventListener('scroll', () => {
-      if (window.scrollY > 60) {
-        nav.classList.add('scrolled');
-      } else {
-        nav.classList.remove('scrolled');
-      }
+      nav.classList.toggle('scrolled', window.scrollY > 60);
     }, { passive: true });
 
-
-    /* ─────────────────────────────────────────────────────────────
-       PARTICLE SYSTEM (lightweight canvas)
-    ───────────────────────────────────────────────────────────── */
+    /* PARTICLES */
     (function initParticles() {
       const canvas = document.getElementById('particles-canvas');
       if (!canvas) return;
       const ctx = canvas.getContext('2d');
-
       let particles = [];
-      const PARTICLE_COUNT = 40; // Low count for mobile performance
+      const COUNT = 40;
 
       function resize() {
         canvas.width  = window.innerWidth;
@@ -3055,33 +2697,26 @@
       resize();
       window.addEventListener('resize', resize, { passive: true });
 
-      // Particle constructor
-      function Particle() {
-        this.reset();
-      }
-
+      function Particle() { this.reset(); }
       Particle.prototype.reset = function() {
-        this.x     = Math.random() * canvas.width;
-        this.y     = Math.random() * canvas.height;
-        this.size  = Math.random() * 1.5 + 0.5;
-        this.speedX = (Math.random() - 0.5) * 0.3;
-        this.speedY = -Math.random() * 0.4 - 0.1;
+        this.x       = Math.random() * canvas.width;
+        this.y       = Math.random() * canvas.height;
+        this.size    = Math.random() * 1.5 + 0.5;
+        this.speedX  = (Math.random() - 0.5) * 0.3;
+        this.speedY  = -Math.random() * 0.4 - 0.1;
         this.opacity = Math.random() * 0.4 + 0.1;
-        // Alternate between gold and violet particles
-        this.color = Math.random() > 0.5
-          ? `rgba(201, 168, 76, ${this.opacity})`
-          : `rgba(155, 48, 255, ${this.opacity * 0.5})`;
-        this.life  = 1;
-        this.decay = Math.random() * 0.002 + 0.001;
+        this.color   = Math.random() > 0.5
+          ? `rgba(201,168,76,${this.opacity})`
+          : `rgba(155,48,255,${this.opacity * 0.5})`;
+        this.life    = 1;
+        this.decay   = Math.random() * 0.002 + 0.001;
       };
-
       Particle.prototype.update = function() {
         this.x += this.speedX;
         this.y += this.speedY;
         this.life -= this.decay;
         if (this.life <= 0 || this.y < -10) this.reset();
       };
-
       Particle.prototype.draw = function() {
         ctx.save();
         ctx.globalAlpha = this.life * this.opacity;
@@ -3092,15 +2727,12 @@
         ctx.restore();
       };
 
-      // Create particles
-      for (let i = 0; i < PARTICLE_COUNT; i++) {
+      for (let i = 0; i < COUNT; i++) {
         const p = new Particle();
-        // Stagger initial positions
         p.y = Math.random() * canvas.height;
         particles.push(p);
       }
 
-      // Animation loop
       let animId;
       function animate() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -3109,88 +2741,57 @@
       }
       animate();
 
-      // Pause when tab is hidden (battery optimization)
       document.addEventListener('visibilitychange', () => {
-        if (document.hidden) {
-          cancelAnimationFrame(animId);
-        } else {
-          animate();
-        }
+        if (document.hidden) cancelAnimationFrame(animId);
+        else animate();
       });
-
     })();
 
-
-    /* ─────────────────────────────────────────────────────────────
-       INTERSECTION OBSERVER — FADE-IN ANIMATIONS
-    ───────────────────────────────────────────────────────────── */
-    const fadeEls = document.querySelectorAll('.fade-in');
-
+    /* FADE-IN OBSERVER */
     const fadeObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
-          // Unobserve after triggering (performance)
           fadeObserver.unobserve(entry.target);
         }
       });
-    }, {
-      threshold: 0.12,
-      rootMargin: '0px 0px -40px 0px'
-    });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
 
-    fadeEls.forEach(el => fadeObserver.observe(el));
+    document.querySelectorAll('.fade-in').forEach(el => fadeObserver.observe(el));
 
-
-    /* ─────────────────────────────────────────────────────────────
-       PARALLAX — IMMERSION SECTION
-    ───────────────────────────────────────────────────────────── */
+    /* PARALLAX */
     const parallaxBg = document.getElementById('parallaxBg');
-
-    function handleParallax() {
+    window.addEventListener('scroll', () => {
       if (!parallaxBg) return;
-      const rect    = parallaxBg.parentElement.getBoundingClientRect();
-      const viewH   = window.innerHeight;
+      const rect     = parallaxBg.parentElement.getBoundingClientRect();
+      const viewH    = window.innerHeight;
       const progress = 1 - (rect.top + rect.height) / (viewH + rect.height);
-      const offset   = (progress - 0.5) * 60;
-      parallaxBg.style.transform = `translateY(${offset}px)`;
-    }
+      parallaxBg.style.transform = `translateY(${(progress - 0.5) * 60}px)`;
+    }, { passive: true });
 
-    window.addEventListener('scroll', handleParallax, { passive: true });
-
-
-    /* ─────────────────────────────────────────────────────────────
-       BEFORE / AFTER SLIDER
-    ───────────────────────────────────────────────────────────── */
+    /* BEFORE / AFTER SLIDER */
     (function initBASlider() {
       const baImages  = document.getElementById('baImages');
       const baAfter   = document.getElementById('baAfter');
       const baDivider = document.getElementById('baDivider');
-
       if (!baImages || !baAfter || !baDivider) return;
 
       let isDragging = false;
+      let autoPos = 50, autoDir = -1, autoAnim;
 
-      // Start animation to show interactivity
-      let autoPos = 50;
-      let autoDir = -1;
-      let autoAnim;
-
-      function setPosition(percent) {
-        percent = Math.max(5, Math.min(95, percent));
-        baDivider.style.left      = percent + '%';
-        baAfter.style.clipPath    = `inset(0 ${100 - percent}% 0 0)`;
+      function setPosition(pct) {
+        pct = Math.max(5, Math.min(95, pct));
+        baDivider.style.left   = pct + '%';
+        baAfter.style.clipPath = `inset(0 ${100 - pct}% 0 0)`;
       }
 
       function autoAnimate() {
         autoPos += autoDir * 0.4;
-        if (autoPos <= 15) { autoDir = 1; }
-        if (autoPos >= 85) { autoDir = -1; }
+        if (autoPos <= 15) autoDir = 1;
+        if (autoPos >= 85) autoDir = -1;
         setPosition(autoPos);
         autoAnim = requestAnimationFrame(autoAnimate);
       }
-
-      // Start auto animation
       autoAnim = requestAnimationFrame(autoAnimate);
 
       function getPercent(clientX) {
@@ -3204,54 +2805,38 @@
         document.body.style.userSelect = 'none';
         e.preventDefault();
       }
-
       function doDrag(e) {
         if (!isDragging) return;
         const clientX = e.touches ? e.touches[0].clientX : e.clientX;
         setPosition(getPercent(clientX));
       }
-
       function stopDrag() {
         if (!isDragging) return;
         isDragging = false;
         document.body.style.userSelect = '';
       }
 
-      // Mouse events
       baDivider.addEventListener('mousedown', startDrag);
       baImages.addEventListener('mousedown',  startDrag);
       window.addEventListener('mousemove', doDrag);
       window.addEventListener('mouseup',   stopDrag);
 
-      // Touch events
       baDivider.addEventListener('touchstart', startDrag, { passive: false });
       baImages.addEventListener('touchstart',  startDrag, { passive: false });
       window.addEventListener('touchmove', doDrag, { passive: true });
       window.addEventListener('touchend',  stopDrag);
 
-      // Keyboard accessibility
       baImages.addEventListener('keydown', (e) => {
         cancelAnimationFrame(autoAnim);
-        if (e.key === 'ArrowLeft') {
-          autoPos = Math.max(5, autoPos - 5);
-          setPosition(autoPos);
-        }
-        if (e.key === 'ArrowRight') {
-          autoPos = Math.min(95, autoPos + 5);
-          setPosition(autoPos);
-        }
+        if (e.key === 'ArrowLeft') { autoPos = Math.max(5,  autoPos - 5); setPosition(autoPos); }
+        if (e.key === 'ArrowRight'){ autoPos = Math.min(95, autoPos + 5); setPosition(autoPos); }
       });
 
       setPosition(50);
-
     })();
 
-
-    /* ─────────────────────────────────────────────────────────────
-       PRODUCT FILTERS
-    ───────────────────────────────────────────────────────────── */
+    /* PRODUCT FILTERS */
     function filterProducts(btn, category) {
-      // Update active tab
       document.querySelectorAll('.filter-tab').forEach(t => {
         t.classList.remove('active');
         t.setAttribute('aria-selected', 'false');
@@ -3259,9 +2844,7 @@
       btn.classList.add('active');
       btn.setAttribute('aria-selected', 'true');
 
-      // Filter cards
-      const cards = document.querySelectorAll('.product-card');
-      cards.forEach(card => {
+      document.querySelectorAll('.product-card').forEach(card => {
         const cat = card.getAttribute('data-category');
         if (category === 'all' || cat === category) {
           card.style.display = '';
@@ -3269,34 +2852,27 @@
           card.style.transform = 'translateY(10px)';
           setTimeout(() => {
             card.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
-            card.style.opacity = '1';
-            card.style.transform = 'translateY(0)';
+            card.style.opacity    = '1';
+            card.style.transform  = 'translateY(0)';
           }, 50);
         } else {
-          card.style.opacity = '0';
+          card.style.opacity   = '0';
           card.style.transform = 'translateY(10px)';
           setTimeout(() => { card.style.display = 'none'; }, 400);
         }
       });
     }
 
-
-    /* ─────────────────────────────────────────────────────────────
-       ADD TO CART
-    ───────────────────────────────────────────────────────────── */
+    /* ADD TO CART */
     let cartTotal = 2;
-
     function addToCart(productName) {
       cartTotal++;
       const countEl = document.getElementById('cartCount');
       if (countEl) {
         countEl.textContent = cartTotal;
-        // Bounce animation
         countEl.style.transform = 'scale(1.5)';
         setTimeout(() => { countEl.style.transform = 'scale(1)'; }, 300);
       }
-
-      // Show confirmation toast
       const toast = document.getElementById('toast');
       if (toast) {
         toast.querySelector('.toast-title').textContent = '✦ Ajouté au panier';
@@ -3306,10 +2882,7 @@
       }
     }
 
-
-    /* ─────────────────────────────────────────────────────────────
-       TOAST NOTIFICATION (urgency)
-    ───────────────────────────────────────────────────────────── */
+    /* TOAST */
     function showToast() {
       const toast = document.getElementById('toast');
       if (!toast) return;
@@ -3319,52 +2892,37 @@
       setTimeout(() => toast.classList.remove('show'), 5000);
     }
 
-
-    /* ─────────────────────────────────────────────────────────────
-       REVIEWS CAROUSEL — DOT NAVIGATION
-    ───────────────────────────────────────────────────────────── */
+    /* REVIEWS DOTS */
     function scrollToReview(index) {
       const track = document.getElementById('reviewsTrack');
       if (!track) return;
-
       const cards = track.querySelectorAll('.review-card');
       if (!cards[index]) return;
-
-      const cardWidth = cards[0].offsetWidth + 16; // include gap
-      track.scrollTo({ left: index * cardWidth, behavior: 'smooth' });
-
-      // Update dots
+      track.scrollTo({ left: index * (cards[0].offsetWidth + 16), behavior: 'smooth' });
       document.querySelectorAll('.reviews-dot').forEach((dot, i) => {
         dot.classList.toggle('active', i === index);
         dot.setAttribute('aria-selected', i === index ? 'true' : 'false');
       });
     }
 
-    // Auto-update dots on scroll
     (function() {
       const track = document.getElementById('reviewsTrack');
       if (!track) return;
-
-      let scrollTimer;
+      let timer;
       track.addEventListener('scroll', () => {
-        clearTimeout(scrollTimer);
-        scrollTimer = setTimeout(() => {
-          const cards    = track.querySelectorAll('.review-card');
-          const cardW    = cards[0] ? cards[0].offsetWidth + 16 : 296;
-          const activeIdx = Math.round(track.scrollLeft / cardW);
-
+        clearTimeout(timer);
+        timer = setTimeout(() => {
+          const cards = track.querySelectorAll('.review-card');
+          const cardW = cards[0] ? cards[0].offsetWidth + 16 : 296;
+          const idx   = Math.round(track.scrollLeft / cardW);
           document.querySelectorAll('.reviews-dot').forEach((dot, i) => {
-            dot.classList.toggle('active', i === activeIdx);
-            dot.setAttribute('aria-selected', i === activeIdx ? 'true' : 'false');
+            dot.classList.toggle('active', i === idx);
           });
         }, 80);
       }, { passive: true });
     })();
 
-
-    /* ─────────────────────────────────────────────────────────────
-       SMOOTH ANCHOR SCROLLING (fallback for older mobile browsers)
-    ───────────────────────────────────────────────────────────── */
+    /* SMOOTH SCROLL */
     document.querySelectorAll('a[href^="#"]').forEach(link => {
       link.addEventListener('click', (e) => {
         const target = document.querySelector(link.getAttribute('href'));
@@ -3375,69 +2933,38 @@
       });
     });
 
-
-    /* ─────────────────────────────────────────────────────────────
-       HAIR STRAND ANIMATION — JS enhancement
-       (adds subtle wind-effect to hero strands on scroll)
-    ───────────────────────────────────────────────────────────── */
-    const strands = document.querySelectorAll('.hair-strand');
-
-    window.addEventListener('scroll', () => {
-      const scrollY = window.scrollY;
-      const maxScroll = window.innerHeight;
-      const progress = Math.min(scrollY / maxScroll, 1);
-
-      strands.forEach((strand, i) => {
-        const direction = i % 2 === 0 ? 1 : -1;
-        const sway = progress * direction * 3;
-        strand.style.transform = `rotate(${sway}deg)`;
-      });
-    }, { passive: true });
-
-
-    /* ─────────────────────────────────────────────────────────────
-       COUNTER ANIMATION — Stats in immersion section
-    ───────────────────────────────────────────────────────────── */
+    /* COUNTER ANIMATION */
     (function initCounters() {
-      const stats = document.querySelectorAll('.stat-number');
-      const targets = [98, 5000, 100];
+      const stats    = document.querySelectorAll('.stat-number');
+      const targets  = [98, 5000, 100];
       const suffixes = ['%', '+', '%'];
-      let animated = false;
+      let animated   = false;
 
       function animateCounters() {
         if (animated) return;
         animated = true;
         stats.forEach((el, i) => {
-          const target = targets[i];
-          const suffix = suffixes[i];
+          const target   = targets[i];
+          const suffix   = suffixes[i];
           const duration = 1800;
-          const startTime = performance.now();
-
+          const start    = performance.now();
           function tick(now) {
-            const elapsed  = now - startTime;
-            const progress = Math.min(elapsed / duration, 1);
-            // Ease-out cubic
-            const eased = 1 - Math.pow(1 - progress, 3);
-            const current = Math.floor(eased * target);
-            el.textContent = (i === 1 ? (current >= 1000 ? '5K' : current) : current) + suffix;
+            const progress = Math.min((now - start) / duration, 1);
+            const eased    = 1 - Math.pow(1 - progress, 3);
+            const current  = Math.floor(eased * target);
+            el.textContent = (i === 1 && current >= 1000 ? '5K' : current) + suffix;
             if (progress < 1) requestAnimationFrame(tick);
           }
           requestAnimationFrame(tick);
         });
       }
 
-      // Trigger when immersion section is in view
       const immersion = document.getElementById('immersion');
       if (!immersion) return;
-
-      const counterObserver = new IntersectionObserver((entries) => {
-        if (entries[0].isIntersecting) {
-          animateCounters();
-          counterObserver.disconnect();
-        }
+      const obs = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) { animateCounters(); obs.disconnect(); }
       }, { threshold: 0.3 });
-
-      counterObserver.observe(immersion);
+      obs.observe(immersion);
     })();
 
   </script>
