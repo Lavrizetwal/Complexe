@@ -1,0 +1,11 @@
+images/
+├── model-hero.jpg        ← Photo modèle (Section Héro)
+├── prod1-elixir.jpg      ← Photo Élixir Précieux
+├── prod2-masque.jpg      ← Photo Masque Couronne
+├── prod3-creme.jpg       ← Photo Crème Définissante
+├── prod4-serum.jpg       ← Photo Sérum Réparateur
+├── prod5-huile.jpg       ← Photo Huile 7 Plantes
+├── story1-origines.jpg   ← Photo Storytelling 1
+├── story2-science.jpg    ← Photo Storytelling 2
+├── avant.jpg             ← Photo AVANT traitement
+└── apres.jpg             ← Photo APRÈS traitement
