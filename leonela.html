@@ -1,0 +1,1663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nails by Leonela</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --pink: #f4a7b9;
+            --dark-pink: #e8789a;
+            --rose: #c94b7b;
+            --light: #fff5f8;
+            --white: #ffffff;
+            --dark: #2d1b26;
+            --gray: #7a6b72;
+            --gold: #d4a853;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        /* ===== SCROLLBAR ===== */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--light); }
+        ::-webkit-scrollbar-thumb { background: var(--dark-pink); border-radius: 10px; }
+
+        /* ===== NAVBAR ===== */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 18px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(244, 167, 185, 0.3);
+            box-shadow: 0 2px 30px rgba(201, 75, 123, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-logo .logo-icon {
+            width: 42px;
+            height: 42px;
+            background: linear-gradient(135deg, var(--dark-pink), var(--rose));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+        }
+
+        .nav-logo h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            color: var(--rose);
+            font-weight: 700;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 35px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-size: 0.88rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--rose);
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover { color: var(--rose); }
+        .nav-links a:hover::after { width: 100%; }
+
+        .nav-book-btn {
+            background: linear-gradient(135deg, var(--dark-pink), var(--rose));
+            color: white !important;
+            padding: 10px 24px;
+            border-radius: 30px;
+            font-weight: 600 !important;
+            box-shadow: 0 4px 15px rgba(201, 75, 123, 0.3);
+            transition: all 0.3s ease !important;
+        }
+
+        .nav-book-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(201, 75, 123, 0.4) !important;
+        }
+
+        .nav-book-btn::after { display: none !important; }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 2px;
+            background: var(--rose);
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #fff0f5 0%, #fce4ec 50%, #f8bbd9 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 120px 20px 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 30% 70%, rgba(244, 167, 185, 0.3) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 30%, rgba(201, 75, 123, 0.15) 0%, transparent 50%);
+            animation: float 8s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(-20px, -20px) rotate(5deg); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 700px;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(244, 167, 185, 0.5);
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-size: 0.82rem;
+            color: var(--rose);
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+            backdrop-filter: blur(10px);
+            animation: fadeInDown 0.8s ease;
+        }
+
+        .hero h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.8rem, 6vw, 5rem);
+            color: var(--dark);
+            line-height: 1.15;
+            margin-bottom: 20px;
+            animation: fadeInUp 0.8s ease 0.2s both;
+        }
+
+        .hero h2 span {
+            color: var(--rose);
+            font-style: italic;
+        }
+
+        .hero p {
+            font-size: 1.05rem;
+            color: var(--gray);
+            line-height: 1.8;
+            margin-bottom: 40px;
+            font-weight: 300;
+            animation: fadeInUp 0.8s ease 0.4s both;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.8s ease 0.6s both;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--dark-pink), var(--rose));
+            color: white;
+            padding: 16px 38px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            box-shadow: 0 8px 25px rgba(201, 75, 123, 0.35);
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(201, 75, 123, 0.45);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--rose);
+            padding: 16px 38px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            border: 2px solid var(--pink);
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-secondary:hover {
+            background: var(--rose);
+            color: white;
+            border-color: var(--rose);
+            transform: translateY(-3px);
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 40px;
+            justify-content: center;
+            margin-top: 60px;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.8s ease 0.8s both;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--rose);
+            font-weight: 700;
+        }
+
+        .stat-text {
+            font-size: 0.78rem;
+            color: var(--gray);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 500;
+        }
+
+        /* Floating elements */
+        .floating-nail {
+            position: absolute;
+            font-size: 2.5rem;
+            opacity: 0.15;
+            animation: floatNail 6s ease-in-out infinite;
+        }
+
+        .floating-nail:nth-child(1) { top: 15%; left: 8%; animation-delay: 0s; }
+        .floating-nail:nth-child(2) { top: 25%; right: 10%; animation-delay: 1.5s; }
+        .floating-nail:nth-child(3) { bottom: 20%; left: 12%; animation-delay: 3s; }
+        .floating-nail:nth-child(4) { bottom: 30%; right: 8%; animation-delay: 4.5s; }
+
+        @keyframes floatNail {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
+        }
+
+        /* ===== SECTION STYLES ===== */
+        section {
+            padding: 90px 40px;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-tag {
+            display: inline-block;
+            background: linear-gradient(135deg, rgba(244, 167, 185, 0.2), rgba(201, 75, 123, 0.15));
+            color: var(--rose);
+            padding: 6px 18px;
+            border-radius: 20px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            border: 1px solid rgba(201, 75, 123, 0.2);
+        }
+
+        .section-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            color: var(--dark);
+            margin-bottom: 15px;
+            line-height: 1.3;
+        }
+
+        .section-header h2 span { color: var(--rose); font-style: italic; }
+
+        .section-header p {
+            color: var(--gray);
+            font-size: 0.98rem;
+            max-width: 500px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        .divider {
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(135deg, var(--pink), var(--rose));
+            margin: 20px auto;
+            border-radius: 3px;
+        }
+
+        /* ===== GALLERY ===== */
+        #gallery {
+            background: white;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .gallery-card {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            aspect-ratio: 4/5;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .gallery-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(201, 75, 123, 0.25);
+        }
+
+        .gallery-card:first-child {
+            grid-row: span 1;
+        }
+
+        .gallery-upload-zone {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #fce4ec, #f8bbd9);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 2px dashed var(--pink);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .gallery-upload-zone:hover {
+            background: linear-gradient(135deg, #f8bbd9, #f48fb1);
+            border-color: var(--rose);
+        }
+
+        .gallery-upload-zone input[type="file"] {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            cursor: pointer;
+            width: 100%;
+            height: 100%;
+        }
+
+        .upload-icon {
+            width: 65px;
+            height: 65px;
+            background: rgba(255,255,255,0.6);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            backdrop-filter: blur(5px);
+        }
+
+        .upload-icon i {
+            font-size: 1.6rem;
+            color: var(--rose);
+        }
+
+        .upload-text {
+            font-weight: 600;
+            color: var(--rose);
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+
+        .upload-sub {
+            font-size: 0.75rem;
+            color: var(--gray);
+        }
+
+        .gallery-image-preview {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(201, 75, 123, 0.8), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            display: flex;
+            align-items: flex-end;
+            padding: 20px;
+        }
+
+        .gallery-card:hover .gallery-overlay { opacity: 1; }
+
+        .gallery-overlay span {
+            color: white;
+            font-weight: 600;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+        }
+
+        .gallery-label {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: rgba(255,255,255,0.9);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: var(--rose);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            backdrop-filter: blur(5px);
+            z-index: 2;
+        }
+
+        .remove-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 30px;
+            height: 30px;
+            background: rgba(255,255,255,0.9);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            color: var(--rose);
+            font-size: 0.75rem;
+            z-index: 3;
+            transition: all 0.2s ease;
+        }
+
+        .remove-btn:hover { background: var(--rose); color: white; }
+
+        .gallery-card.has-image .remove-btn { display: flex; }
+        .gallery-card.has-image .gallery-upload-zone { display: none; }
+
+        /* ===== SERVICES ===== */
+        #services {
+            background: linear-gradient(135deg, #fff5f8, #fce4ec);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 25px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 24px;
+            padding: 35px 28px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(244, 167, 185, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, var(--pink), var(--rose));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(201, 75, 123, 0.15);
+        }
+
+        .service-card:hover::before { opacity: 1; }
+
+        .service-icon {
+            width: 75px;
+            height: 75px;
+            background: linear-gradient(135deg, rgba(244, 167, 185, 0.2), rgba(201, 75, 123, 0.15));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .service-card:hover .service-icon {
+            background: linear-gradient(135deg, var(--dark-pink), var(--rose));
+        }
+
+        .service-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            color: var(--dark);
+            margin-bottom: 10px;
+        }
+
+        .service-card p {
+            color: var(--gray);
+            font-size: 0.88rem;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .service-price {
+            display: inline-block;
+            background: linear-gradient(135deg, rgba(244, 167, 185, 0.2), rgba(201, 75, 123, 0.15));
+            color: var(--rose);
+            padding: 6px 20px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            border: 1px solid rgba(201, 75, 123, 0.2);
+        }
+
+        /* ===== DEPOSIT BANNER ===== */
+        .deposit-banner {
+            background: linear-gradient(135deg, var(--dark-pink), var(--rose), #a03660);
+            padding: 50px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .deposit-banner::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.06'%3E%3Ccircle cx='30' cy='30' r='4'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        .deposit-banner-content {
+            position: relative;
+            z-index: 2;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .deposit-icon {
+            width: 70px;
+            height: 70px;
+            background: rgba(255,255,255,0.15);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 1.8rem;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .deposit-banner h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: white;
+            margin-bottom: 12px;
+        }
+
+        .deposit-amount {
+            font-size: 3rem;
+            font-weight: 700;
+            color: white;
+            font-family: 'Playfair Display', serif;
+            margin: 10px 0;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .deposit-banner p {
+            color: rgba(255,255,255,0.85);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            max-width: 420px;
+            margin: 0 auto;
+        }
+
+        /* ===== BOOKING ===== */
+        #booking {
+            background: white;
+        }
+
+        .booking-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            max-width: 1000px;
+            margin: 0 auto;
+            align-items: start;
+        }
+
+        .booking-info h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            color: var(--dark);
+            margin-bottom: 20px;
+        }
+
+        .booking-info p {
+            color: var(--gray);
+            line-height: 1.8;
+            font-size: 0.92rem;
+            margin-bottom: 30px;
+        }
+
+        .contact-items {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px 18px;
+            background: var(--light);
+            border-radius: 14px;
+            border: 1px solid rgba(244, 167, 185, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            background: white;
+            box-shadow: 0 5px 20px rgba(201, 75, 123, 0.1);
+            border-color: var(--pink);
+            transform: translateX(5px);
+        }
+
+        .contact-item a {
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            width: 100%;
+        }
+
+        .contact-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+
+        .ci-phone { background: linear-gradient(135deg, #e8f5e9, #c8e6c9); color: #2e7d32; }
+        .ci-whatsapp { background: linear-gradient(135deg, #e8f5e9, #a5d6a7); color: #1b5e20; }
+        .ci-email { background: linear-gradient(135deg, #e3f2fd, #bbdefb); color: #1565c0; }
+        .ci-clock { background: linear-gradient(135deg, #fff3e0, #ffe0b2); color: #e65100; }
+        .ci-insta { background: linear-gradient(135deg, #fce4ec, #f8bbd0); color: var(--rose); }
+        .ci-tiktok { background: linear-gradient(135deg, #e8eaf6, #c5cae9); color: #283593; }
+
+        .contact-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .contact-text span:first-child {
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--gray);
+            font-weight: 600;
+        }
+
+        .contact-text span:last-child {
+            font-size: 0.9rem;
+            color: var(--dark);
+            font-weight: 500;
+        }
+
+        /* FORM */
+        .booking-form {
+            background: var(--light);
+            padding: 40px 35px;
+            border-radius: 24px;
+            border: 1px solid rgba(244, 167, 185, 0.3);
+        }
+
+        .booking-form h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            color: var(--dark);
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--gray);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 13px 16px;
+            border: 2px solid rgba(244, 167, 185, 0.3);
+            border-radius: 12px;
+            background: white;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.9rem;
+            color: var(--dark);
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--dark-pink);
+            box-shadow: 0 0 0 4px rgba(232, 120, 154, 0.1);
+        }
+
+        .form-group textarea { height: 100px; resize: none; }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, var(--dark-pink), var(--rose));
+            color: white;
+            border: none;
+            border-radius: 14px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            box-shadow: 0 6px 20px rgba(201, 75, 123, 0.3);
+            margin-top: 5px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(201, 75, 123, 0.4);
+        }
+
+        /* ===== HOURS ===== */
+        .hours-section {
+            background: linear-gradient(135deg, #fff5f8, #fce4ec);
+            padding: 60px 40px;
+            text-align: center;
+        }
+
+        .hours-card {
+            background: white;
+            max-width: 450px;
+            margin: 0 auto;
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(201, 75, 123, 0.1);
+            border: 1px solid rgba(244, 167, 185, 0.3);
+        }
+
+        .hours-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--dark);
+            margin-bottom: 25px;
+        }
+
+        .hours-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 0;
+            border-bottom: 1px solid rgba(244, 167, 185, 0.2);
+            font-size: 0.9rem;
+        }
+
+        .hours-item:last-child { border-bottom: none; }
+
+        .hours-day { color: var(--gray); font-weight: 500; }
+
+        .hours-time {
+            color: var(--rose);
+            font-weight: 700;
+            background: rgba(244, 167, 185, 0.15);
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 60px 40px 30px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr;
+            gap: 50px;
+            max-width: 1100px;
+            margin: 0 auto 50px;
+        }
+
+        .footer-brand .logo-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--pink);
+            margin-bottom: 15px;
+        }
+
+        .footer-brand p {
+            color: rgba(255,255,255,0.55);
+            font-size: 0.88rem;
+            line-height: 1.8;
+            margin-bottom: 25px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 12px;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: white;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-link.instagram {
+            background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+        }
+
+        .social-link.tiktok {
+            background: linear-gradient(135deg, #010101, #69C9D0);
+        }
+
+        .social-link.whatsapp {
+            background: linear-gradient(135deg, #25d366, #128c7e);
+        }
+
+        .social-link:hover { transform: translateY(-4px); box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
+
+        .footer-col h4 {
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--pink);
+            margin-bottom: 20px;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col ul li a {
+            color: rgba(255,255,255,0.55);
+            text-decoration: none;
+            font-size: 0.88rem;
+            transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-col ul li a:hover { color: var(--pink); }
+
+        .footer-col ul li a i { font-size: 0.75rem; }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 25px;
+            text-align: center;
+            color: rgba(255,255,255,0.4);
+            font-size: 0.82rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .footer-bottom span { color: var(--pink); }
+
+        /* ===== ANIMATIONS ===== */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ===== MOBILE MENU ===== */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: white;
+            z-index: 999;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .mobile-menu.active { display: flex; }
+
+        .mobile-menu a {
+            text-decoration: none;
+            color: var(--dark);
+            font-size: 1.3rem;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .mobile-menu a:hover { color: var(--rose); }
+
+        .close-menu {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--rose);
+            background: none;
+            border: none;
+        }
+
+        /* ===== SUCCESS MESSAGE ===== */
+        .success-msg {
+            display: none;
+            background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+            border: 1px solid #a5d6a7;
+            color: #2e7d32;
+            padding: 15px 20px;
+            border-radius: 12px;
+            margin-top: 15px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        /* ===== WHATSAPP FLOAT ===== */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 58px;
+            height: 58px;
+            background: linear-gradient(135deg, #25d366, #128c7e);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.6rem;
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+            z-index: 999;
+            text-decoration: none;
+            animation: pulse 2s infinite;
+            transition: transform 0.3s ease;
+        }
+
+        .whatsapp-float:hover { transform: scale(1.1); }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4); }
+            50% { box-shadow: 0 8px 40px rgba(37, 211, 102, 0.6); }
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 900px) {
+            .booking-wrapper {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav { padding: 15px 20px; }
+
+            .nav-links { display: none; }
+
+            .hamburger { display: flex; }
+
+            section { padding: 70px 20px; }
+
+            .gallery-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 12px;
+            }
+
+            .gallery-card { aspect-ratio: 3/4; }
+
+            .services-grid { grid-template-columns: 1fr; }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .form-row { grid-template-columns: 1fr; }
+
+            .hero-stats { gap: 25px; }
+
+            .booking-form { padding: 25px 20px; }
+        }
+
+        @media (max-width: 480px) {
+            .gallery-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+    <button class="close-menu" onclick="closeMobileMenu()"><i class="fas fa-times"></i></button>
+    <a href="#home" onclick="closeMobileMenu()">Home</a>
+    <a href="#gallery" onclick="closeMobileMenu()">Gallery</a>
+    <a href="#services" onclick="closeMobileMenu()">Services</a>
+    <a href="#booking" onclick="closeMobileMenu()">Contact</a>
+    <a href="#booking" onclick="closeMobileMenu()" class="btn-primary" style="margin-top:10px;">Book Now</a>
+</div>
+
+<!-- NAVBAR -->
+<nav>
+    <div class="nav-logo">
+        <div class="logo-icon">💅</div>
+        <h1>Nails by Leonela</h1>
+    </div>
+    <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#booking">Contact</a></li>
+        <li><a href="#booking" class="nav-book-btn">Book Now</a></li>
+    </ul>
+    <div class="hamburger" onclick="openMobileMenu()">
+        <span></span><span></span><span></span>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section id="home" class="hero">
+    <span class="floating-nail">💅</span>
+    <span class="floating-nail">✨</span>
+    <span class="floating-nail">💖</span>
+    <span class="floating-nail">🌸</span>
+
+    <div class="hero-content">
+        <div class="hero-badge">
+            <i class="fas fa-star"></i>
+            Professional Nail Studio
+        </div>
+        <h2>Where Nails Become <span>Art</span></h2>
+        <p>Elevate your style with stunning nail designs crafted with passion, precision, and creativity. Your perfect set is just one appointment away.</p>
+        <div class="hero-buttons">
+            <a href="#booking" class="btn-primary">
+                <i class="fas fa-calendar-check"></i>
+                Book Appointment
+            </a>
+            <a href="#gallery" class="btn-secondary">
+                <i class="fas fa-images"></i>
+                View Gallery
+            </a>
+        </div>
+        <div class="hero-stats">
+            <div class="stat">
+                <div class="stat-number">100+</div>
+                <div class="stat-text">Designs</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">5★</div>
+                <div class="stat-text">Rating</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">500+</div>
+                <div class="stat-text">Happy Clients</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+    <div class="section-header">
+        <div class="section-tag">✨ Our Work</div>
+        <h2>Nail <span>Gallery</span></h2>
+        <div class="divider"></div>
+        <p>Browse our stunning nail art collection. Upload 4 of your favorite nail style photos below.</p>
+    </div>
+
+    <div class="gallery-grid">
+        <!-- Card 1 -->
+        <div class="gallery-card" id="card1">
+            <div class="gallery-label">Style 01</div>
+            <div class="gallery-upload-zone">
+                <input type="file" accept="image/*" onchange="uploadImage(this, 'card1', 'img1')">
+                <div class="upload-icon"><i class="fas fa-plus"></i></div>
+                <div class="upload-text">Add Photo</div>
+                <div class="upload-sub">Click to upload</div>
+            </div>
+            <img class="gallery-image-preview" id="img1" src="" alt="Nail Style 1">
+            <div class="gallery-overlay"><span>✨ Nail Style 01</span></div>
+            <button class="remove-btn" onclick="removeImage('card1', 'img1')">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="gallery-card" id="card2">
+            <div class="gallery-label">Style 02</div>
+            <div class="gallery-upload-zone">
+                <input type="file" accept="image/*" onchange="uploadImage(this, 'card2', 'img2')">
+                <div class="upload-icon"><i class="fas fa-plus"></i></div>
+                <div class="upload-text">Add Photo</div>
+                <div class="upload-sub">Click to upload</div>
+            </div>
+            <img class="gallery-image-preview" id="img2" src="" alt="Nail Style 2">
+            <div class="gallery-overlay"><span>✨ Nail Style 02</span></div>
+            <button class="remove-btn" onclick="removeImage('card2', 'img2')">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="gallery-card" id="card3">
+            <div class="gallery-label">Style 03</div>
+            <div class="gallery-upload-zone">
+                <input type="file" accept="image/*" onchange="uploadImage(this, 'card3', 'img3')">
+                <div class="upload-icon"><i class="fas fa-plus"></i></div>
+                <div class="upload-text">Add Photo</div>
+                <div class="upload-sub">Click to upload</div>
+            </div>
+            <img class="gallery-image-preview" id="img3" src="" alt="Nail Style 3">
+            <div class="gallery-overlay"><span>✨ Nail Style 03</span></div>
+            <button class="remove-btn" onclick="removeImage('card3', 'img3')">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="gallery-card" id="card4">
+            <div class="gallery-label">Style 04</div>
+            <div class="gallery-upload-zone">
+                <input type="file" accept="image/*" onchange="uploadImage(this, 'card4', 'img4')">
+                <div class="upload-icon"><i class="fas fa-plus"></i></div>
+                <div class="upload-text">Add Photo</div>
+                <div class="upload-sub">Click to upload</div>
+            </div>
+            <img class="gallery-image-preview" id="img4" src="" alt="Nail Style 4">
+            <div class="gallery-overlay"><span>✨ Nail Style 04</span></div>
+            <button class="remove-btn" onclick="removeImage('card4', 'img4')">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+    <div class="section-header">
+        <div class="section-tag">💅 What We Offer</div>
+        <h2>Our <span>Services</span></h2>
+        <div class="divider"></div>
+        <p>Professional nail services tailored to your unique style and preferences.</p>
+    </div>
+
+    <div class="services-grid">
+        <div class="service-card">
+            <div class="service-icon">💅</div>
+            <h3>Acrylic Nails</h3>
+            <p>Full set of beautiful, long-lasting acrylic nails sculpted to perfection.</p>
+            <span class="service-price">Starting at $55</span>
+        </div>
+        <div class="service-card">
+            <div class="service-icon">✨</div>
+            <h3>Gel Nails</h3>
+            <p>Glossy, chip-free gel manicure for a natural look that lasts 2-3 weeks.</p>
+            <span class="service-price">Starting at $45</span>
+        </div>
+        <div class="service-card">
+            <div class="service-icon">🎨</div>
+            <h3>Nail Art</h3>
+            <p>Custom nail art designs — from simple patterns to stunning 3D creations.</p>
+            <span class="service-price">Starting at $15+</span>
+        </div>
+        <div class="service-card">
+            <div class="service-icon">🌸</div>
+            <h3>Manicure</h3>
+            <p>Classic & spa manicure with exfoliation, massage, and polish of your choice.</p>
+            <span class="service-price">Starting at $30</span>
+        </div>
+        <div class="service-card">
+            <div class="service-icon">💎</div>
+            <h3>Nail Fills</h3>
+            <p>Acrylic or gel fill-ins to keep your set looking fresh and flawless.</p>
+            <span class="service-price">Starting at $40</span>
+        </div>
+        <div class="service-card">
+            <div class="service-icon">🪄</div>
+            <h3>Nail Removal</h3>
+            <p>Safe and gentle removal of acrylic or gel nails with nail care treatment.</p>
+            <span class="service-price">Starting at $20</span>
+        </div>
+    </div>
+</section>
+
+<!-- DEPOSIT BANNER -->
+<div class="deposit-banner">
+    <div class="deposit-banner-content">
+        <div class="deposit-icon">💳</div>
+        <h3>Deposit Required to Book</h3>
+        <div class="deposit-amount">$30</div>
+        <p>A non-refundable deposit of <strong>$30</strong> is required to secure your appointment. This amount will be applied toward your service total. Contact us to book and send your deposit.</p>
+    </div>
+</div>
+
+<!-- HOURS -->
+<div class="hours-section">
+    <div class="section-header">
+        <div class="section-tag">🕐 Schedule</div>
+        <h2>Business <span>Hours</span></h2>
+        <div class="divider"></div>
+    </div>
+    <div class="hours-card">
+        <h3>🌸 When We're Open</h3>
+        <div class="hours-item">
+            <span class="hours-day">Monday</span>
+            <span class="hours-time">8:00 AM – 8:00 PM</span>
+        </div>
+        <div class="hours-item">
+            <span class="hours-day">Tuesday</span>
+            <span class="hours-time">8:00 AM – 8:00 PM</span>
+        </div>
+        <div class="hours-item">
+            <span class="hours-day">Wednesday</span>
+            <span class="hours-time">8:00 AM – 8:00 PM</span>
+        </div>
+        <div class="hours-item">
+            <span class="hours-day">Thursday</span>
+            <span class="hours-time">8:00 AM – 8:00 PM</span>
+        </div>
+        <div class="hours-item">
+            <span class="hours-day">Friday</span>
+            <span class="hours-time">8:00 AM – 8:00 PM</span>
+        </div>
+        <div class="hours-item">
+            <span class="hours-day">Saturday</span>
+            <span class="hours-time">8:00 AM – 8:00 PM</span>
+        </div>
+        <div class="hours-item">
+            <span class="hours-day">Sunday</span>
+            <span class="hours-time">8:00 AM – 8:00 PM</span>
+        </div>
+    </div>
+</div>
+
+<!-- BOOKING / CONTACT -->
+<section id="booking">
+    <div class="section-header">
+        <div class="section-tag">📅 Book Now</div>
+        <h2>Make an <span>Appointment</span></h2>
+        <div class="divider"></div>
+        <p>Ready to treat yourself? Reach out to us and let's create your perfect set!</p>
+    </div>
+
+    <div class="booking-wrapper">
+        <div class="booking-info">
+            <h3>Get In Touch</h3>
+            <p>We'd love to hear from you! Reach out through any of the channels below to book your appointment or ask any questions.</p>
+
+            <div class="contact-items">
+                <div class="contact-item">
+                    <a href="tel:9547069782">
+                        <div class="contact-icon ci-phone"><i class="fas fa-phone"></i></div>
+                        <div class="contact-text">
+                            <span>Phone</span>
+                            <span>(954) 706-9782</span>
+                        </div>
+                    </a>
+                </div>
+                <div class="contact-item">
+                    <a href="https://wa.me/19547069682" target="_blank">
+                        <div class="contact-icon ci-whatsapp"><i class="fab fa-whatsapp"></i></div>
+                        <div class="contact-text">
+                            <span>WhatsApp</span>
+                            <span>(954) 706-9682</span>
+                        </div>
+                    </a>
+                </div>
+                <div class="contact-item">
+                    <a href="mailto:Carlinejnpierre17@gmail.com">
+                        <div class="contact-icon ci-email"><i class="fas fa-envelope"></i></div>
+                        <div class="contact-text">
+                            <span>Email</span>
+                            <span>Carlinejnpierre17@gmail.com</span>
+                        </div>
+                    </a>
+                </div>
+                <div class="contact-item">
+                    <a href="https://www.instagram.com/nails_by_leonela" target="_blank">
+                        <div class="contact-icon ci-insta"><i class="fab fa-instagram"></i></div>
+                        <div class="contact-text">
+                            <span>Instagram</span>
+                            <span>@nails_by_leonela</span>
+                        </div>
+                    </a>
+                </div>
+                <div class="contact-item">
+                    <a href="https://www.tiktok.com/@leonelamontenegr9" target="_blank">
+                        <div class="contact-icon ci-tiktok"><i class="fab fa-tiktok"></i></div>
+                        <div class="contact-text">
+                            <span>TikTok</span>
+                            <span>@leonelamontenegr9</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="booking-form">
+            <h3>💌 Request Appointment</h3>
+            <form id="bookingForm" onsubmit="handleSubmit(event)">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>First Name</label>
+                        <input type="text" placeholder="Jane" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Last Name</label>
+                        <input type="text" placeholder="Doe" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input type="tel" placeholder="(123) 456-7890" required>
+                </div>
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" placeholder="jane@example.com" required>
+                </div>
+                <div class="form-group">
+                    <label>Service Desired</label>
+                    <select required>
+                        <option value="" disabled selected>Select a service...</option>
+                        <option>Acrylic Nails – Full Set</option>
+                        <option>Gel Nails</option>
+                        <option>Nail Art</option>
+                        <option>Classic Manicure</option>
+                        <option>Nail Fills</option>
+                        <option>Nail Removal</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Preferred Date</label>
+                        <input type="date" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Preferred Time</label>
+                        <input type="time" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Additional Notes</label>
+                    <textarea placeholder="Describe the nail style you want, inspo pics, or any questions..."></textarea>
+                </div>
+                <button type="submit" class="submit-btn">
+                    <i class="fas fa-paper-plane"></i>
+                    Send Request
+                </button>
+                <div class="success-msg" id="successMsg">
+                    🎉 Request sent! We'll contact you shortly to confirm your appointment.
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <div class="footer-grid">
+        <div class="footer-brand">
+            <div class="logo-name">💅 Nails by Leonela</div>
+            <p>Professional nail studio dedicated to creating beautiful, long-lasting nail art that expresses your unique style and personality.</p>
+            <div class="social-links">
+                <a href="https://www.instagram.com/nails_by_leonela" target="_blank" class="social-link instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://www.tiktok.com/@leonelamontenegr9" target="_blank" class="social-link tiktok">
+                    <i class="fab fa-tiktok"></i>
+                </a>
+                <a href="https://wa.me/19547069682" target="_blank" class="social-link whatsapp">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="footer-col">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a href="#home"><i class="fas fa-chevron-right"></i> Home</a></li>
+                <li><a href="#gallery"><i class="fas fa-chevron-right"></i> Gallery</a></li>
+                <li><a href="#services"><i class="fas fa-chevron-right"></i> Services</a></li>
+                <li><a href="#booking"><i class="fas fa-chevron-right"></i> Book Now</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-col">
+            <h4>Contact</h4>
+            <ul>
+                <li><a href="tel:9547069782"><i class="fas fa-phone"></i> (954) 706-9782</a></li>
+                <li><a href="https://wa.me/19547069682"><i class="fab fa-whatsapp"></i> WhatsApp Us</a></li>
+                <li><a href="mailto:Carlinejnpierre17@gmail.com"><i class="fas fa-envelope"></i> Email Us</a></li>
+                <li><a href="#"><i class="fas fa-clock"></i> 8AM – 8PM Daily</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>© 2025 <span>Nails by Leonela</span>. All Rights Reserved. Made with <span>💖</span></p>
+    </div>
+</footer>
+
+<!-- WHATSAPP FLOAT BUTTON -->
+<a href="https://wa.me/19547069682" class="whatsapp-float" target="_blank">
+    <i class="fab fa-whatsapp"></i>
+</a>
+
+<script>
+    // ===== MOBILE MENU =====
+    function openMobileMenu() {
+        document.getElementById('mobileMenu').classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeMobileMenu() {
+        document.getElementById('mobileMenu').classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    // ===== GALLERY IMAGE UPLOAD =====
+    function uploadImage(input, cardId, imgId) {
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const card = document.getElementById(cardId);
+                const img = document.getElementById(imgId);
+                img.src = e.target.result;
+                card.classList.add('has-image');
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    function removeImage(cardId, imgId) {
+        const card = document.getElementById(cardId);
+        const img = document.getElementById(imgId);
+        img.src = '';
+        card.classList.remove('has-image');
+        const input = card.querySelector('input[type="file"]');
+        input.value = '';
+    }
+
+    // ===== FORM SUBMIT =====
+    function handleSubmit(e) {
+        e.preventDefault();
+        const btn = document.querySelector('.submit-btn');
+        const msg = document.getElementById('successMsg');
+
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+        btn.disabled = true;
+
+        setTimeout(() => {
+            btn.innerHTML = '<i class="fas fa-check"></i> Sent!';
+            btn.style.background = 'linear-gradient(135deg, #43a047, #2e7d32)';
+            msg.style.display = 'block';
+
+            setTimeout(() => {
+                btn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Request';
+                btn.style.background = '';
+                btn.disabled = false;
+                msg.style.display = 'none';
+                document.getElementById('bookingForm').reset();
+            }, 4000);
+        }, 1500);
+    }
+
+    // ===== NAVBAR SCROLL EFFECT =====
+    window.addEventListener('scroll', () => {
+        const nav = document.querySelector('nav');
+        if (window.scrollY > 50) {
+            nav.style.boxShadow = '0 4px 30px rgba(201, 75, 123, 0.12)';
+        } else {
+            nav.style.boxShadow = '0 2px 30px rgba(201, 75, 123, 0.08)';
+        }
+    });
+
+    // ===== SCROLL ANIMATIONS =====
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.service-card, .gallery-card, .contact-item').forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(30px)';
+        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(el);
+    });
+
+    // ===== SET MIN DATE FOR BOOKING =====
+    const dateInput = document.querySelector('input[type="date"]');
+    if (dateInput) {
+        const today = new Date().toISOString().split('T')[0];
+        dateInput.min = today;
+    }
+</script>
+</body>
+</html>
