@@ -24,9 +24,7 @@
             --gold: #d4a853;
         }
 
-        html {
-            scroll-behavior: smooth;
-        }
+        html { scroll-behavior: smooth; }
 
         body {
             font-family: 'Poppins', sans-serif;
@@ -35,7 +33,6 @@
             overflow-x: hidden;
         }
 
-        /* ===== SCROLLBAR ===== */
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: var(--light); }
         ::-webkit-scrollbar-thumb { background: var(--dark-pink); border-radius: 10px; }
@@ -282,9 +279,7 @@
             animation: fadeInUp 0.8s ease 0.8s both;
         }
 
-        .stat {
-            text-align: center;
-        }
+        .stat { text-align: center; }
 
         .stat-number {
             font-family: 'Playfair Display', serif;
@@ -301,7 +296,6 @@
             font-weight: 500;
         }
 
-        /* Floating elements */
         .floating-nail {
             position: absolute;
             font-size: 2.5rem;
@@ -320,9 +314,7 @@
         }
 
         /* ===== SECTION STYLES ===== */
-        section {
-            padding: 90px 40px;
-        }
+        section { padding: 90px 40px; }
 
         .section-header {
             text-align: center;
@@ -370,9 +362,7 @@
         }
 
         /* ===== GALLERY ===== */
-        #gallery {
-            background: white;
-        }
+        #gallery { background: white; }
 
         .gallery-grid {
             display: grid;
@@ -395,10 +385,6 @@
         .gallery-card:hover {
             transform: translateY(-8px);
             box-shadow: 0 20px 50px rgba(201, 75, 123, 0.25);
-        }
-
-        .gallery-card:first-child {
-            grid-row: span 1;
         }
 
         .gallery-upload-zone {
@@ -440,22 +426,9 @@
             backdrop-filter: blur(5px);
         }
 
-        .upload-icon i {
-            font-size: 1.6rem;
-            color: var(--rose);
-        }
-
-        .upload-text {
-            font-weight: 600;
-            color: var(--rose);
-            font-size: 0.9rem;
-            margin-bottom: 5px;
-        }
-
-        .upload-sub {
-            font-size: 0.75rem;
-            color: var(--gray);
-        }
+        .upload-icon i { font-size: 1.6rem; color: var(--rose); }
+        .upload-text { font-weight: 600; color: var(--rose); font-size: 0.9rem; margin-bottom: 5px; }
+        .upload-sub { font-size: 0.75rem; color: var(--gray); }
 
         .gallery-image-preview {
             width: 100%;
@@ -476,13 +449,7 @@
         }
 
         .gallery-card:hover .gallery-overlay { opacity: 1; }
-
-        .gallery-overlay span {
-            color: white;
-            font-weight: 600;
-            font-size: 0.85rem;
-            letter-spacing: 1px;
-        }
+        .gallery-overlay span { color: white; font-weight: 600; font-size: 0.85rem; letter-spacing: 1px; }
 
         .gallery-label {
             position: absolute;
@@ -520,7 +487,6 @@
         }
 
         .remove-btn:hover { background: var(--rose); color: white; }
-
         .gallery-card.has-image .remove-btn { display: flex; }
         .gallery-card.has-image .gallery-upload-zone { display: none; }
 
@@ -529,24 +495,65 @@
             background: linear-gradient(135deg, #fff5f8, #fce4ec);
         }
 
+        /* ---- SERVICES TABS ---- */
+        .services-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 45px;
+        }
+
+        .tab-btn {
+            padding: 10px 24px;
+            border-radius: 30px;
+            border: 2px solid rgba(201, 75, 123, 0.25);
+            background: white;
+            color: var(--gray);
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.82rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            letter-spacing: 0.5px;
+        }
+
+        .tab-btn:hover {
+            border-color: var(--rose);
+            color: var(--rose);
+            transform: translateY(-2px);
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, var(--dark-pink), var(--rose));
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 6px 20px rgba(201, 75, 123, 0.3);
+        }
+
+        /* ---- SERVICES GRID ---- */
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 25px;
-            max-width: 1100px;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 22px;
+            max-width: 1150px;
             margin: 0 auto;
         }
+
+        .service-panel { display: none; }
+        .service-panel.active { display: block; }
 
         .service-card {
             background: white;
             border-radius: 24px;
-            padding: 35px 28px;
+            padding: 32px 26px;
             text-align: center;
             box-shadow: 0 5px 20px rgba(0,0,0,0.06);
             transition: all 0.3s ease;
             border: 1px solid rgba(244, 167, 185, 0.2);
             position: relative;
             overflow: hidden;
+            animation: fadeInUp 0.5s ease both;
         }
 
         .service-card::before {
@@ -568,6 +575,36 @@
 
         .service-card:hover::before { opacity: 1; }
 
+        /* NEW BADGE */
+        .badge-new {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            background: linear-gradient(135deg, var(--gold), #b8860b);
+            color: white;
+            font-size: 0.62rem;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 20px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* POPULAR BADGE */
+        .badge-popular {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            background: linear-gradient(135deg, var(--dark-pink), var(--rose));
+            color: white;
+            font-size: 0.62rem;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 20px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
         .service-icon {
             width: 75px;
             height: 75px;
@@ -583,18 +620,19 @@
 
         .service-card:hover .service-icon {
             background: linear-gradient(135deg, var(--dark-pink), var(--rose));
+            transform: scale(1.1) rotate(5deg);
         }
 
         .service-card h3 {
             font-family: 'Playfair Display', serif;
-            font-size: 1.2rem;
+            font-size: 1.18rem;
             color: var(--dark);
             margin-bottom: 10px;
         }
 
         .service-card p {
             color: var(--gray);
-            font-size: 0.88rem;
+            font-size: 0.86rem;
             line-height: 1.7;
             margin-bottom: 20px;
         }
@@ -603,11 +641,133 @@
             display: inline-block;
             background: linear-gradient(135deg, rgba(244, 167, 185, 0.2), rgba(201, 75, 123, 0.15));
             color: var(--rose);
-            padding: 6px 20px;
+            padding: 7px 22px;
             border-radius: 20px;
             font-weight: 700;
-            font-size: 0.9rem;
+            font-size: 1rem;
             border: 1px solid rgba(201, 75, 123, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .service-card:hover .service-price {
+            background: linear-gradient(135deg, var(--dark-pink), var(--rose));
+            color: white;
+            border-color: transparent;
+        }
+
+        /* All services grid for "All" tab */
+        .all-services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 22px;
+            max-width: 1150px;
+            margin: 0 auto;
+        }
+
+        /* ===== PRICE LIST TABLE ===== */
+        .price-list-section {
+            background: white;
+            padding: 90px 40px;
+        }
+
+        .price-table-wrapper {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--light);
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(201, 75, 123, 0.1);
+            border: 1px solid rgba(244, 167, 185, 0.3);
+        }
+
+        .price-table-header {
+            background: linear-gradient(135deg, var(--dark-pink), var(--rose));
+            padding: 25px 35px;
+            display: grid;
+            grid-template-columns: 1fr auto auto;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .price-table-header span {
+            color: white;
+            font-size: 0.78rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .price-row {
+            display: grid;
+            grid-template-columns: 1fr auto auto;
+            gap: 20px;
+            align-items: center;
+            padding: 18px 35px;
+            border-bottom: 1px solid rgba(244, 167, 185, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .price-row:last-child { border-bottom: none; }
+
+        .price-row:hover {
+            background: white;
+            padding-left: 45px;
+        }
+
+        .price-row-category {
+            background: linear-gradient(135deg, rgba(244, 167, 185, 0.15), rgba(201, 75, 123, 0.1));
+            padding: 10px 35px;
+            border-bottom: 1px solid rgba(244, 167, 185, 0.2);
+        }
+
+        .price-row-category span {
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--rose);
+        }
+
+        .price-service-name {
+            font-size: 0.92rem;
+            font-weight: 500;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .price-service-name i {
+            color: var(--pink);
+            font-size: 0.85rem;
+        }
+
+        .price-amount {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--rose);
+            font-family: 'Playfair Display', serif;
+            white-space: nowrap;
+        }
+
+        .price-tag-badge {
+            font-size: 0.7rem;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .tag-popular {
+            background: rgba(244, 167, 185, 0.2);
+            color: var(--rose);
+            border: 1px solid rgba(201, 75, 123, 0.2);
+        }
+
+        .tag-new {
+            background: rgba(212, 168, 83, 0.15);
+            color: var(--gold);
+            border: 1px solid rgba(212, 168, 83, 0.3);
         }
 
         /* ===== DEPOSIT BANNER ===== */
@@ -672,9 +832,7 @@
         }
 
         /* ===== BOOKING ===== */
-        #booking {
-            background: white;
-        }
+        #booking { background: white; }
 
         .booking-wrapper {
             display: grid;
@@ -750,10 +908,7 @@
         .ci-insta { background: linear-gradient(135deg, #fce4ec, #f8bbd0); color: var(--rose); }
         .ci-tiktok { background: linear-gradient(135deg, #e8eaf6, #c5cae9); color: #283593; }
 
-        .contact-text {
-            display: flex;
-            flex-direction: column;
-        }
+        .contact-text { display: flex; flex-direction: column; }
 
         .contact-text span:first-child {
             font-size: 0.72rem;
@@ -785,9 +940,7 @@
             text-align: center;
         }
 
-        .form-group {
-            margin-bottom: 18px;
-        }
+        .form-group { margin-bottom: 18px; }
 
         .form-group label {
             display: block;
@@ -888,7 +1041,6 @@
         }
 
         .hours-item:last-child { border-bottom: none; }
-
         .hours-day { color: var(--gray); font-weight: 500; }
 
         .hours-time {
@@ -929,10 +1081,7 @@
             margin-bottom: 25px;
         }
 
-        .social-links {
-            display: flex;
-            gap: 12px;
-        }
+        .social-links { display: flex; gap: 12px; }
 
         .social-link {
             width: 40px;
@@ -970,13 +1119,8 @@
             margin-bottom: 20px;
         }
 
-        .footer-col ul {
-            list-style: none;
-        }
-
-        .footer-col ul li {
-            margin-bottom: 10px;
-        }
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: 10px; }
 
         .footer-col ul li a {
             color: rgba(255,255,255,0.55);
@@ -989,7 +1133,6 @@
         }
 
         .footer-col ul li a:hover { color: var(--pink); }
-
         .footer-col ul li a i { font-size: 0.75rem; }
 
         .footer-bottom {
@@ -1098,52 +1241,36 @@
 
         /* ===== RESPONSIVE ===== */
         @media (max-width: 900px) {
-            .booking-wrapper {
-                grid-template-columns: 1fr;
-                gap: 40px;
-            }
-
-            .footer-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 30px;
-            }
+            .booking-wrapper { grid-template-columns: 1fr; gap: 40px; }
+            .footer-grid { grid-template-columns: 1fr 1fr; gap: 30px; }
         }
 
         @media (max-width: 768px) {
             nav { padding: 15px 20px; }
-
             .nav-links { display: none; }
-
             .hamburger { display: flex; }
-
             section { padding: 70px 20px; }
-
-            .gallery-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 12px;
-            }
-
+            .gallery-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
             .gallery-card { aspect-ratio: 3/4; }
-
             .services-grid { grid-template-columns: 1fr; }
-
-            .footer-grid {
-                grid-template-columns: 1fr;
-                gap: 30px;
-            }
-
+            .footer-grid { grid-template-columns: 1fr; gap: 30px; }
             .form-row { grid-template-columns: 1fr; }
-
             .hero-stats { gap: 25px; }
-
             .booking-form { padding: 25px 20px; }
+            .price-table-header,
+            .price-row { grid-template-columns: 1fr auto; }
+            .price-table-header span:last-child,
+            .price-tag-badge { display: none; }
+            .price-list-section { padding: 70px 20px; }
+            .services-tabs { gap: 8px; }
+            .tab-btn { padding: 8px 16px; font-size: 0.75rem; }
         }
 
         @media (max-width: 480px) {
-            .gallery-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 10px;
-            }
+            .gallery-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+            .price-row { padding: 14px 20px; }
+            .price-row:hover { padding-left: 26px; }
+            .price-table-header { padding: 20px; }
         }
     </style>
 </head>
@@ -1155,6 +1282,7 @@
     <a href="#home" onclick="closeMobileMenu()">Home</a>
     <a href="#gallery" onclick="closeMobileMenu()">Gallery</a>
     <a href="#services" onclick="closeMobileMenu()">Services</a>
+    <a href="#prices" onclick="closeMobileMenu()">Prices</a>
     <a href="#booking" onclick="closeMobileMenu()">Contact</a>
     <a href="#booking" onclick="closeMobileMenu()" class="btn-primary" style="margin-top:10px;">Book Now</a>
 </div>
@@ -1169,6 +1297,7 @@
         <li><a href="#home">Home</a></li>
         <li><a href="#gallery">Gallery</a></li>
         <li><a href="#services">Services</a></li>
+        <li><a href="#prices">Prices</a></li>
         <li><a href="#booking">Contact</a></li>
         <li><a href="#booking" class="nav-book-btn">Book Now</a></li>
     </ul>
@@ -1224,11 +1353,10 @@
         <div class="section-tag">✨ Our Work</div>
         <h2>Nail <span>Gallery</span></h2>
         <div class="divider"></div>
-        <p>Browse our stunning nail art collection. Upload 4 of your favorite nail style photos below.</p>
+        <p>Browse our stunning nail art collection. Upload your favorite nail style photos below.</p>
     </div>
 
     <div class="gallery-grid">
-        <!-- Card 1 -->
         <div class="gallery-card" id="card1">
             <div class="gallery-label">Style 01</div>
             <div class="gallery-upload-zone">
@@ -1239,12 +1367,9 @@
             </div>
             <img class="gallery-image-preview" id="img1" src="" alt="Nail Style 1">
             <div class="gallery-overlay"><span>✨ Nail Style 01</span></div>
-            <button class="remove-btn" onclick="removeImage('card1', 'img1')">
-                <i class="fas fa-times"></i>
-            </button>
+            <button class="remove-btn" onclick="removeImage('card1', 'img1')"><i class="fas fa-times"></i></button>
         </div>
 
-        <!-- Card 2 -->
         <div class="gallery-card" id="card2">
             <div class="gallery-label">Style 02</div>
             <div class="gallery-upload-zone">
@@ -1255,12 +1380,9 @@
             </div>
             <img class="gallery-image-preview" id="img2" src="" alt="Nail Style 2">
             <div class="gallery-overlay"><span>✨ Nail Style 02</span></div>
-            <button class="remove-btn" onclick="removeImage('card2', 'img2')">
-                <i class="fas fa-times"></i>
-            </button>
+            <button class="remove-btn" onclick="removeImage('card2', 'img2')"><i class="fas fa-times"></i></button>
         </div>
 
-        <!-- Card 3 -->
         <div class="gallery-card" id="card3">
             <div class="gallery-label">Style 03</div>
             <div class="gallery-upload-zone">
@@ -1271,12 +1393,9 @@
             </div>
             <img class="gallery-image-preview" id="img3" src="" alt="Nail Style 3">
             <div class="gallery-overlay"><span>✨ Nail Style 03</span></div>
-            <button class="remove-btn" onclick="removeImage('card3', 'img3')">
-                <i class="fas fa-times"></i>
-            </button>
+            <button class="remove-btn" onclick="removeImage('card3', 'img3')"><i class="fas fa-times"></i></button>
         </div>
 
-        <!-- Card 4 -->
         <div class="gallery-card" id="card4">
             <div class="gallery-label">Style 04</div>
             <div class="gallery-upload-zone">
@@ -1287,9 +1406,7 @@
             </div>
             <img class="gallery-image-preview" id="img4" src="" alt="Nail Style 4">
             <div class="gallery-overlay"><span>✨ Nail Style 04</span></div>
-            <button class="remove-btn" onclick="removeImage('card4', 'img4')">
-                <i class="fas fa-times"></i>
-            </button>
+            <button class="remove-btn" onclick="removeImage('card4', 'img4')"><i class="fas fa-times"></i></button>
         </div>
     </div>
 </section>
@@ -1303,42 +1420,269 @@
         <p>Professional nail services tailored to your unique style and preferences.</p>
     </div>
 
-    <div class="services-grid">
-        <div class="service-card">
-            <div class="service-icon">💅</div>
-            <h3>Acrylic Nails</h3>
-            <p>Full set of beautiful, long-lasting acrylic nails sculpted to perfection.</p>
-            <span class="service-price">Starting at $55</span>
+    <!-- TABS -->
+    <div class="services-tabs">
+        <button class="tab-btn active" onclick="switchTab('all')">🌸 All Services</button>
+        <button class="tab-btn" onclick="switchTab('nails')">💅 Nails</button>
+        <button class="tab-btn" onclick="switchTab('toes')">🦶 Toes & Pedi</button>
+        <button class="tab-btn" onclick="switchTab('gel')">✨ Gel & Poly</button>
+    </div>
+
+    <!-- ALL SERVICES -->
+    <div class="service-panel active" id="tab-all">
+        <div class="all-services-grid">
+            <!-- NAILS -->
+            <div class="service-card">
+                <span class="badge-popular">⭐ Popular</span>
+                <div class="service-icon">💅</div>
+                <h3>Acrylic Nails</h3>
+                <p>Full set of beautiful, long-lasting acrylic nails sculpted to perfection.</p>
+                <span class="service-price">Starting at $55</span>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🎨</div>
+                <h3>Nail Art</h3>
+                <p>Custom nail art designs — from simple patterns to stunning 3D creations.</p>
+                <span class="service-price">Starting at $15+</span>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🌸</div>
+                <h3>Manicure</h3>
+                <p>Classic & spa manicure with exfoliation, massage, and polish of your choice.</p>
+                <span class="service-price">$30</span>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">💎</div>
+                <h3>Nail Fills</h3>
+                <p>Acrylic or gel fill-ins to keep your set looking fresh and flawless.</p>
+                <span class="service-price">Starting at $40</span>
+            </div>
+            <!-- TOES -->
+            <div class="service-card">
+                <span class="badge-popular">⭐ Popular</span>
+                <div class="service-icon">🦶</div>
+                <h3>Pedicure</h3>
+                <p>Relaxing pedicure with soak, exfoliation, cuticle care & polish.</p>
+                <span class="service-price">$45</span>
+            </div>
+            <div class="service-card">
+                <span class="badge-new">✨ New</span>
+                <div class="service-icon">👣</div>
+                <h3>Acrylic Toes</h3>
+                <p>Full set of acrylic toe nails — durable, beautiful and long-lasting.</p>
+                <span class="service-price">$65</span>
+            </div>
+            <!-- GEL & POLY -->
+            <div class="service-card">
+                <span class="badge-new">✨ New</span>
+                <div class="service-icon">💜</div>
+                <h3>Poly Gel</h3>
+                <p>Lightweight and flexible poly gel nails — the perfect hybrid system.</p>
+                <span class="service-price">$55</span>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🔴</div>
+                <h3>Rubber Gel</h3>
+                <p>Flexible rubber gel overlay — strong, shiny and comfortable to wear.</p>
+                <span class="service-price">$55</span>
+            </div>
+            <div class="service-card">
+                <span class="badge-popular">⭐ Popular</span>
+                <div class="service-icon">✨</div>
+                <h3>Gel X</h3>
+                <p>Soft gel nail extensions for a natural feel with salon-quality finish.</p>
+                <span class="service-price">$55</span>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">💅</div>
+                <h3>Gel Nails</h3>
+                <p>Glossy, chip-free gel manicure for a natural look that lasts 2–3 weeks.</p>
+                <span class="service-price">Starting at $45</span>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🪄</div>
+                <h3>Nail Removal</h3>
+                <p>Safe and gentle removal of acrylic or gel nails with nail care treatment.</p>
+                <span class="service-price">Starting at $20</span>
+            </div>
         </div>
-        <div class="service-card">
-            <div class="service-icon">✨</div>
-            <h3>Gel Nails</h3>
-            <p>Glossy, chip-free gel manicure for a natural look that lasts 2-3 weeks.</p>
-            <span class="service-price">Starting at $45</span>
+    </div>
+
+    <!-- NAILS TAB -->
+    <div class="service-panel" id="tab-nails">
+        <div class="all-services-grid">
+            <div class="service-card">
+                <span class="badge-popular">⭐ Popular</span>
+                <div class="service-icon">💅</div>
+                <h3>Acrylic Nails</h3>
+                <p>Full set of beautiful, long-lasting acrylic nails sculpted to perfection.</p>
+                <span class="service-price">Starting at $55</span>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🌸</div>
+                <h3>Manicure</h3>
+                <p>Classic & spa manicure with exfoliation, massage, and polish of your choice.</p>
+                <span class="service-price">$30</span>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🎨</div>
+                <h3>Nail Art</h3>
+                <p>Custom nail art designs — from simple patterns to stunning 3D creations.</p>
+                <span class="service-price">Starting at $15+</span>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">💎</div>
+                <h3>Nail Fills</h3>
+                <p>Acrylic or gel fill-ins to keep your set looking fresh and flawless.</p>
+                <span class="service-price">Starting at $40</span>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🪄</div>
+                <h3>Nail Removal</h3>
+                <p>Safe and gentle removal of acrylic or gel nails with nail care treatment.</p>
+                <span class="service-price">Starting at $20</span>
+            </div>
         </div>
-        <div class="service-card">
-            <div class="service-icon">🎨</div>
-            <h3>Nail Art</h3>
-            <p>Custom nail art designs — from simple patterns to stunning 3D creations.</p>
-            <span class="service-price">Starting at $15+</span>
+    </div>
+
+    <!-- TOES TAB -->
+    <div class="service-panel" id="tab-toes">
+        <div class="all-services-grid">
+            <div class="service-card">
+                <span class="badge-popular">⭐ Popular</span>
+                <div class="service-icon">🦶</div>
+                <h3>Pedicure</h3>
+                <p>Relaxing pedicure with soak, exfoliation, cuticle care & polish of your choice.</p>
+                <span class="service-price">$45</span>
+            </div>
+            <div class="service-card">
+                <span class="badge-new">✨ New</span>
+                <div class="service-icon">👣</div>
+                <h3>Acrylic Toes</h3>
+                <p>Full set of acrylic toe nails — durable, beautiful and long-lasting.</p>
+                <span class="service-price">$65</span>
+            </div>
         </div>
-        <div class="service-card">
-            <div class="service-icon">🌸</div>
-            <h3>Manicure</h3>
-            <p>Classic & spa manicure with exfoliation, massage, and polish of your choice.</p>
-            <span class="service-price">Starting at $30</span>
+    </div>
+
+    <!-- GEL & POLY TAB -->
+    <div class="service-panel" id="tab-gel">
+        <div class="all-services-grid">
+            <div class="service-card">
+                <span class="badge-popular">⭐ Popular</span>
+                <div class="service-icon">✨</div>
+                <h3>Gel Nails</h3>
+                <p>Glossy, chip-free gel manicure for a natural look that lasts 2–3 weeks.</p>
+                <span class="service-price">Starting at $45</span>
+            </div>
+            <div class="service-card">
+                <span class="badge-new">✨ New</span>
+                <div class="service-icon">💜</div>
+                <h3>Poly Gel</h3>
+                <p>Lightweight and flexible poly gel nails — the perfect hybrid system.</p>
+                <span class="service-price">$55</span>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🔴</div>
+                <h3>Rubber Gel</h3>
+                <p>Flexible rubber gel overlay — strong, shiny and comfortable to wear.</p>
+                <span class="service-price">$55</span>
+            </div>
+            <div class="service-card">
+                <span class="badge-popular">⭐ Popular</span>
+                <div class="service-icon">💎</div>
+                <h3>Gel X</h3>
+                <p>Soft gel nail extensions for a natural feel with salon-quality finish.</p>
+                <span class="service-price">$55</span>
+            </div>
         </div>
-        <div class="service-card">
-            <div class="service-icon">💎</div>
-            <h3>Nail Fills</h3>
-            <p>Acrylic or gel fill-ins to keep your set looking fresh and flawless.</p>
-            <span class="service-price">Starting at $40</span>
+    </div>
+</section>
+
+<!-- PRICE LIST -->
+<section id="prices" class="price-list-section">
+    <div class="section-header">
+        <div class="section-tag">💰 Pricing</div>
+        <h2>Full <span>Price List</span></h2>
+        <div class="divider"></div>
+        <p>Transparent pricing for all our services. No hidden fees — just beautiful nails.</p>
+    </div>
+
+    <div class="price-table-wrapper">
+        <div class="price-table-header">
+            <span>Service</span>
+            <span>Price</span>
+            <span>Tag</span>
         </div>
-        <div class="service-card">
-            <div class="service-icon">🪄</div>
-            <h3>Nail Removal</h3>
-            <p>Safe and gentle removal of acrylic or gel nails with nail care treatment.</p>
-            <span class="service-price">Starting at $20</span>
+
+        <!-- NAIL SERVICES -->
+        <div class="price-row-category">
+            <span>💅 Nail Services</span>
+        </div>
+        <div class="price-row">
+            <div class="price-service-name"><i class="fas fa-gem"></i> Acrylic Nails – Full Set</div>
+            <div class="price-amount">$55</div>
+            <span class="price-tag-badge tag-popular">⭐ Popular</span>
+        </div>
+        <div class="price-row">
+            <div class="price-service-name"><i class="fas fa-gem"></i> Nail Fills</div>
+            <div class="price-amount">$40+</div>
+            <span class="price-tag-badge tag-popular">⭐ Popular</span>
+        </div>
+        <div class="price-row">
+            <div class="price-service-name"><i class="fas fa-gem"></i> Manicure</div>
+            <div class="price-amount">$30</div>
+            <span class="price-tag-badge tag-popular">⭐ Popular</span>
+        </div>
+        <div class="price-row">
+            <div class="price-service-name"><i class="fas fa-gem"></i> Nail Art</div>
+            <div class="price-amount">$15+</div>
+            <span class="price-tag-badge tag-popular">⭐ Popular</span>
+        </div>
+        <div class="price-row">
+            <div class="price-service-name"><i class="fas fa-gem"></i> Nail Removal</div>
+            <div class="price-amount">$20+</div>
+            <span class="price-tag-badge" style="background:rgba(122,107,114,0.1);color:var(--gray);border:1px solid rgba(122,107,114,0.2);">Add-on</span>
+        </div>
+
+        <!-- TOES -->
+        <div class="price-row-category">
+            <span>🦶 Toes & Pedicure</span>
+        </div>
+        <div class="price-row">
+            <div class="price-service-name"><i class="fas fa-gem"></i> Pedicure</div>
+            <div class="price-amount">$45</div>
+            <span class="price-tag-badge tag-popular">⭐ Popular</span>
+        </div>
+        <div class="price-row">
+            <div class="price-service-name"><i class="fas fa-gem"></i> Acrylic Toes – Full Set</div>
+            <div class="price-amount">$65</div>
+            <span class="price-tag-badge tag-new">✨ New</span>
+        </div>
+
+        <!-- GEL & POLY -->
+        <div class="price-row-category">
+            <span>✨ Gel & Poly Systems</span>
+        </div>
+        <div class="price-row">
+            <div class="price-service-name"><i class="fas fa-gem"></i> Gel Nails</div>
+            <div class="price-amount">$45+</div>
+            <span class="price-tag-badge tag-popular">⭐ Popular</span>
+        </div>
+        <div class="price-row">
+            <div class="price-service-name"><i class="fas fa-gem"></i> Poly Gel</div>
+            <div class="price-amount">$55</div>
+            <span class="price-tag-badge tag-new">✨ New</span>
+        </div>
+        <div class="price-row">
+            <div class="price-service-name"><i class="fas fa-gem"></i> Rubber Gel</div>
+            <div class="price-amount">$55</div>
+            <span class="price-tag-badge tag-new">✨ New</span>
+        </div>
+        <div class="price-row">
+            <div class="price-service-name"><i class="fas fa-gem"></i> Gel X</div>
+            <div class="price-amount">$55</div>
+            <span class="price-tag-badge tag-popular">⭐ Popular</span>
         </div>
     </div>
 </section>
@@ -1349,7 +1693,7 @@
         <div class="deposit-icon">💳</div>
         <h3>Deposit Required to Book</h3>
         <div class="deposit-amount">$30</div>
-        <p>A non-refundable deposit of <strong>$30</strong> is required to secure your appointment. This amount will be applied toward your service total. Contact us to book and send your deposit.</p>
+        <p>A non-refundable deposit of <strong>$30</strong> is required to secure your appointment. This amount will be applied toward your service total.</p>
     </div>
 </div>
 
@@ -1393,20 +1737,19 @@
     </div>
 </div>
 
-<!-- BOOKING / CONTACT -->
+<!-- BOOKING -->
 <section id="booking">
     <div class="section-header">
         <div class="section-tag">📅 Book Now</div>
         <h2>Make an <span>Appointment</span></h2>
         <div class="divider"></div>
-        <p>Ready to treat yourself? Reach out to us and let's create your perfect set!</p>
+        <p>Ready to treat yourself? Reach out and let's create your perfect set!</p>
     </div>
 
     <div class="booking-wrapper">
         <div class="booking-info">
             <h3>Get In Touch</h3>
             <p>We'd love to hear from you! Reach out through any of the channels below to book your appointment or ask any questions.</p>
-
             <div class="contact-items">
                 <div class="contact-item">
                     <a href="tel:9547069782">
@@ -1481,13 +1824,24 @@
                     <label>Service Desired</label>
                     <select required>
                         <option value="" disabled selected>Select a service...</option>
-                        <option>Acrylic Nails – Full Set</option>
-                        <option>Gel Nails</option>
-                        <option>Nail Art</option>
-                        <option>Classic Manicure</option>
-                        <option>Nail Fills</option>
-                        <option>Nail Removal</option>
-                        <option>Other</option>
+                        <optgroup label="💅 Nail Services">
+                            <option>Acrylic Nails – Full Set ($55)</option>
+                            <option>Nail Fills ($40+)</option>
+                            <option>Manicure ($30)</option>
+                            <option>Nail Art ($15+)</option>
+                            <option>Nail Removal ($20+)</option>
+                        </optgroup>
+                        <optgroup label="🦶 Toes & Pedicure">
+                            <option>Pedicure ($45)</option>
+                            <option>Acrylic Toes – Full Set ($65)</option>
+                        </optgroup>
+                        <optgroup label="✨ Gel & Poly Systems">
+                            <option>Gel Nails ($45+)</option>
+                            <option>Poly Gel ($55)</option>
+                            <option>Rubber Gel ($55)</option>
+                            <option>Gel X ($55)</option>
+                        </optgroup>
+                        <option>Other / Not Sure</option>
                     </select>
                 </div>
                 <div class="form-row">
@@ -1541,6 +1895,7 @@
                 <li><a href="#home"><i class="fas fa-chevron-right"></i> Home</a></li>
                 <li><a href="#gallery"><i class="fas fa-chevron-right"></i> Gallery</a></li>
                 <li><a href="#services"><i class="fas fa-chevron-right"></i> Services</a></li>
+                <li><a href="#prices"><i class="fas fa-chevron-right"></i> Price List</a></li>
                 <li><a href="#booking"><i class="fas fa-chevron-right"></i> Book Now</a></li>
             </ul>
         </div>
@@ -1561,7 +1916,7 @@
     </div>
 </footer>
 
-<!-- WHATSAPP FLOAT BUTTON -->
+<!-- WHATSAPP FLOAT -->
 <a href="https://wa.me/19547069682" class="whatsapp-float" target="_blank">
     <i class="fab fa-whatsapp"></i>
 </a>
@@ -1572,10 +1927,20 @@
         document.getElementById('mobileMenu').classList.add('active');
         document.body.style.overflow = 'hidden';
     }
-
     function closeMobileMenu() {
         document.getElementById('mobileMenu').classList.remove('active');
         document.body.style.overflow = '';
+    }
+
+    // ===== SERVICE TABS =====
+    function switchTab(tab) {
+        // Hide all panels
+        document.querySelectorAll('.service-panel').forEach(p => p.classList.remove('active'));
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+
+        // Show selected
+        document.getElementById('tab-' + tab).classList.add('active');
+        event.target.classList.add('active');
     }
 
     // ===== GALLERY IMAGE UPLOAD =====
@@ -1597,8 +1962,7 @@
         const img = document.getElementById(imgId);
         img.src = '';
         card.classList.remove('has-image');
-        const input = card.querySelector('input[type="file"]');
-        input.value = '';
+        card.querySelector('input[type="file"]').value = '';
     }
 
     // ===== FORM SUBMIT =====
@@ -1606,15 +1970,12 @@
         e.preventDefault();
         const btn = document.querySelector('.submit-btn');
         const msg = document.getElementById('successMsg');
-
         btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
         btn.disabled = true;
-
         setTimeout(() => {
             btn.innerHTML = '<i class="fas fa-check"></i> Sent!';
             btn.style.background = 'linear-gradient(135deg, #43a047, #2e7d32)';
             msg.style.display = 'block';
-
             setTimeout(() => {
                 btn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Request';
                 btn.style.background = '';
@@ -1625,14 +1986,12 @@
         }, 1500);
     }
 
-    // ===== NAVBAR SCROLL EFFECT =====
+    // ===== NAVBAR SCROLL =====
     window.addEventListener('scroll', () => {
         const nav = document.querySelector('nav');
-        if (window.scrollY > 50) {
-            nav.style.boxShadow = '0 4px 30px rgba(201, 75, 123, 0.12)';
-        } else {
-            nav.style.boxShadow = '0 2px 30px rgba(201, 75, 123, 0.08)';
-        }
+        nav.style.boxShadow = window.scrollY > 50
+            ? '0 4px 30px rgba(201, 75, 123, 0.12)'
+            : '0 2px 30px rgba(201, 75, 123, 0.08)';
     });
 
     // ===== SCROLL ANIMATIONS =====
@@ -1645,19 +2004,16 @@
         });
     }, { threshold: 0.1 });
 
-    document.querySelectorAll('.service-card, .gallery-card, .contact-item').forEach(el => {
+    document.querySelectorAll('.service-card, .gallery-card, .contact-item, .price-row').forEach(el => {
         el.style.opacity = '0';
-        el.style.transform = 'translateY(30px)';
-        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        el.style.transform = 'translateY(25px)';
+        el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
         observer.observe(el);
     });
 
-    // ===== SET MIN DATE FOR BOOKING =====
+    // ===== MIN DATE =====
     const dateInput = document.querySelector('input[type="date"]');
-    if (dateInput) {
-        const today = new Date().toISOString().split('T')[0];
-        dateInput.min = today;
-    }
+    if (dateInput) dateInput.min = new Date().toISOString().split('T')[0];
 </script>
 </body>
 </html>
